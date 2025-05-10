@@ -37,7 +37,7 @@ const Header: React.FC = () => {
         <Link to="/sobre" className="text-gray-300 hover:text-white transition-colors duration-300">Sobre</Link>
       </nav>
       <a 
-        href="https://wa.me/83999806248"
+        href="https://wa.me/5583999806248"
         className="px-4 py-2 text-sm bg-transparent border border-[#0cfa83] text-[#0cfa83] rounded-lg hover:bg-[#0cfa83]/10 transition-all duration-300 flex items-center"
         target="_blank"
         rel="noopener noreferrer"
