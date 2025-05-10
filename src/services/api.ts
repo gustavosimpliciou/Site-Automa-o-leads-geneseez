@@ -7,10 +7,10 @@ import { FormData } from '../types';
  */
 export const submitFormData = async (data: FormData): Promise<void> => {
   try {
-    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/form-proxy`, {
+    // Send directly to n8n webhook since we're having issues with Supabase Edge Functions
+    const response = await fetch('https://geneseez.app.n8n.cloud/webhook-test/formulario-site', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
