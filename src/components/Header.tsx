@@ -28,7 +28,7 @@ const Header: React.FC = () => {
   return (
     <header className="w-full py-4 px-6 md:px-12 flex justify-between items-center">
       <Link to="/" className="flex items-center">
-        <img src="logo2.png" alt="Geneseez Logo" className="w-8 h-8 mr-2" />
+        <img src="/logo2.png" alt="Geneseez Logo" className="w-8 h-8 mr-2" />
         <span className="text-xl font-bold neon-text-blue">GENESEEZ IA</span>
       </Link>
       <nav className="hidden md:flex space-x-6">
