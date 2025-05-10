@@ -10,9 +10,7 @@ const Header: React.FC = () => {
     e.preventDefault();
     
     if (location.pathname !== '/') {
-      // If we're not on the home page, navigate first then scroll
       navigate('/', { replace: true });
-      // Wait for navigation to complete before scrolling
       setTimeout(() => {
         const benefitsSection = document.getElementById('benefits');
         if (benefitsSection) {
@@ -20,7 +18,6 @@ const Header: React.FC = () => {
         }
       }, 100);
     } else {
-      // If we're already on the home page, just scroll
       const benefitsSection = document.getElementById('benefits');
       if (benefitsSection) {
         benefitsSection.scrollIntoView({ behavior: 'smooth' });
@@ -32,7 +29,7 @@ const Header: React.FC = () => {
     <header className="w-full py-4 px-6 md:px-12 flex justify-between items-center">
       <Link to="/" className="flex items-center">
         <Cpu className="w-8 h-8 mr-2 text-[#0cf]" />
-        <span className="text-xl font-bold neon-text-blue">IA Sites</span>
+        <span className="text-xl font-bold neon-text-blue">GENESEEZ IA</span>
       </Link>
       <nav className="hidden md:flex space-x-6">
         <Link to="/" className="text-gray-300 hover:text-white transition-colors duration-300">Home</Link>
@@ -52,4 +49,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default Header

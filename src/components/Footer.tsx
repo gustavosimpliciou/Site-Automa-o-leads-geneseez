@@ -1,5 +1,6 @@
 import React from 'react';
-import { Cpu, Mail, Phone, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
+import { Cpu, Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
@@ -14,14 +15,21 @@ const Footer: React.FC = () => {
             Transformamos sua presença digital com tecnologia de ponta e soluções inteligentes para seu negócio.
           </p>
           <div className="flex space-x-4">
-            <a href="#" className="text-gray-400 hover:text-[#0cf] transition-colors duration-300">
+            <a 
+              href="https://www.instagram.com/geneseez/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-gray-400 hover:text-[#0cf] transition-colors duration-300"
+            >
               <Instagram size={20} />
             </a>
-            <a href="#" className="text-gray-400 hover:text-[#0cf] transition-colors duration-300">
+            <a 
+              href="https://www.facebook.com/profile.php?id=61569243569140" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-gray-400 hover:text-[#0cf] transition-colors duration-300"
+            >
               <Facebook size={20} />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-[#0cf] transition-colors duration-300">
-              <Twitter size={20} />
             </a>
           </div>
         </div>
@@ -29,9 +37,9 @@ const Footer: React.FC = () => {
         <div>
           <h3 className="text-lg font-semibold mb-6">Links Rápidos</h3>
           <ul className="space-y-3">
-            <li><a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Home</a></li>
+            <li><Link to="/" className="text-gray-400 hover:text-white transition-colors duration-300">Home</Link></li>
             <li><a href="#benefits" className="text-gray-400 hover:text-white transition-colors duration-300">Benefícios</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Sobre Nós</a></li>
+            <li><Link to="/sobre" className="text-gray-400 hover:text-white transition-colors duration-300">Sobre Nós</Link></li>
             <li><a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">FAQ</a></li>
           </ul>
         </div>
