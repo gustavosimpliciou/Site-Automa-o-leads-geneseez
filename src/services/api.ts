@@ -7,11 +7,10 @@ import { FormData } from '../types';
  */
 export const submitFormData = async (data: FormData): Promise<void> => {
   try {
-    const webhookUrl = 'https://geneseez.app.n8n.cloud/webhook-test/formulario-site';
-    
-    const response = await fetch(webhookUrl, {
+    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/form-proxy`, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
