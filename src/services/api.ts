@@ -1,7 +1,7 @@
 import { FormData } from '../types';
 
 /**
- * Envia os dados do formulário para o webhook do n8n através de uma Edge Function
+ * Envia os dados do formulário para o webhook do n8n
  * @param data Dados do formulário do usuário
  * @returns Promise que resolve quando os dados são enviados
  */
@@ -11,7 +11,6 @@ export const submitFormData = async (data: FormData): Promise<void> => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Origin': window.location.origin,
       },
       body: JSON.stringify(data),
     });
