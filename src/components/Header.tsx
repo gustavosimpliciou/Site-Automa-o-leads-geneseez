@@ -1,17 +1,30 @@
 import React from 'react';
-import { Cpu, Mail } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Cpu, MessageSquare } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   
   const scrollToBenefits = (e: React.MouseEvent) => {
     e.preventDefault();
-    const benefitsSection = document.getElementById('benefits');
-    if (benefitsSection && location.pathname === '/') {
-      benefitsSection.scrollIntoView({ behavior: 'smooth' });
-    } else if (location.pathname !== '/') {
-      window.location.href = '/#benefits';
+    
+    if (location.pathname !== '/') {
+      // If we're not on the home page, navigate first then scroll
+      navigate('/', { replace: true });
+      // Wait for navigation to complete before scrolling
+      setTimeout(() => {
+        const benefitsSection = document.getElementById('benefits');
+        if (benefitsSection) {
+          benefitsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // If we're already on the home page, just scroll
+      const benefitsSection = document.getElementById('benefits');
+      if (benefitsSection) {
+        benefitsSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -26,15 +39,15 @@ const Header: React.FC = () => {
         <a href="#benefits" onClick={scrollToBenefits} className="text-gray-300 hover:text-white transition-colors duration-300">Benefícios</a>
         <Link to="/sobre" className="text-gray-300 hover:text-white transition-colors duration-300">Sobre</Link>
       </nav>
-      <div>
-        <a 
-          href="mailto:contato@iasites.com.br"
-          className="px-4 py-2 text-sm bg-transparent border border-[#0cf] text-[#0cf] rounded-lg hover:bg-[#0cf]/10 transition-all duration-300 flex items-center"
-        >
-          <Mail size={16} className="mr-2" />
-          Contato
-        </a>
-      </div>
+      <a 
+        href="https://wa.me/83999806248"
+        className="px-4 py-2 text-sm bg-transparent border border-[#0cfa83] text-[#0cfa83] rounded-lg hover:bg-[#0cfa83]/10 transition-all duration-300 flex items-center"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <MessageSquare size={16} className="mr-2" />
+        WhatsApp
+      </a>
     </header>
   );
 };
