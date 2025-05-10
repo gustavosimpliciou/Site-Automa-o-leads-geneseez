@@ -19,7 +19,7 @@ const Formulario = () => {
     };
 
     try {
-      const response = await fetch("https://www.geneseez.com/webhook/formulario-site", {
+      const response = await fetch("https://geneseez.app.n8n.cloud/webhook-test/formulario-site", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
