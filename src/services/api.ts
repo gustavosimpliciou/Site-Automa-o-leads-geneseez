@@ -7,8 +7,7 @@ import { FormData } from '../types';
  */
 export const submitFormData = async (data: FormData): Promise<void> => {
   try {
-    // Replace with your actual webhook URL
-    const webhookUrl = 'https://seuservidor.n8n.cloud/webhook/sitegratis';
+    const webhookUrl = 'https://geneseez.app.n8n.cloud/webhook-test/formulario-site';
     
     const response = await fetch(webhookUrl, {
       method: 'POST',
@@ -21,9 +20,6 @@ export const submitFormData = async (data: FormData): Promise<void> => {
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
-    
-    // Log for development purposes
-    console.log('Form submitted successfully:', data);
     
     // Adding a slight delay to simulate processing
     return new Promise(resolve => setTimeout(resolve, 800));
