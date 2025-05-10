@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
         <div>
           <div className="flex items-center mb-6">
             <Cpu className="w-6 h-6 mr-2 text-[#0cf]" />
-            <span className="text-xl font-bold neon-text-blue">IA Sites</span>
+            <span className="text-xl font-bold neon-text-blue">GENESEEZ IA</span>
           </div>
           <p className="text-gray-400 mb-6">
             Transformamos sua presença digital com tecnologia de ponta e soluções inteligentes para seu negócio.
@@ -41,11 +41,11 @@ const Footer: React.FC = () => {
           <ul className="space-y-4">
             <li className="flex items-center">
               <Mail size={18} className="mr-3 text-[#0cf]" />
-              <span className="text-gray-400">contato@iasites.com.br</span>
+              <span className="text-gray-400">ageneseez@gmail.com</span>
             </li>
             <li className="flex items-center">
               <Phone size={18} className="mr-3 text-[#0cf]" />
-              <span className="text-gray-400">(11) 99999-9999</span>
+              <span className="text-gray-400">(83) 99980-6248</span>
             </li>
             <li className="flex items-start">
               <MapPin size={18} className="mr-3 mt-1 text-[#0cf]" />
@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
       </div>
       
       <div className="border-t border-gray-800 mt-10 pt-8 text-center text-gray-500 text-sm">
-        <p>&copy; {new Date().getFullYear()} IA Sites. Todos os direitos reservados.</p>
+        <p>&copy; {new Date().getFullYear()} GENESEEZ IA. Todos os direitos reservados.</p>
       </div>
     </footer>
   );
