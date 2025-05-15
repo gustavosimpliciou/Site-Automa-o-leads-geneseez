@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import Portfolio from './components/Portfolio';
 import Benefits from './components/Benefits';
 import Footer from './components/Footer';
 import PopupForm from './components/PopupForm';
@@ -14,6 +15,7 @@ function HomePage() {
   return (
     <>
       <Hero onCtaClick={() => setShowPopup(true)} />
+      <Portfolio />
       <Benefits />
       {showPopup && <PopupForm onClose={() => setShowPopup(false)} />}
     </>
@@ -35,4 +37,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
