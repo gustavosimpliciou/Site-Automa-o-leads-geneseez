@@ -52,7 +52,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
         ref={subtitleRef}
         className="text-xl md:text-2xl text-center text-gray-300 max-w-2xl mb-12"
       >
-        Crie sua presença digital com inteligência artificial e automação completa
+        Pare de perder clientes por falta de atendimento — nós ativamos sua presença digital em 7 dias.
       </p>
       
       <button 
