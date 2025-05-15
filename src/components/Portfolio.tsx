@@ -21,7 +21,7 @@ const projects: Project[] = [
     id: 2,
     title: "Academia FitPro",
     description: "Plataforma de agendamento de aulas e acompanhamento",
-    image: "https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg",
+    image: "/previews/fitagenda.JPG",
     previewUrl: "/previews/academia.html"
   },
   {
