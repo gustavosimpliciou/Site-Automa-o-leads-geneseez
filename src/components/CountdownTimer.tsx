@@ -3,8 +3,8 @@ import { Timer } from 'lucide-react';
 
 const CountdownTimer: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState({
-    hours: 23,
-    minutes: 59,
+    hours: 34,
+    minutes: 19,
     seconds: 59
   });
   const [spotsLeft] = useState(7);
