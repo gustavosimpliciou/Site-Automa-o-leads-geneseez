@@ -70,7 +70,7 @@ const Header: React.FC = () => {
           Sobre
         </Link>
         <a 
-          href="https://wa.me/5583999806248"
+          href="https://wa.me/5583991411822"
           className="px-6 py-3 text-base bg-transparent border border-[#0cfa83] text-[#0cfa83] rounded-lg hover:bg-[#0cfa83]/10 transition-all duration-300 flex items-center"
           target="_blank"
           rel="noopener noreferrer"
@@ -90,7 +90,7 @@ const Header: React.FC = () => {
 
       {/* Desktop WhatsApp Button */}
       <a 
-        href="https://wa.me/5583999806248"
+        href="https://wa.me/5583991411822"
         className="hidden md:flex px-4 py-2 text-sm bg-transparent border border-[#0cfa83] text-[#0cfa83] rounded-lg hover:bg-[#0cfa83]/10 transition-all duration-300 items-center"
         target="_blank"
         rel="noopener noreferrer"
