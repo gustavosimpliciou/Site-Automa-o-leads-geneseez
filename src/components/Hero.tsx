@@ -60,7 +60,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
         onClick={onCtaClick}
         className="cta-button group flex items-center shine-effect"
       >
-        CONTRATE JÁ
+        QUERO MEU SITE COM IA
         <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" size={20} />
       </button>
     </section>

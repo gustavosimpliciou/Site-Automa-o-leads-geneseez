@@ -5,8 +5,10 @@ import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
 import Benefits from './components/Benefits';
 import Pricing from './components/Pricing';
+import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 import PopupForm from './components/PopupForm';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 import About from './components/About';
 import { usePopupTimer } from './hooks/usePopupTimer';
 
@@ -26,6 +28,7 @@ function HomePage() {
       <Portfolio />
       <Benefits />
       <Pricing onCtaClick={() => setShowPopup(true)} />
+      <Testimonials />
       {showPopup && <PopupForm onClose={() => setShowPopup(false)} />}
     </>
   );
@@ -41,6 +44,7 @@ function App() {
           <Route path="/sobre" element={<About />} />
         </Routes>
         <Footer />
+        <FloatingWhatsApp />
       </div>
     </Router>
   );
