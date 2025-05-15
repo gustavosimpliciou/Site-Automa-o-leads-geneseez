@@ -14,7 +14,7 @@ const projects: Project[] = [
     id: 1,
     title: "Restaurante Sabor & Arte",
     description: "Site completo com cardápio digital e sistema de reservas",
-    image: "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg",
+    image: "/saborearte.JPGr",
     previewUrl: "/previews/restaurante/index.html"
   },
   {
