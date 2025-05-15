@@ -1,0 +1,150 @@
+/* Responsive Styles */
+
+/* Large Desktops */
+@media (max-width: 1200px) {
+  .container {
+    max-width: 960px;
+  }
+
+  #hero .hero-image {
+    flex: 0 0 45%;
+  }
+
+  #hero .hero-content {
+    flex: 0 0 50%;
+  }
+
+  #hero .hero-content h2 {
+    font-size: 36px;
+  }
+}
+
+/* Laptops and Tablets */
+@media (max-width: 992px) {
+  .container {
+    max-width: 720px;
+  }
+
+  #hero .container {
+    flex-direction: column-reverse;
+  }
+
+  #hero .hero-image, #hero .hero-content {
+    flex: 0 0 100%;
+  }
+
+  #hero .hero-content {
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+  }
+
+  #delivery .food-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #footer .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg) var(--spacing-md);
+  }
+
+  #footer .footer-logo {
+    grid-column: span 2;
+    text-align: center;
+  }
+
+  #footer .footer-logo h2 {
+    margin: 0 auto var(--spacing-sm);
+  }
+
+  #footer h3:after {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}
+
+/* Tablets and Large Phones */
+@media (max-width: 768px) {
+  .container {
+    max-width: 540px;
+  }
+
+  #header nav, #header .social-icons {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .section-title h2 {
+    font-size: 32px;
+  }
+
+  #group .brands-container {
+    gap: var(--spacing-md);
+  }
+
+  #group .brand {
+    min-width: 160px;
+  }
+
+  #footer .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  #footer .footer-logo {
+    grid-column: span 1;
+  }
+
+  #footer h3:after {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  #footer .footer-contact p {
+    justify-content: center;
+  }
+
+  #footer .footer-social {
+    justify-content: center;
+  }
+}
+
+/* Small Phones */
+@media (max-width: 576px) {
+  section {
+    padding: var(--spacing-lg) 0;
+  }
+
+  #hero {
+    padding-top: 100px;
+  }
+
+  #hero .hero-content h2 {
+    font-size: 28px;
+  }
+
+  #hero .hero-content p {
+    font-size: 16px;
+  }
+
+  #delivery .food-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+
+  #group .brands-container {
+    flex-direction: column;
+  }
+
+  #group .brand {
+    width: 100%;
+  }
+}

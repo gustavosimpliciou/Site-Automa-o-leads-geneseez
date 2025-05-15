@@ -1,0 +1,62 @@
+/* Group Section */
+#group {
+  background-color: var(--light-color);
+  position: relative;
+}
+
+#group .brands-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+#group .brand {
+  text-align: center;
+  padding: var(--spacing-md);
+  min-width: 220px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+}
+
+#group .brand:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  border-color: var(--secondary-color);
+}
+
+#group .brand h3 {
+  font-size: 22px;
+  margin-bottom: var(--spacing-xs);
+  color: var(--primary-color);
+}
+
+#group .brand p {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 0;
+}
+
+#group .group-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--spacing-lg);
+}
+
+#group .group-decoration .line {
+  width: 100px;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#group .group-decoration .dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+  margin: 0 var(--spacing-sm);
+}

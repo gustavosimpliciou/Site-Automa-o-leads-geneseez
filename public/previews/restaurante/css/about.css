@@ -1,0 +1,29 @@
+/* About Section */
+#about {
+  background-color: var(--light-color);
+  position: relative;
+}
+
+#about .about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#about .about-content p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+}
+
+#about .about-content p:first-of-type {
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--primary-color);
+}
+
+#about .btn-secondary {
+  margin-top: var(--spacing-md);
+}
