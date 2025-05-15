@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
 import Benefits from './components/Benefits';
+import Pricing from './components/Pricing';
 import Footer from './components/Footer';
 import PopupForm from './components/PopupForm';
 import About from './components/About';
@@ -12,11 +13,19 @@ import { usePopupTimer } from './hooks/usePopupTimer';
 function HomePage() {
   const { showPopup, setShowPopup } = usePopupTimer(5000);
 
+  const scrollToPricing = () => {
+    const pricingSection = document.getElementById('pricing');
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
-      <Hero onCtaClick={() => setShowPopup(true)} />
+      <Hero onCtaClick={scrollToPricing} />
       <Portfolio />
       <Benefits />
+      <Pricing onCtaClick={() => setShowPopup(true)} />
       {showPopup && <PopupForm onClose={() => setShowPopup(false)} />}
     </>
   );
@@ -37,4 +46,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

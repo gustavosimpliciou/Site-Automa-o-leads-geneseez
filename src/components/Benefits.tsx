@@ -62,15 +62,19 @@ const BenefitCard: React.FC<BenefitCardProps> = ({ icon, title, description, col
 const Benefits: React.FC = () => {
   return (
     <section id="benefits" className="w-full py-20 px-6 md:px-12">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
         Benefícios <span className="neon-text-purple">Exclusivos</span>
       </h2>
+      
+      <p className="text-center text-gray-300 text-lg mb-16 max-w-3xl mx-auto">
+        Ao contratar nossos serviços, você receberá um pacote completo de soluções digitais para impulsionar seu negócio:
+      </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
         <BenefitCard 
           icon={<Globe size={48} />} 
-          title="Site Profissional Gratuito" 
-          description="Tenha um site moderno e responsivo sem custo, otimizado para conversão e com design profissional."
+          title="Site Profissional" 
+          description="Site moderno e responsivo, otimizado para conversão e com design profissional personalizado."
           color="blue"
           delay={0}
         />

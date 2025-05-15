@@ -32,7 +32,6 @@ const PopupForm: React.FC<PopupFormProps> = ({ onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Close modal when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         onClose();
@@ -40,8 +39,6 @@ const PopupForm: React.FC<PopupFormProps> = ({ onClose }) => {
     };
     
     document.addEventListener('mousedown', handleClickOutside);
-    
-    // Prevent body scrolling
     document.body.style.overflow = 'hidden';
     
     return () => {
@@ -76,7 +73,6 @@ const PopupForm: React.FC<PopupFormProps> = ({ onClose }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     
-    // Format WhatsApp input
     if (name === 'whatsapp') {
       const numbers = value.replace(/\D/g, '');
       
@@ -133,9 +129,9 @@ const PopupForm: React.FC<PopupFormProps> = ({ onClose }) => {
           <FormSuccess />
         ) : (
           <>
-            <h2 className="text-2xl font-bold mb-2 text-center">Ganhe Seu Site Grátis!</h2>
+            <h2 className="text-2xl font-bold mb-2 text-center">Complete seu Cadastro</h2>
             <p className="text-gray-300 text-center mb-6">
-              Preencha seus dados para receber esta oferta exclusiva.
+              Preencha seus dados para garantir sua oferta de lançamento
             </p>
             
             <form onSubmit={handleSubmit}>
@@ -204,7 +200,7 @@ const PopupForm: React.FC<PopupFormProps> = ({ onClose }) => {
                 ) : (
                   <>
                     <Send size={20} className="mr-2" />
-                    ADQUIRIR AGORA
+                    GARANTIR MINHA OFERTA
                   </>
                 )}
               </button>
