@@ -14,14 +14,14 @@ const projects: Project[] = [
     id: 1,
     title: "Restaurante Sabor & Arte",
     description: "Site completo com cardápio digital e sistema de reservas",
-    image: "/previews/saborearte.JPG",
+    image: "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg",
     previewUrl: "/previews/restaurante/index.html"
   },
   {
     id: 2,
     title: "Academia FitPro",
     description: "Plataforma de agendamento de aulas e acompanhamento",
-    image: "/previews/fitagenda.JPG",
+    image: "https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg",
     previewUrl: "/previews/academia.html"
   },
   {
