@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import PopupForm from './components/PopupForm';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import About from './components/About';
+import CountdownTimer from './components/CountdownTimer';
 import { usePopupTimer } from './hooks/usePopupTimer';
 
 function HomePage() {
@@ -38,6 +39,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white font-poppins">
+        <CountdownTimer />
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
