@@ -6,7 +6,6 @@ import Benefits from './components/Benefits';
 import Footer from './components/Footer';
 import PopupForm from './components/PopupForm';
 import About from './components/About';
-import FormPage from './components/FormPage';
 import { usePopupTimer } from './hooks/usePopupTimer';
 
 function HomePage() {
@@ -29,7 +28,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/sobre" element={<About />} />
-          <Route path="/formulario" element={<FormPage />} />
         </Routes>
         <Footer />
       </div>

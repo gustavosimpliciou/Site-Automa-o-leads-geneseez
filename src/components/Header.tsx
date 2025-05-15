@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageSquare, FileText } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {
@@ -36,24 +36,15 @@ const Header: React.FC = () => {
         <a href="#benefits" onClick={scrollToBenefits} className="text-gray-300 hover:text-white transition-colors duration-300">Benefícios</a>
         <Link to="/sobre" className="text-gray-300 hover:text-white transition-colors duration-300">Sobre</Link>
       </nav>
-      <div className="flex space-x-4">
-        <Link 
-          to="/formulario"
-          className="px-4 py-2 text-sm bg-transparent border border-[#b45afb] text-[#b45afb] rounded-lg hover:bg-[#b45afb]/10 transition-all duration-300 flex items-center"
-        >
-          <FileText size={16} className="mr-2" />
-          Formulário
-        </Link>
-        <a 
-          href="https://wa.me/5583999806248"
-          className="px-4 py-2 text-sm bg-transparent border border-[#0cfa83] text-[#0cfa83] rounded-lg hover:bg-[#0cfa83]/10 transition-all duration-300 flex items-center"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <MessageSquare size={16} className="mr-2" />
-          WhatsApp
-        </a>
-      </div>
+      <a 
+        href="https://wa.me/5583999806248"
+        className="px-4 py-2 text-sm bg-transparent border border-[#0cfa83] text-[#0cfa83] rounded-lg hover:bg-[#0cfa83]/10 transition-all duration-300 flex items-center"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <MessageSquare size={16} className="mr-2" />
+        WhatsApp
+      </a>
     </header>
   );
 };
