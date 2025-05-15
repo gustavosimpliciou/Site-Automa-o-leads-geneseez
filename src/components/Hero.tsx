@@ -28,7 +28,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
   }, []);
 
   return (
-    <section className="w-full min-h-[80vh] flex flex-col items-center justify-center px-6 md:px-12 pt-16 pb-24 relative overflow-hidden">
+    <section className="w-full min-h-[80vh] flex flex-col items-center justify-center px-4 md:px-12 pt-16 pb-24 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-[#0cf]/20 rounded-full blur-[120px] -z-10"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-[#b45afb]/20 rounded-full blur-[120px] -z-10"></div>
       
@@ -41,16 +41,16 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
       
       <h1 
         ref={titleRef}
-        className="text-4xl md:text-5xl lg:text-6xl font-bold text-center max-w-4xl mb-6"
+        className="text-3xl md:text-5xl lg:text-6xl font-bold text-center max-w-4xl mb-6 px-4"
       >
         🚀 Site + Captação de Leads + <span className="neon-text-blue">Atendimento Automatizado</span>
         <br />
-        <span className="text-2xl md:text-3xl lg:text-4xl text-[#0cfa83]">Implantação em 7 dias</span>
+        <span className="text-xl md:text-3xl lg:text-4xl text-[#0cfa83] mt-4 block">Implantação em 7 dias</span>
       </h1>
       
       <p 
         ref={subtitleRef}
-        className="text-xl md:text-2xl text-center text-gray-300 max-w-2xl mb-12"
+        className="text-lg md:text-2xl text-center text-gray-300 max-w-2xl mb-12 px-4"
       >
         Pare de perder clientes por falta de atendimento — nós ativamos sua presença digital em 7 dias.
       </p>
@@ -58,7 +58,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
       <button 
         ref={ctaRef}
         onClick={onCtaClick}
-        className="cta-button group flex items-center shine-effect"
+        className="cta-button group flex items-center shine-effect px-6 py-4 text-base md:text-lg"
       >
         QUERO MEU SITE COM IA
         <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" size={20} />

@@ -44,20 +44,20 @@ const CountdownTimer: React.FC = () => {
 
   return (
     <div className="w-full bg-gradient-to-r from-slate-900 to-slate-800 py-3">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
+      <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-center">
         <div className="flex items-center gap-2 text-[#0cf]">
-          <Timer className="w-5 h-5" />
-          <span className="font-semibold">Oferta Especial:</span>
+          <Timer className="w-4 h-4 sm:w-5 sm:h-5" />
+          <span className="font-semibold text-sm sm:text-base">Oferta Especial:</span>
         </div>
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 text-sm sm:text-base">
           <span className="text-gray-300">Apenas</span>
           <span className="text-[#0cfa83] font-bold">{spotsLeft} vagas</span>
           <span className="text-gray-300">com</span>
           <span className="text-[#0cf] font-bold">30% OFF</span>
         </div>
         
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 text-sm sm:text-base">
           <span className="text-gray-300">Expira em:</span>
           <div className="flex items-center gap-1">
             <span className="bg-slate-800 px-2 py-1 rounded font-mono font-bold text-[#0cf]">
