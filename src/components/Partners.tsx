@@ -76,7 +76,7 @@ const Partners: React.FC<PartnersProps> = ({ onContactClick }) => {
   return (
     <section id="partners" className="py-24 bg-white" ref={sectionRef}>
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Tecnologias</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">ERIVALDO</h2>
         <p className="text-gray-700 max-w-2xl mx-auto text-center mb-12">
           Trabalhamos com ferramentas e plataformas de tecnologia líderes de mercado para desenvolver automações personalizadas e eficientes para nossos clientes.
         </p>
