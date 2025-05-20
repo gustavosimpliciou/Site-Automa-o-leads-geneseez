@@ -34,8 +34,8 @@ const Partners: React.FC<PartnersProps> = ({ onContactClick }) => {
     },
     {
       id: 5,
-      name: "Parceiro 4",
-      logo: "https://via.placeholder.com/150x50/FFFFFF/000000?text=Parceiro+4"
+      name: "slack",
+      logo: "slack.png"
     },
     {
       id: 6,
