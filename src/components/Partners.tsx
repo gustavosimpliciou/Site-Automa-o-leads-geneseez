@@ -19,18 +19,18 @@ const Partners: React.FC<PartnersProps> = ({ onContactClick }) => {
     },
     {
       id: 2,
-      name: "Parceiro 1",
-      logo: "https://via.placeholder.com/150x50/FFFFFF/000000?text=Parceiro+1"
+      name: "Z-API",
+      logo: "zapi.png"
     },
     {
       id: 3,
-      name: "Parceiro 2",
-      logo: "https://via.placeholder.com/150x50/FFFFFF/000000?text=Parceiro+2"
+      name: "chat-gpt",
+      logo: "chatgpt.png"
     },
     {
       id: 4,
-      name: "Parceiro 3",
-      logo: "https://via.placeholder.com/150x50/FFFFFF/000000?text=Parceiro+3"
+      name: "supabase",
+      logo: "supabase.png"
     },
     {
       id: 5,
