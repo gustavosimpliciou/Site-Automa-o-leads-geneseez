@@ -48,15 +48,17 @@ const Header: React.FC = () => {
         <div className="flex items-center">
           <a 
             href="#home" 
-            className="interactive-particle text-2xl font-bold tracking-tight pointer-events-auto"
+            className="interactive-particle pointer-events-auto"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection('home');
             }}
           >
-            <span className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
-              Genessez
-            </span>
+            <img 
+              src="/logo2.png" 
+              alt="Geneseez" 
+              className={`h-8 transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-100'}`}
+            />
           </a>
         </div>
 

@@ -19,13 +19,17 @@ const Footer: React.FC = () => {
           <div>
             <a 
               href="#home" 
-              className="text-2xl font-bold tracking-tight mb-6 inline-block"
+              className="inline-block mb-6"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection('home');
               }}
             >
-              Genessez
+              <img 
+                src="/logo2.png" 
+                alt="Geneseez" 
+                className="h-8"
+              />
             </a>
             <p className="text-gray-400 mt-4">
               Capacitando empresas através de automação avançada de processos com tecnologia n8n.

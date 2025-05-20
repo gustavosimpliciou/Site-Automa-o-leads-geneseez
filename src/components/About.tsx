@@ -43,13 +43,13 @@ const About: React.FC = () => {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-black">Quem Somos</h2>
             <p className="text-gray-700 mb-6">
-              A Geneseez é uma empresa dedicada à criação de soluções avançadas de automação e ideias inovadoras para processos empresariais em diversos setores. Oferecemos a melhor experiência de atendimento ao cliente através da automação de ponta alimentada pela plataforma n8n.
+              A Genessez é uma empresa dedicada à criação de soluções avançadas de automação e ideias inovadoras para processos empresariais em diversos setores. Oferecemos a melhor experiência de atendimento ao cliente através da automação de ponta alimentada pela plataforma n8n.
             </p>
             <p className="text-gray-700 mb-6">
               Nossa equipe de especialistas trabalha em estreita colaboração com os clientes para entender suas necessidades específicas e desenvolver soluções de automação personalizadas que otimizam operações, reduzem tarefas manuais e melhoram a eficiência geral.
             </p>
             <p className="text-gray-700">
-              Acreditamos no poder da automação para transformar negócios e impulsionar o crescimento. Com a Geneseez, você não está apenas contratando um fornecedor de serviços – está ganhando um parceiro estratégico comprometido com seu sucesso.
+              Acreditamos no poder da automação para transformar negócios e impulsionar o crescimento. Com a Genessez, você não está apenas contratando um fornecedor de serviços – está ganhando um parceiro estratégico comprometido com seu sucesso.
             </p>
           </div>
           <div 

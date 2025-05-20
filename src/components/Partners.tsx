@@ -98,7 +98,7 @@ const Partners: React.FC = () => {
         <div className="mt-16 text-center">
           <h3 className="text-2xl font-bold mb-4">Seja um Parceiro</h3>
           <p className="text-gray-700 max-w-2xl mx-auto mb-8">
-            Interessado em fazer parceria com a Geneseez? Estamos sempre procurando expandir nossa rede de parceiros tecnológicos.
+            Interessado em fazer parceria com a Genessez? Estamos sempre procurando expandir nossa rede de parceiros tecnológicos.
           </p>
           <button 
             onClick={() => {
