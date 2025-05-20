@@ -76,9 +76,9 @@ const Partners: React.FC<PartnersProps> = ({ onContactClick }) => {
   return (
     <section id="partners" className="py-24 bg-white" ref={sectionRef}>
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Nossos Parceiros</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Tecnológias</h2>
         <p className="text-gray-700 max-w-2xl mx-auto text-center mb-12">
-          Trabalhamos com parceiros tecnológicos líderes do setor para entregar as melhores soluções de automação para nossos clientes.
+          Trabalhamos com empresas de tecnológicos líderes do setor para entregar as melhores soluções de automação para nossos clientes.
         </p>
         
         <div 
@@ -100,9 +100,9 @@ const Partners: React.FC<PartnersProps> = ({ onContactClick }) => {
         </div>
         
         <div className="mt-16 text-center">
-          <h3 className="text-2xl font-bold mb-4">Seja um Parceiro</h3>
+          <h3 className="text-2xl font-bold mb-4">Saiba Mais</h3>
           <p className="text-gray-700 max-w-2xl mx-auto mb-8">
-            Interessado em fazer parceria com a Geneseez? Estamos sempre procurando expandir nossa rede de parceiros tecnológicos.
+            Interessado em fazer parte da equipe Geneseez? Estamos sempre procurando expandir nossa equipe.
           </p>
           <button 
             onClick={onContactClick}
