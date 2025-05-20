@@ -15,7 +15,7 @@ const Partners: React.FC<PartnersProps> = ({ onContactClick }) => {
     {
       id: 1,
       name: "n8n",
-      logo: "https://n8n.io/images/n8n-logo.svg"
+      logo: "/public/n8n.png"
     },
     {
       id: 2,
