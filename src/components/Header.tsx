@@ -55,7 +55,7 @@ const Header: React.FC = () => {
             }}
           >
             <img 
-              src="/logo2.png" 
+              src="components/logo2.png" 
               alt="Geneseez" 
               className={`h-8 transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-100'}`}
             />
