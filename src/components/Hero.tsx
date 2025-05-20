@@ -1,7 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import ParticleAnimation from './ParticleAnimation';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onContactClick: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -31,22 +35,11 @@ const Hero: React.FC = () => {
     };
   }, []);
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      window.scrollTo({
-        top: contactSection.offsetTop - 100,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
     <section 
       id="home" 
       className="interactive-particle relative min-h-screen flex items-center justify-center pt-24 pb-16"
     >
-      {/* Background com padrão geométrico */}
       <div className="absolute inset-0 bg-black overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="grid grid-cols-8 grid-rows-8 h-full w-full">
@@ -65,7 +58,6 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/90" />
       </div>
 
-      {/* Animação de partículas */}
       <ParticleAnimation />
 
       <div className="container mx-auto px-4 z-20 text-center">
@@ -86,7 +78,7 @@ const Hero: React.FC = () => {
           className="transition-all duration-1000 delay-500 opacity-0 translate-y-10"
         >
           <button 
-            onClick={scrollToContact}
+            onClick={onContactClick}
             className="bg-white text-black font-medium py-3 px-8 rounded-md hover:bg-gray-200 transition-colors duration-300 transform hover:scale-105"
           >
             Solicitar Demonstração

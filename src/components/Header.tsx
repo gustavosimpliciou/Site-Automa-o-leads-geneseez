@@ -33,7 +33,6 @@ const Header: React.FC = () => {
     { id: 'home', label: 'Início' },
     { id: 'about', label: 'Sobre' },
     { id: 'projects', label: 'Projetos' },
-    { id: 'pricing', label: 'Preços' },
     { id: 'contact', label: 'Contato' },
     { id: 'partners', label: 'Parceiros' }
   ];
@@ -117,4 +116,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default Header

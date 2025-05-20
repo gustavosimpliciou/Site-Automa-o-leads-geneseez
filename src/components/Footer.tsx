@@ -1,5 +1,5 @@
 import React from 'react';
-import { Twitter, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { Twitter, Linkedin, Instagram, Facebook, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
@@ -9,6 +9,17 @@ const Footer: React.FC = () => {
         top: section.offsetTop - 100,
         behavior: 'smooth'
       });
+    }
+  };
+
+  const contactInfo = {
+    email: 'contato@geneseez.com',
+    phone: '+55 11 99999-9999',
+    address: {
+      street: 'Rua da Automação, 123',
+      district: 'Distrito Tecnológico',
+      city: 'São Paulo, SP',
+      postalCode: '04538-133'
     }
   };
 
@@ -57,7 +68,7 @@ const Footer: React.FC = () => {
                 ['home', 'Início'],
                 ['about', 'Sobre'],
                 ['projects', 'Projetos'],
-                ['pricing', 'Preços']
+                ['contact', 'Contato']
               ].map(([id, label]) => (
                 <li key={id}>
                   <a
@@ -76,27 +87,29 @@ const Footer: React.FC = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-bold mb-6">Empresa</h3>
-            <ul className="space-y-3">
-              {[
-                ['contact', 'Contato'],
-                ['partners', 'Parceiros'],
-                ['testimonials', 'Depoimentos'],
-                ['review', 'Avaliações']
-              ].map(([id, label]) => (
-                <li key={id}>
-                  <a
-                    href={`#${id}`}
-                    className="text-gray-400 hover:text-white transition-colors"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(id);
-                    }}
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
+            <h3 className="text-lg font-bold mb-6">Contato</h3>
+            <ul className="space-y-4">
+              <li className="flex items-center">
+                <Mail size={20} className="text-gray-400 mr-2" />
+                <a href={`mailto:${contactInfo.email}`} className="text-gray-400 hover:text-white">
+                  {contactInfo.email}
+                </a>
+              </li>
+              <li className="flex items-center">
+                <Phone size={20} className="text-gray-400 mr-2" />
+                <a href={`tel:${contactInfo.phone}`} className="text-gray-400 hover:text-white">
+                  {contactInfo.phone}
+                </a>
+              </li>
+              <li className="flex items-start">
+                <MapPin size={20} className="text-gray-400 mr-2 mt-1" />
+                <address className="text-gray-400 not-italic">
+                  {contactInfo.address.street}<br />
+                  {contactInfo.address.district}<br />
+                  {contactInfo.address.city}<br />
+                  {contactInfo.address.postalCode}
+                </address>
+              </li>
             </ul>
           </div>
           
@@ -139,4 +152,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer;
+export default Footer

@@ -1,17 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, X } from 'lucide-react';
 
-const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
+interface ContactFormData {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
+interface ContactProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
+    phone: '',
+    subject: 'duvidas',
     message: ''
   });
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const formRef = useRef<HTMLDivElement>(null);
-  const contactInfoRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -21,78 +34,96 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setFormStatus('submitting');
-    
-    setTimeout(() => {
-      console.log('Contact form submitted:', formData);
-      
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
-      });
-      setFormStatus('success');
-      
-      setTimeout(() => {
-        setFormStatus('idle');
-      }, 5000);
-    }, 1000);
+    console.log('Form submitted:', formData);
+    onClose();
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      subject: 'duvidas',
+      message: ''
+    });
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (entry.target === formRef.current) {
-              entry.target.classList.add('opacity-100', 'translate-x-0');
-              entry.target.classList.remove('opacity-0', 'translate-x-[-50px]');
-            } else if (entry.target === contactInfoRef.current) {
-              entry.target.classList.add('opacity-100', 'translate-x-0');
-              entry.target.classList.remove('opacity-0', 'translate-x-[50px]');
-            }
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
 
-    if (formRef.current) observer.observe(formRef.current);
-    if (contactInfoRef.current) observer.observe(contactInfoRef.current);
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
 
     return () => {
-      if (formRef.current) observer.unobserve(formRef.current);
-      if (contactInfoRef.current) observer.unobserve(contactInfoRef.current);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [isOpen, onClose]);
+
+  const contactInfo = {
+    email: 'contato@geneseez.com',
+    phone: '+55 11 99999-9999',
+    address: {
+      street: 'Rua da Automação, 123',
+      district: 'Distrito Tecnológico',
+      city: 'São Paulo, SP',
+      postalCode: '04538-133'
+    }
+  };
 
   return (
     <section id="contact" className="py-24 bg-gray-100">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Entre em Contato</h2>
-        
-        <div className="grid md:grid-cols-2 gap-12">
-          <div 
-            ref={formRef}
-            className="bg-white p-8 rounded-lg shadow-md transition-all duration-1000 opacity-0 translate-x-[-50px]"
-          >
-            {formStatus === 'success' ? (
-              <div className="text-center py-8">
-                <h3 className="text-2xl font-bold mb-4">Obrigado!</h3>
-                <p className="text-gray-700 mb-6">Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.</p>
+
+        {/* Contact Information */}
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center">
+            <Mail size={32} className="mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Email</h3>
+            <a href={`mailto:${contactInfo.email}`} className="text-gray-600 hover:text-black">
+              {contactInfo.email}
+            </a>
+          </div>
+
+          <div className="text-center">
+            <Phone size={32} className="mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Telefone</h3>
+            <a href={`tel:${contactInfo.phone}`} className="text-gray-600 hover:text-black">
+              {contactInfo.phone}
+            </a>
+          </div>
+
+          <div className="text-center">
+            <MapPin size={32} className="mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Endereço</h3>
+            <address className="text-gray-600 not-italic">
+              {contactInfo.address.street}<br />
+              {contactInfo.address.district}<br />
+              {contactInfo.address.city}<br />
+              {contactInfo.address.postalCode}
+            </address>
+          </div>
+        </div>
+
+        {/* Contact Modal */}
+        {isOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div ref={modalRef} className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-bold">Entre em Contato</h3>
                 <button
-                  onClick={() => setFormStatus('idle')}
-                  className="bg-black text-white font-medium py-3 px-8 rounded-md hover:bg-gray-800 transition-colors"
+                  onClick={onClose}
+                  className="text-gray-500 hover:text-gray-700"
                 >
-                  Enviar Outra Mensagem
+                  <X size={24} />
                 </button>
               </div>
-            ) : (
-              <>
-                <h3 className="text-2xl font-bold mb-6">Envie uma Mensagem</h3>
-                <form onSubmit={handleSubmit}>
-                  <div className="mb-6">
+
+              <form onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
                     <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
                       Nome
                     </label>
@@ -106,8 +137,8 @@ const Contact: React.FC = () => {
                       required
                     />
                   </div>
-                  
-                  <div className="mb-6">
+
+                  <div>
                     <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
                       Email
                     </label>
@@ -121,8 +152,42 @@ const Contact: React.FC = () => {
                       required
                     />
                   </div>
-                  
-                  <div className="mb-6">
+
+                  <div>
+                    <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">
+                      Telefone
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="subject" className="block text-gray-700 font-medium mb-2">
+                      Assunto
+                    </label>
+                    <select
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                      required
+                    >
+                      <option value="duvidas">Dúvidas</option>
+                      <option value="orcamentos">Orçamentos</option>
+                      <option value="parceiros">Parceiros</option>
+                      <option value="outros">Outros</option>
+                    </select>
+                  </div>
+
+                  <div className="md:col-span-2">
                     <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
                       Mensagem
                     </label>
@@ -131,75 +196,23 @@ const Contact: React.FC = () => {
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      rows={5}
+                      rows={4}
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                       required
                     ></textarea>
                   </div>
-                  
-                  <button
-                    type="submit"
-                    disabled={formStatus === 'submitting'}
-                    className={`w-full py-3 px-4 bg-black text-white rounded-md hover:bg-gray-800 transition-colors ${
-                      formStatus === 'submitting' ? 'opacity-70 cursor-not-allowed' : ''
-                    }`}
-                  >
-                    {formStatus === 'submitting' ? 'Enviando...' : 'Enviar Mensagem'}
-                  </button>
-                </form>
-              </>
-            )}
-          </div>
-          
-          <div 
-            ref={contactInfoRef}
-            className="transition-all duration-1000 opacity-0 translate-x-[50px]"
-          >
-            <div className="bg-white p-8 rounded-lg shadow-md h-full">
-              <h3 className="text-2xl font-bold mb-6">Informações de Contato</h3>
-              
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <Mail size={24} className="text-black mr-4 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium mb-1">Email</p>
-                    <a href="mailto:info@genessez.com" className="text-gray-700 hover:text-black transition-colors">
-                      info@genessez.com
-                    </a>
-                  </div>
                 </div>
-                
-                <div className="flex items-start">
-                  <Phone size={24} className="text-black mr-4 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium mb-1">Telefone</p>
-                    <a href="tel:+11234567890" className="text-gray-700 hover:text-black transition-colors">
-                      +1 (123) 456-7890
-                    </a>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <MapPin size={24} className="text-black mr-4 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium mb-1">Endereço</p>
-                    <address className="text-gray-700 not-italic">
-                      Rua da Automação, 123<br />
-                      Distrito Tecnológico<br />
-                      São Paulo, SP 04538-133
-                    </address>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="mt-8">
-                <h4 className="font-bold mb-4">Horário de Funcionamento</h4>
-                <p className="text-gray-700 mb-2">Segunda - Sexta: 9:00 - 18:00</p>
-                <p className="text-gray-700">Sábado - Domingo: Fechado</p>
-              </div>
+
+                <button
+                  type="submit"
+                  className="mt-6 w-full bg-black text-white py-3 px-6 rounded-md hover:bg-gray-800 transition-colors"
+                >
+                  Enviar Mensagem
+                </button>
+              </form>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

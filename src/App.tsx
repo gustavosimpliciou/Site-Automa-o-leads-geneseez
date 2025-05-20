@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Benefits from './components/Benefits';
 import Projects from './components/Projects';
+import Partners from './components/Partners';
 import Testimonials from './components/Testimonials';
 import ReviewForm from './components/ReviewForm';
-import Pricing from './components/Pricing';
-import Partners from './components/Partners';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 
 function App() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   useEffect(() => {
     // Update page title
-    document.title = 'Genessez - Process Automation with n8n';
+    document.title = 'Geneseez - Process Automation with n8n';
     
     // Update favicon (optional)
     const link = document.querySelector("link[rel='icon']") as HTMLLinkElement;
@@ -39,18 +40,21 @@ function App() {
     };
   }, []);
 
+  const handleContactClick = () => {
+    setIsContactModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
-      <Hero />
+      <Hero onContactClick={handleContactClick} />
       <About />
       <Benefits />
       <Projects />
+      <Partners onContactClick={handleContactClick} />
       <Testimonials />
       <ReviewForm />
-      <Pricing />
-      <Partners />
-      <Contact />
+      <Contact isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
       <Footer />
       <WhatsAppButton />
     </div>
