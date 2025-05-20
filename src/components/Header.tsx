@@ -34,7 +34,7 @@ const Header: React.FC = () => {
     { id: 'about', label: 'Sobre' },
     { id: 'projects', label: 'Projetos' },
     { id: 'contact', label: 'Contato' },
-    { id: 'partners', label: 'Tecnológias' }
+    { id: 'partners', label: 'Tecnologias' }
   ];
 
   return (
