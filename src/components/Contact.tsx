@@ -63,7 +63,7 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
 
   const contactInfo = {
     email: 'contato@geneseez.com',
-    phone: '+55 11 99999-9999',
+    phone: '+55 83 99141-1822',
     address: {
       street: 'Rua da Automação, 123',
       district: 'Distrito Tecnológico',
