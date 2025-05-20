@@ -1,103 +1,116 @@
-import React, { useState } from 'react';
-import { MessageSquare, Menu, X } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
 
 const Header: React.FC = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
-  const scrollToBenefits = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsMenuOpen(false);
-    
-    if (location.pathname !== '/') {
-      navigate('/', { replace: true });
-      setTimeout(() => {
-        const benefitsSection = document.getElementById('benefits');
-        if (benefitsSection) {
-          benefitsSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      const benefitsSection = document.getElementById('benefits');
-      if (benefitsSection) {
-        benefitsSection.scrollIntoView({ behavior: 'smooth' });
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
       }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop - 100,
+        behavior: 'smooth'
+      });
+      setIsOpen(false);
     }
   };
 
+  const menuItems = [
+    { id: 'home', label: 'Início' },
+    { id: 'about', label: 'Sobre' },
+    { id: 'projects', label: 'Projetos' },
+    { id: 'pricing', label: 'Preços' },
+    { id: 'contact', label: 'Contato' },
+    { id: 'partners', label: 'Parceiros' }
+  ];
+
   return (
-    <header className="w-full py-4 px-4 md:px-12 flex justify-between items-center relative">
-      <Link to="/" className="flex items-center z-20">
-        <img src="/image/logo2.png" alt="Geneseez Logo" className="w-8 h-8 mr-2" />
-        <span className="text-xl font-bold neon-text-blue">GENESEEZ IA</span>
-      </Link>
+    <header 
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-6'
+      }`}
+    >
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="flex items-center">
+          <a 
+            href="#home" 
+            className="interactive-particle text-2xl font-bold tracking-tight pointer-events-auto"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('home');
+            }}
+          >
+            <span className={`transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}>
+              Genessez
+            </span>
+          </a>
+        </div>
 
-      {/* Mobile Menu Button */}
-      <button 
-        className="md:hidden z-20 text-gray-300 hover:text-white transition-colors"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-      >
-        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-8">
+          {menuItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`interactive-particle font-medium transition-colors duration-300 hover:text-gray-500 pointer-events-auto ${
+                isScrolled ? 'text-black' : 'text-white'
+              }`}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(item.id);
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
 
-      {/* Mobile Menu */}
-      <div className={`
-        fixed inset-0 bg-slate-900/95 z-10 md:hidden transition-transform duration-300
-        ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}
-        flex flex-col items-center justify-center gap-8
-      `}>
-        <Link 
-          to="/" 
-          className="text-xl text-gray-300 hover:text-white transition-colors duration-300"
-          onClick={() => setIsMenuOpen(false)}
+        {/* Mobile Menu Button */}
+        <button 
+          onClick={() => setIsOpen(!isOpen)} 
+          className={`md:hidden transition-colors duration-300 ${isScrolled ? 'text-black' : 'text-white'}`}
+          aria-label="Alternar menu"
         >
-          Home
-        </Link>
-        <a 
-          href="#benefits" 
-          onClick={scrollToBenefits}
-          className="text-xl text-gray-300 hover:text-white transition-colors duration-300"
-        >
-          Benefícios
-        </a>
-        <Link 
-          to="/sobre" 
-          className="text-xl text-gray-300 hover:text-white transition-colors duration-300"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Sobre
-        </Link>
-        <a 
-          href="https://wa.me/5583991411822"
-          className="px-6 py-3 text-base bg-transparent border border-[#0cfa83] text-[#0cfa83] rounded-lg hover:bg-[#0cfa83]/10 transition-all duration-300 flex items-center"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          <MessageSquare size={16} className="mr-2" />
-          WhatsApp
-        </a>
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
 
-      {/* Desktop Menu */}
-      <nav className="hidden md:flex space-x-6">
-        <Link to="/" className="text-gray-300 hover:text-white transition-colors duration-300">Home</Link>
-        <a href="#benefits" onClick={scrollToBenefits} className="text-gray-300 hover:text-white transition-colors duration-300">Benefícios</a>
-        <Link to="/sobre" className="text-gray-300 hover:text-white transition-colors duration-300">Sobre</Link>
-      </nav>
-
-      {/* Desktop WhatsApp Button */}
-      <a 
-        href="https://wa.me/5583991411822"
-        className="hidden md:flex px-4 py-2 text-sm bg-transparent border border-[#0cfa83] text-[#0cfa83] rounded-lg hover:bg-[#0cfa83]/10 transition-all duration-300 items-center"
-        target="_blank"
-        rel="noopener noreferrer"
+      {/* Mobile Navigation */}
+      <div 
+        className={`md:hidden absolute w-full bg-white ${
+          isOpen ? 'max-h-screen py-4 shadow-lg' : 'max-h-0 py-0 overflow-hidden'
+        } transition-all duration-300 ease-in-out`}
       >
-        <MessageSquare size={16} className="mr-2" />
-        WhatsApp
-      </a>
+        <div className="container mx-auto px-4 flex flex-col space-y-4">
+          {menuItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="interactive-particle text-black font-medium py-2 transition-colors duration-300 hover:text-gray-500 pointer-events-auto"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(item.id);
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
     </header>
   );
 };

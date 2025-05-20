@@ -1,68 +1,98 @@
 import React, { useEffect, useRef } from 'react';
-import { Bot, Zap, ArrowRight } from 'lucide-react';
+import ParticleAnimation from './ParticleAnimation';
 
-interface HeroProps {
-  onCtaClick: () => void;
-}
-
-const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLButtonElement>(null);
+const Hero: React.FC = () => {
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const subheadlineRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const elements = [titleRef.current, subtitleRef.current, ctaRef.current];
-    
-    elements.forEach((el, index) => {
-      if (el) {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        
-        setTimeout(() => {
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        }, 300 + (index * 200));
-      }
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (headlineRef.current) observer.observe(headlineRef.current);
+    if (subheadlineRef.current) observer.observe(subheadlineRef.current);
+    if (ctaRef.current) observer.observe(ctaRef.current);
+
+    return () => {
+      if (headlineRef.current) observer.unobserve(headlineRef.current);
+      if (subheadlineRef.current) observer.unobserve(subheadlineRef.current);
+      if (ctaRef.current) observer.unobserve(ctaRef.current);
+    };
   }, []);
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      window.scrollTo({
+        top: contactSection.offsetTop - 100,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <section className="w-full min-h-[80vh] flex flex-col items-center justify-center px-4 md:px-12 pt-16 pb-24 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-[#0cf]/20 rounded-full blur-[120px] -z-10"></div>
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-[#b45afb]/20 rounded-full blur-[120px] -z-10"></div>
-      
-      <div className="absolute top-1/4 left-1/4 animate-float opacity-20">
-        <Bot size={48} className="text-[#0cf]" />
+    <section 
+      id="home" 
+      className="interactive-particle relative min-h-screen flex items-center justify-center pt-24 pb-16"
+    >
+      {/* Background com padrão geométrico */}
+      <div className="absolute inset-0 bg-black overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="grid grid-cols-8 grid-rows-8 h-full w-full">
+            {Array(64).fill(null).map((_, i) => (
+              <div 
+                key={i}
+                className={`
+                  border border-gray-700 
+                  ${Math.random() > 0.7 ? 'bg-gray-800' : ''}
+                  ${Math.random() > 0.9 ? 'bg-gray-700' : ''}
+                `} 
+              />
+            ))}
+          </div>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/90" />
       </div>
-      <div className="absolute bottom-1/4 right-1/4 animate-float opacity-20" style={{ animationDelay: '1s' }}>
-        <Zap size={48} className="text-[#ff47d2]" />
+
+      {/* Animação de partículas */}
+      <ParticleAnimation />
+
+      <div className="container mx-auto px-4 z-20 text-center">
+        <h1 
+          ref={headlineRef}
+          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 transition-all duration-1000 opacity-0 translate-y-10"
+        >
+          Transforme Sua Empresa com Automação Genessez
+        </h1>
+        <p 
+          ref={subheadlineRef}
+          className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8 transition-all duration-1000 delay-300 opacity-0 translate-y-10"
+        >
+          Utilizando o poder do n8n para entregar automação de processos perfeita e experiências excepcionais aos clientes.
+        </p>
+        <div 
+          ref={ctaRef}
+          className="transition-all duration-1000 delay-500 opacity-0 translate-y-10"
+        >
+          <button 
+            onClick={scrollToContact}
+            className="bg-white text-black font-medium py-3 px-8 rounded-md hover:bg-gray-200 transition-colors duration-300 transform hover:scale-105"
+          >
+            Solicitar Demonstração
+          </button>
+        </div>
       </div>
-      
-      <h1 
-        ref={titleRef}
-        className="text-3xl md:text-5xl lg:text-6xl font-bold text-center max-w-4xl mb-6 px-4"
-      >
-        🚀 Site + Captação de Leads + <span className="neon-text-blue">Atendimento Automatizado</span>
-        <br />
-        <span className="text-xl md:text-3xl lg:text-4xl text-[#0cfa83] mt-4 block">Implantação em 7 dias</span>
-      </h1>
-      
-      <p 
-        ref={subtitleRef}
-        className="text-lg md:text-2xl text-center text-gray-300 max-w-2xl mb-12 px-4"
-      >
-        Pare de perder clientes por falta de atendimento — nós ativamos sua presença digital em 7 dias.
-      </p>
-      
-      <button 
-        ref={ctaRef}
-        onClick={onCtaClick}
-        className="cta-button group flex items-center shine-effect px-6 py-4 text-base md:text-lg"
-      >
-        QUERO MEU SITE COM IA
-        <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" size={20} />
-      </button>
     </section>
   );
 };

@@ -1,107 +1,97 @@
 import React, { useEffect, useRef } from 'react';
-import { Globe, Bot, MessageSquareText, FileSpreadsheet } from 'lucide-react';
+import { Zap, TrendingUp, Users, Settings } from 'lucide-react';
 
-interface BenefitCardProps {
-  icon: React.ReactNode;
+interface BenefitProps {
   title: string;
   description: string;
-  color: string;
+  icon: React.ReactNode;
   delay: number;
 }
 
-const BenefitCard: React.FC<BenefitCardProps> = ({ icon, title, description, color, delay }) => {
+const BenefitCard: React.FC<BenefitProps> = ({ title, description, icon, delay }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setTimeout(() => {
-              if (cardRef.current) {
-                cardRef.current.style.opacity = '1';
-                cardRef.current.style.transform = 'translateY(0)';
-              }
+              entry.target.classList.add('opacity-100', 'translate-y-0');
+              entry.target.classList.remove('opacity-0', 'translate-y-10');
             }, delay);
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
-    
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-    
+
+    if (cardRef.current) observer.observe(cardRef.current);
+
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
+      if (cardRef.current) observer.unobserve(cardRef.current);
     };
   }, [delay]);
-  
+
   return (
     <div 
+      className="bg-white p-6 rounded-lg shadow-md transition-all duration-700 opacity-0 translate-y-10"
       ref={cardRef}
-      className={`bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl card-hover gradient-border opacity-0 transform translate-y-10`}
-      style={{ 
-        transition: 'opacity 0.5s ease, transform 0.5s ease',
-        '--neon-blue': color === 'blue' ? '#0cf' : color === 'purple' ? '#b45afb' : color === 'pink' ? '#ff47d2' : '#0cfa83'
-      } as React.CSSProperties}
     >
-      <div className={`mb-4 text-[${color === 'blue' ? '#0cf' : color === 'purple' ? '#b45afb' : color === 'pink' ? '#ff47d2' : '#0cfa83'}]`}>
+      <div className="text-black mb-4">
         {icon}
       </div>
-      <h3 className="text-lg md:text-xl font-semibold mb-3">{title}</h3>
-      <p className="text-gray-300 text-sm md:text-base">{description}</p>
+      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <p className="text-gray-700">{description}</p>
     </div>
   );
 };
 
 const Benefits: React.FC = () => {
+  const benefits = [
+    {
+      title: "Processos Otimizados",
+      description: "Automatize tarefas repetitivas e otimize seus processos empresariais com fluxos de trabalho alimentados por n8n.",
+      icon: <Zap size={32} />,
+      delay: 0
+    },
+    {
+      title: "Soluções Escaláveis",
+      description: "Nossas soluções de automação crescem com seu negócio, adaptando-se às suas necessidades e requisitos em constante mudança.",
+      icon: <TrendingUp size={32} />,
+      delay: 100
+    },
+    {
+      title: "Experiência Aprimorada",
+      description: "Melhore a satisfação do cliente através de um atendimento mais rápido, eficiente e interações personalizadas.",
+      icon: <Users size={32} />,
+      delay: 200
+    },
+    {
+      title: "Suporte Especializado",
+      description: "Receba suporte dedicado de nossa equipe de especialistas em automação, garantindo integração perfeita e desempenho ideal.",
+      icon: <Settings size={32} />,
+      delay: 300
+    }
+  ];
+
   return (
-    <section id="benefits" className="w-full py-16 md:py-20 px-4 md:px-12">
-      <h2 className="text-2xl md:text-4xl font-bold text-center mb-4">
-        Benefícios <span className="neon-text-purple">Exclusivos</span>
-      </h2>
-      
-      <p className="text-center text-gray-300 text-base md:text-lg mb-12 max-w-3xl mx-auto px-4">
-        Ao contratar nossos serviços, você receberá um pacote completo de soluções digitais para impulsionar seu negócio:
-      </p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
-        <BenefitCard 
-          icon={<Globe size={36} />} 
-          title="Site Profissional" 
-          description="Site moderno e responsivo, otimizado para conversão e com design profissional personalizado."
-          color="blue"
-          delay={0}
-        />
+    <section id="benefits" className="py-24 bg-gray-100">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Por que Escolher a Genessez?</h2>
         
-        <BenefitCard 
-          icon={<Bot size={36} />} 
-          title="Integração com IA" 
-          description="Chatbot inteligente para responder suas perguntas e atender seus clientes 24 horas por dia."
-          color="purple"
-          delay={200}
-        />
-        
-        <BenefitCard 
-          icon={<MessageSquareText size={36} />} 
-          title="Automação no WhatsApp" 
-          description="Atendimento automático via WhatsApp para captar leads e responder dúvidas sem sua intervenção."
-          color="pink"
-          delay={400}
-        />
-        
-        <BenefitCard 
-          icon={<FileSpreadsheet size={36} />} 
-          title="Leads no Google Sheets" 
-          description="Todos os contatos são armazenados automaticamente em uma planilha para você acompanhar e gerenciar."
-          color="green"
-          delay={600}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {benefits.map((benefit, index) => (
+            <BenefitCard 
+              key={index}
+              title={benefit.title}
+              description={benefit.description}
+              icon={benefit.icon}
+              delay={benefit.delay}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
