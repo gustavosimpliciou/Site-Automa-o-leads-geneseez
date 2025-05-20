@@ -64,28 +64,28 @@ const Testimonials: React.FC = () => {
       id: 1,
       name: "Sarah Johnson",
       company: "TechCorp",
-      content: "A Genessez transformou nosso fluxo de trabalho com suas soluções de automação n8n. Vimos um aumento dramático na eficiência e nossa equipe agora pode focar em tarefas mais estratégicas.",
+      content: "A Geneseez transformou nosso fluxo de trabalho com suas soluções de automação n8n. Vimos um aumento dramático na eficiência e nossa equipe agora pode focar em tarefas mais estratégicas.",
       rating: 5
     },
     {
       id: 2,
       name: "Michael Chen",
       company: "Global Finance",
-      content: "O sistema de processamento de notas fiscais que a Genessez implementou revolucionou nosso departamento contábil. O que costumava levar dias agora acontece automaticamente em minutos.",
+      content: "O sistema de processamento de notas fiscais que a Geneseez implementou revolucionou nosso departamento contábil. O que costumava levar dias agora acontece automaticamente em minutos.",
       rating: 5
     },
     {
       id: 3,
       name: "Emma Rodriguez",
       company: "HealthPlus",
-      content: "Trabalhar com a Genessez foi perfeito do início ao fim. A equipe deles entendeu nossas necessidades complexas e entregou uma solução que superou nossas expectativas.",
+      content: "Trabalhar com a Geneseez foi perfeito do início ao fim. A equipe deles entendeu nossas necessidades complexas e entregou uma solução que superou nossas expectativas.",
       rating: 4
     },
     {
       id: 4,
       name: "David Kim",
       company: "Retail Solutions",
-      content: "O atendimento ao cliente na Genessez é excepcional. Eles são ágeis, conhecedores e realmente se importam em ajudar nosso negócio a ter sucesso através da automação.",
+      content: "O atendimento ao cliente na Geneseez é excepcional. Eles são ágeis, conhecedores e realmente se importam em ajudar nosso negócio a ter sucesso através da automação.",
       rating: 5
     },
     {

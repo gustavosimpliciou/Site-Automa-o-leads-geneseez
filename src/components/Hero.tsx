@@ -73,7 +73,7 @@ const Hero: React.FC = () => {
           ref={headlineRef}
           className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 transition-all duration-1000 opacity-0 translate-y-10"
         >
-          Transforme Sua Empresa com Automação Genessez
+          Transforme Sua Empresa com Automação Geneseez
         </h1>
         <p 
           ref={subheadlineRef}

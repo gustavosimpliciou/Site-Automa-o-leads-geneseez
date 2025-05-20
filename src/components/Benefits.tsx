@@ -79,7 +79,7 @@ const Benefits: React.FC = () => {
   return (
     <section id="benefits" className="py-24 bg-gray-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Por que Escolher a Genessez?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Por que Escolher a Geneseez?</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {benefits.map((benefit, index) => (

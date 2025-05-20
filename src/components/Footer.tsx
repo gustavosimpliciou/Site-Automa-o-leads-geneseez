@@ -119,7 +119,7 @@ const Footer: React.FC = () => {
         
         <div className="pt-8 border-t border-gray-800 text-center md:flex md:justify-between md:text-left">
           <p className="text-gray-400">
-            © {new Date().getFullYear()} Genessez. Todos os direitos reservados.
+            © {new Date().getFullYear()} Geneseez. Todos os direitos reservados.
           </p>
           <div className="mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-white transition-colors mx-3 md:ml-6 md:mr-0">
