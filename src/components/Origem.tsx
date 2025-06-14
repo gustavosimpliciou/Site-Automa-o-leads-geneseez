@@ -30,40 +30,42 @@ const Origem: React.FC = () => {
       id="origem" 
       className="interactive-particle relative min-h-screen flex items-center justify-center pt-24 pb-16"
     >
-      {/* White background with light gray square pattern */}
+      {/* Clean white background with subtle pattern */}
       <div className="absolute inset-0 bg-white overflow-hidden">
-        <div className="absolute inset-0 opacity-15">
-          <div className="grid grid-cols-8 grid-rows-8 h-full w-full">
-            {Array(64).fill(null).map((_, i) => (
+        <div className="absolute inset-0 opacity-5">
+          <div className="grid grid-cols-12 grid-rows-12 h-full w-full">
+            {Array(144).fill(null).map((_, i) => (
               <div 
                 key={i}
                 className={`
-                  border border-gray-200 
-                  ${Math.random() > 0.7 ? 'bg-gray-100' : ''}
-                  ${Math.random() > 0.9 ? 'bg-gray-200' : ''}
+                  border border-gray-100 
+                  ${Math.random() > 0.85 ? 'bg-gray-50' : ''}
                 `} 
               />
             ))}
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-white/60" />
       </div>
 
-      {/* Black particle animation */}
+      {/* Subtle particle animation */}
       <ParticleAnimation isDark={true} />
 
       {/* Center area for cristo.png image */}
       <div className="container mx-auto px-4 z-20">
         <div 
           ref={sectionRef}
-          className="transition-all duration-1000 opacity-0 translate-y-10 flex items-center justify-center min-h-[60vh]"
+          className="transition-all duration-1000 opacity-0 translate-y-10 flex items-center justify-center min-h-[70vh]"
         >
-          {/* Cristo image container */}
-          <div className="w-full max-w-4xl h-96 flex items-center justify-center">
+          {/* Cristo image container - seamlessly integrated */}
+          <div className="w-full max-w-5xl h-auto flex items-center justify-center">
             <img 
               src="/cristo.png" 
               alt="Cristo" 
-              className="max-w-full max-h-full object-contain rounded-lg shadow-lg"
+              className="max-w-full h-auto object-contain filter drop-shadow-none"
+              style={{
+                filter: 'none',
+                boxShadow: 'none'
+              }}
               onError={(e) => {
                 // Fallback if image doesn't exist
                 const target = e.target as HTMLImageElement;
@@ -75,8 +77,8 @@ const Origem: React.FC = () => {
               }}
             />
             {/* Fallback placeholder */}
-            <div className="fallback w-full h-full bg-transparent border-2 border-dashed border-gray-300 rounded-lg items-center justify-center hidden">
-              <p className="text-gray-400 text-lg">Cristo.png será exibido aqui</p>
+            <div className="fallback w-full max-w-md h-96 bg-transparent border-2 border-dashed border-gray-200 rounded-lg items-center justify-center hidden">
+              <p className="text-gray-300 text-lg text-center px-4">Cristo.png será exibido aqui</p>
             </div>
           </div>
         </div>

@@ -44,6 +44,7 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
   ];
 
   const isSpecialView = currentView !== 'home';
+  const isDarkBackground = currentView === 'home' && !isScrolled;
 
   return (
     <header 
@@ -79,16 +80,23 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
           {menuItems.map((item) => (
             <button
               key={item.id}
-              className={`interactive-particle font-medium transition-all duration-300 hover:text-gray-500 pointer-events-auto px-3 py-2 rounded-md ${
+              className={`interactive-particle font-medium transition-all duration-300 hover:text-gray-500 pointer-events-auto px-3 py-2 rounded-md flex items-center gap-1.5 ${
                 (isScrolled || isSpecialView) ? 'text-black' : 'text-white'
               } ${
                 currentView === item.id 
-                  ? 'font-bold bg-gray-100 text-black shadow-sm' 
+                  ? 'font-bold' 
                   : 'hover:bg-gray-50'
               }`}
               onClick={() => handleMenuClick(item.id)}
             >
               {item.label}
+              {currentView === item.id && (
+                <div 
+                  className={`w-1 h-1 rounded-full ${
+                    isDarkBackground ? 'bg-white' : 'bg-black'
+                  }`}
+                />
+              )}
             </button>
           ))}
         </nav>
@@ -113,7 +121,7 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
           {menuItems.map((item) => (
             <button
               key={item.id}
-              className={`interactive-particle font-medium py-3 px-4 transition-all duration-300 hover:text-gray-500 pointer-events-auto text-left rounded-md ${
+              className={`interactive-particle font-medium py-3 px-4 transition-all duration-300 hover:text-gray-500 pointer-events-auto text-left rounded-md flex items-center justify-between ${
                 currentView === item.id 
                   ? 'font-bold bg-gray-100 text-black shadow-sm' 
                   : 'text-black hover:bg-gray-50'
@@ -121,6 +129,9 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
               onClick={() => handleMenuClick(item.id)}
             >
               {item.label}
+              {currentView === item.id && (
+                <div className="w-1 h-1 rounded-full bg-black" />
+              )}
             </button>
           ))}
         </div>

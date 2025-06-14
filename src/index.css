@@ -42,12 +42,12 @@ html {
 /* Particle Animation - Black particles for light backgrounds */
 .particle-dark {
   position: absolute;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 10%, rgba(0, 0, 0, 0.1) 80%);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.6) 10%, rgba(0, 0, 0, 0.05) 80%);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 15;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   transition: opacity 0.5s ease-out;
 }
 
@@ -85,6 +85,18 @@ html {
   }
 }
 
+/* WhatsApp button pulse animation */
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
 /* For WebKit browsers */
 ::-webkit-scrollbar {
   width: 8px;
@@ -101,4 +113,18 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* Remove any unwanted shadows from images */
+img {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Ensure clean integration for the origem page */
+#origem img {
+  box-shadow: none !important;
+  filter: none !important;
+  border: none !important;
+  outline: none !important;
 }

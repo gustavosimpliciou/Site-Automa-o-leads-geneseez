@@ -4,7 +4,7 @@ const WhatsAppButton: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Show button after scrolling a bit
+    // Show button after scrolling down
     const handleScroll = () => {
       if (window.scrollY > 300) {
         setIsVisible(true);
@@ -22,14 +22,14 @@ const WhatsAppButton: React.FC = () => {
       href="https://wa.me/83991411822"
       target="_blank"
       rel="noopener noreferrer"
-      className={`fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg transition-all duration-300 ease-in-out hover:scale-110 ${
+      className={`fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-3 rounded-full shadow-lg transition-all duration-500 ease-in-out hover:scale-110 hover:shadow-xl ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
       aria-label="Contact us on WhatsApp"
     >
       <svg
-        width="24"
-        height="24"
+        width="22"
+        height="22"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -41,6 +41,9 @@ const WhatsAppButton: React.FC = () => {
           fill="currentColor"
         />
       </svg>
+      
+      {/* Pulse animation ring */}
+      <div className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></div>
     </a>
   );
 };
