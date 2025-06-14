@@ -73,53 +73,45 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-gray-100">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Entre em Contato</h2>
+    <>
+      <section id="contact" className="py-24 bg-gray-100">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Entre em Contato</h2>
 
-        {/* Contact Information */}
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <Mail size={32} className="mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Email</h3>
-            <a href={`mailto:${contactInfo.email}`} className="text-gray-600 hover:text-black">
-              {contactInfo.email}
-            </a>
+          {/* Contact Information */}
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="text-center">
+              <Mail size={32} className="mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Email</h3>
+              <a href={`mailto:${contactInfo.email}`} className="text-gray-600 hover:text-black">
+                {contactInfo.email}
+              </a>
+            </div>
+
+            <div className="text-center">
+              <Phone size={32} className="mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Telefone</h3>
+              <a href={`tel:${contactInfo.phone}`} className="text-gray-600 hover:text-black">
+                {contactInfo.phone}
+              </a>
+            </div>
+
+            <div className="text-center">
+              <MapPin size={32} className="mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Endereço</h3>
+              <address className="text-gray-600 not-italic">
+                {contactInfo.address.street}<br />
+                {contactInfo.address.district}<br />
+                {contactInfo.address.city}<br />
+                {contactInfo.address.postalCode}
+              </address>
+            </div>
           </div>
 
-          <div className="text-center">
-            <Phone size={32} className="mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Telefone</h3>
-            <a href={`tel:${contactInfo.phone}`} className="text-gray-600 hover:text-black">
-              {contactInfo.phone}
-            </a>
-          </div>
-
-          <div className="text-center">
-            <MapPin size={32} className="mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Endereço</h3>
-            <address className="text-gray-600 not-italic">
-              {contactInfo.address.street}<br />
-              {contactInfo.address.district}<br />
-              {contactInfo.address.city}<br />
-              {contactInfo.address.postalCode}
-            </address>
-          </div>
-        </div>
-
-        {/* Contact Modal */}
-        {isOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div ref={modalRef} className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold">Entre em Contato</h3>
-                <button
-                  onClick={onClose}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <X size={24} />
-                </button>
-              </div>
+          {/* Contact Form */}
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white rounded-lg p-8 shadow-md">
+              <h3 className="text-2xl font-bold mb-6 text-center">Envie uma Mensagem</h3>
 
               <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -212,9 +204,116 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
               </form>
             </div>
           </div>
-        )}
-      </div>
-    </section>
+        </div>
+      </section>
+
+      {/* Contact Modal */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div ref={modalRef} className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-bold">Entre em Contato</h3>
+              <button
+                onClick={onClose}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="modal-name" className="block text-gray-700 font-medium mb-2">
+                    Nome
+                  </label>
+                  <input
+                    type="text"
+                    id="modal-name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="modal-email" className="block text-gray-700 font-medium mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="modal-email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="modal-phone" className="block text-gray-700 font-medium mb-2">
+                    Telefone
+                  </label>
+                  <input
+                    type="tel"
+                    id="modal-phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="modal-subject" className="block text-gray-700 font-medium mb-2">
+                    Assunto
+                  </label>
+                  <select
+                    id="modal-subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                    required
+                  >
+                    <option value="duvidas">Dúvidas</option>
+                    <option value="orcamentos">Orçamentos</option>
+                    <option value="parceiros">Parceiros</option>
+                    <option value="outros">Outros</option>
+                  </select>
+                </div>
+
+                <div className="md:col-span-2">
+                  <label htmlFor="modal-message" className="block text-gray-700 font-medium mb-2">
+                    Mensagem
+                  </label>
+                  <textarea
+                    id="modal-message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={4}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                    required
+                  ></textarea>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="mt-6 w-full bg-black text-white py-3 px-6 rounded-md hover:bg-gray-800 transition-colors"
+              >
+                Enviar Mensagem
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

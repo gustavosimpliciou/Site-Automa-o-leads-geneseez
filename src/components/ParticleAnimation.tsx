@@ -19,7 +19,11 @@ interface ActivationPoint {
   section: 'top' | 'middle' | 'bottom' | 'left' | 'right';
 }
 
-const ParticleAnimation: React.FC = () => {
+interface ParticleAnimationProps {
+  isDark?: boolean;
+}
+
+const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<Particle[]>([]);
@@ -110,7 +114,7 @@ const ParticleAnimation: React.FC = () => {
         this.size = Math.random() * 4 + 2;
         this.createdAt = Date.now();
         this.element = document.createElement('div');
-        this.element.className = 'particle';
+        this.element.className = isDark ? 'particle-dark' : 'particle';
         this.element.style.width = `${this.size}px`;
         this.element.style.height = `${this.size}px`;
         container.appendChild(this.element);
@@ -201,7 +205,9 @@ const ParticleAnimation: React.FC = () => {
 
           if (distance < maxDistance) {
             const opacity = (1 - (distance / maxDistance)) * 0.3;
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            // Use black lines for dark mode, white for light mode
+            const color = isDark ? `rgba(0, 0, 0, ${opacity})` : `rgba(255, 255, 255, ${opacity})`;
+            ctx.strokeStyle = color;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -272,7 +278,7 @@ const ParticleAnimation: React.FC = () => {
         }
       });
     };
-  }, []);
+  }, [isDark]);
 
   return (
     <div ref={containerRef} className="fixed inset-0 overflow-hidden pointer-events-none">
