@@ -28,7 +28,7 @@ const Origem: React.FC = () => {
   return (
     <section 
       id="origem" 
-      className="interactive-particle relative min-h-screen flex items-center justify-center pt-24 pb-16"
+      className="interactive-particle relative h-screen flex items-center justify-center pt-24 pb-16"
     >
       {/* Clean white background with subtle pattern */}
       <div className="absolute inset-0 bg-white overflow-hidden">
@@ -51,20 +51,22 @@ const Origem: React.FC = () => {
       <ParticleAnimation isDark={true} />
 
       {/* Center area for cristo.png image */}
-      <div className="container mx-auto px-4 z-20">
+      <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 z-20 h-full flex items-center justify-center">
         <div 
           ref={sectionRef}
-          className="transition-all duration-1000 opacity-0 translate-y-10 flex items-center justify-center min-h-[70vh]"
+          className="transition-all duration-1000 opacity-0 translate-y-10 flex items-center justify-center w-full h-full max-h-[calc(100vh-12rem)]"
         >
-          {/* Cristo image container - seamlessly integrated */}
-          <div className="w-full max-w-5xl h-auto flex items-center justify-center">
+          {/* Cristo image container - perfectly sized for single section */}
+          <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl h-auto flex items-center justify-center">
             <img 
               src="/cristo.png" 
               alt="Cristo" 
-              className="max-w-full h-auto object-contain filter drop-shadow-none"
+              className="w-full h-auto max-h-[60vh] sm:max-h-[65vh] md:max-h-[70vh] lg:max-h-[75vh] object-contain"
               style={{
                 filter: 'none',
-                boxShadow: 'none'
+                boxShadow: 'none',
+                border: 'none',
+                outline: 'none'
               }}
               onError={(e) => {
                 // Fallback if image doesn't exist
@@ -77,8 +79,8 @@ const Origem: React.FC = () => {
               }}
             />
             {/* Fallback placeholder */}
-            <div className="fallback w-full max-w-md h-96 bg-transparent border-2 border-dashed border-gray-200 rounded-lg items-center justify-center hidden">
-              <p className="text-gray-300 text-lg text-center px-4">Cristo.png será exibido aqui</p>
+            <div className="fallback w-full max-w-xs sm:max-w-sm md:max-w-md h-64 sm:h-80 md:h-96 bg-transparent border-2 border-dashed border-gray-200 rounded-lg items-center justify-center hidden">
+              <p className="text-gray-300 text-sm sm:text-base md:text-lg text-center px-4">Cristo.png será exibido aqui</p>
             </div>
           </div>
         </div>
