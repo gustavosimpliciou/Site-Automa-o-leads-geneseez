@@ -37,8 +37,8 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
   const menuItems: { id: ViewType; label: string }[] = [
     { id: 'home', label: 'Início' },
     { id: 'about', label: 'Sobre' },
-    { id: 'projects', label: 'Imersão Completa' },
-    { id: 'origem', label: 'Origem' }
+    { id: 'projects', label: 'Imersão' },
+    { id: 'origem', label: 'Artistas' }
   ];
 
   const isSpecialView = currentView !== 'home';
@@ -46,9 +46,9 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed left-0 w-full z-50 transition-all duration-300 ${
         isScrolled || isSpecialView ? 'bg-white shadow-md py-3' : 'bg-transparent py-6'
-      }`}
+      } ${isSpecialView ? 'top-10' : 'top-0'}`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">

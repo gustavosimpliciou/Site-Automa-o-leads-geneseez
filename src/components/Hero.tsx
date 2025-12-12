@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import ParticleAnimation from './ParticleAnimation';
+import Countdown from './Countdown';
 
 interface HeroProps {
   onProjectsClick: () => void;
@@ -9,6 +10,7 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const countdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,11 +29,13 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
     if (headlineRef.current) observer.observe(headlineRef.current);
     if (subheadlineRef.current) observer.observe(subheadlineRef.current);
     if (ctaRef.current) observer.observe(ctaRef.current);
+    if (countdownRef.current) observer.observe(countdownRef.current);
 
     return () => {
       if (headlineRef.current) observer.unobserve(headlineRef.current);
       if (subheadlineRef.current) observer.unobserve(subheadlineRef.current);
       if (ctaRef.current) observer.unobserve(ctaRef.current);
+      if (countdownRef.current) observer.unobserve(countdownRef.current);
     };
   }, []);
 
@@ -66,7 +70,7 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
           ref={subheadlineRef}
           style={{ transitionDelay: '100ms' }}
         >
-          ONDE TUDO COMEÇA
+          GENESEEZ ONDE TUDO COMEÇA
         </p>
         <h1 
           ref={headlineRef}
@@ -74,15 +78,9 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
         >
           CRIAMOS A FREQUÊNCIA DE NOSSA VIDA
         </h1>
-        <p 
-          className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 transition-all duration-1000 delay-300 opacity-0 translate-y-10 uppercase"
-        >
-          MÚSICA. ARTE. DESIGN. VÍDEO. FOTOGRAFIA. SOMOS A PONTE ENTRE A IMAGINAÇÃO E A REALIDADE. 
-          CADA PROJETO É UMA HISTÓRIA QUE MERECE SER CONTADA COM AUTENTICIDADE.
-        </p>
         <div 
           ref={ctaRef}
-          className="transition-all duration-1000 delay-500 opacity-0 translate-y-10 flex flex-col sm:flex-row gap-4 justify-center items-center"
+          className="transition-all duration-1000 delay-300 opacity-0 translate-y-10 flex flex-col sm:flex-row gap-4 justify-center items-center mt-6"
         >
           <button 
             onClick={onProjectsClick}
@@ -91,6 +89,12 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
             CONHECER PROJETOS
           </button>
           <span className="text-gray-500 text-sm uppercase">NOVO LANÇAMENTO: ÊXTASE 999</span>
+        </div>
+        <div 
+          ref={countdownRef}
+          className="transition-all duration-1000 delay-500 opacity-0 translate-y-10"
+        >
+          <Countdown isHome={true} />
         </div>
       </div>
     </section>

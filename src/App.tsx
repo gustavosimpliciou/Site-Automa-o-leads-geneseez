@@ -5,6 +5,7 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
 import Origem from './components/Origem';
+import Countdown from './components/Countdown';
 
 type ViewType = 'home' | 'about' | 'projects' | 'origem';
 
@@ -105,6 +106,7 @@ function App() {
 
   return (
     <div className="min-h-screen">
+      {currentView !== 'home' && <Countdown isHome={false} />}
       <Header 
         onViewChange={handleViewChange}
         currentView={currentView}

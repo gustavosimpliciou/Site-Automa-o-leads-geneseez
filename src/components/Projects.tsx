@@ -5,6 +5,7 @@ interface Track {
   id: number;
   title: string;
   duration: string;
+  artist: string;
   isPlaying?: boolean;
 }
 
@@ -15,15 +16,15 @@ const Projects: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const tracks: Track[] = [
-    { id: 1, title: 'DESACREDITOU', duration: '3:12' },
-    { id: 2, title: 'VIDA', duration: '3:11' },
-    { id: 3, title: 'PREFÁCIL', duration: '3:50' },
-    { id: 4, title: 'BAILA COMIGO', duration: '2:17' },
-    { id: 5, title: 'FICA UM POUCO MAIS', duration: '3:00' },
-    { id: 6, title: 'GENESEEZ', duration: '2:00' },
-    { id: 7, title: 'SINTONIA', duration: '3:04' },
-    { id: 8, title: 'APOGEU', duration: '3:00' },
-    { id: 9, title: '999!', duration: '4:26' },
+    { id: 1, title: 'DESACREDITOU', duration: '3:12', artist: 'LOPZ, DIIVINU' },
+    { id: 2, title: 'VIDA', duration: '3:11', artist: 'DIIVINU' },
+    { id: 3, title: 'PREFÁCIL', duration: '3:50', artist: 'LOPZ' },
+    { id: 4, title: 'BAILA COMIGO', duration: '2:17', artist: 'LOPZ' },
+    { id: 5, title: 'FICA UM POUCO MAIS', duration: '3:00', artist: 'LOPZ' },
+    { id: 6, title: 'GENESEEZ', duration: '2:00', artist: 'DIIVINU' },
+    { id: 7, title: 'SINTONIA', duration: '3:04', artist: 'DIIVINU' },
+    { id: 8, title: 'APOGEU', duration: '3:00', artist: 'DIIVINU, LOPZ' },
+    { id: 9, title: '999!', duration: '4:26', artist: 'DIIVINU, LOPZ' },
   ];
 
   useEffect(() => {
@@ -69,7 +70,7 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="py-24 bg-gradient-to-b from-gray-900 via-black to-black min-h-screen">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-white uppercase tracking-wide">IMERSÃO COMPLETA</h2>
+        <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-white uppercase tracking-wide">IMERSÃO</h2>
         
         {/* Album Container - Spotify Style */}
         <div 
@@ -170,7 +171,7 @@ const Projects: React.FC = () => {
                     <span className={`text-sm font-medium uppercase ${currentTrack === track.id ? 'text-green-500' : 'text-white'}`}>
                       {track.title}
                     </span>
-                    <span className="text-xs text-gray-400">DIIVINU, LOPZ</span>
+                    <span className="text-xs text-gray-400">{track.artist}</span>
                   </div>
                   <span className="text-right text-sm text-gray-400">{track.duration}</span>
                 </div>
