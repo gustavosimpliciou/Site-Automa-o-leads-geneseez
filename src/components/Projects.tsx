@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Play, Pause, SkipBack, SkipForward, Volume2, Heart, MoreHorizontal, Clock, Music2 } from 'lucide-react';
+import { Play, Pause, Heart, MoreHorizontal, Clock, Music2 } from 'lucide-react';
 
 interface Track {
   id: number;
@@ -12,7 +12,6 @@ const Projects: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(1);
   const [liked, setLiked] = useState(false);
-  const [progress] = useState(35);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const tracks: Track[] = [
@@ -172,63 +171,15 @@ const Projects: React.FC = () => {
             </div>
           </div>
 
-          {/* Mini Player */}
-          {currentTrack && (
-            <div className="bg-gradient-to-r from-purple-900/80 to-black border-t border-white/10 p-4">
-              <div className="flex items-center justify-between gap-4">
-                {/* Current Track Info */}
-                <div className="flex items-center gap-3 min-w-0 flex-1">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 rounded flex-shrink-0 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">999</span>
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-white text-sm font-medium truncate">
-                      {tracks.find(t => t.id === currentTrack)?.title}
-                    </p>
-                    <p className="text-gray-400 text-xs truncate">DIIVINU, LOPZ</p>
-                  </div>
-                </div>
-
-                {/* Controls */}
-                <div className="flex items-center gap-4">
-                  <button className="text-gray-400 hover:text-white transition-colors hidden sm:block">
-                    <SkipBack className="w-5 h-5" />
-                  </button>
-                  <button 
-                    onClick={() => setIsPlaying(!isPlaying)}
-                    className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:scale-105 transition-transform"
-                  >
-                    {isPlaying ? <Pause className="w-5 h-5 text-black" /> : <Play className="w-5 h-5 text-black ml-0.5" />}
-                  </button>
-                  <button className="text-gray-400 hover:text-white transition-colors hidden sm:block">
-                    <SkipForward className="w-5 h-5" />
-                  </button>
-                </div>
-
-                {/* Volume */}
-                <div className="hidden md:flex items-center gap-2 flex-1 justify-end">
-                  <Volume2 className="w-5 h-5 text-gray-400" />
-                  <div className="w-24 h-1 bg-gray-600 rounded-full overflow-hidden">
-                    <div className="w-3/4 h-full bg-white rounded-full" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="mt-3 flex items-center gap-2">
-                <span className="text-xs text-gray-400 w-10">1:12</span>
-                <div className="flex-1 h-1 bg-gray-600 rounded-full overflow-hidden group cursor-pointer">
-                  <div 
-                    className="h-full bg-white group-hover:bg-green-500 rounded-full transition-colors"
-                    style={{ width: `${progress}%` }}
-                  />
-                </div>
-                <span className="text-xs text-gray-400 w-10 text-right">
-                  {tracks.find(t => t.id === currentTrack)?.duration}
-                </span>
-              </div>
-            </div>
-          )}
+          {/* Listen Button */}
+          <div className="px-6 md:px-8 pb-8">
+            <a 
+              href="#" 
+              className="block w-full bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-8 rounded-full text-center uppercase tracking-wider transition-all duration-300 hover:scale-[1.02]"
+            >
+              OUVIR ÁLBUM
+            </a>
+          </div>
         </div>
 
         {/* Coming Soon */}
