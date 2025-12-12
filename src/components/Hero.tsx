@@ -86,7 +86,7 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
             onClick={onProjectsClick}
             className="bg-white text-black font-medium py-3 px-8 rounded-md hover:bg-gray-200 transition-colors duration-300 transform hover:scale-105 uppercase"
           >
-            CONHECER PROJETOS
+            VISÃO DO ALBUM
           </button>
           <span className="text-gray-500 text-sm uppercase">NOVO LANÇAMENTO: ÊXTASE 999</span>
         </div>
