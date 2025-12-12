@@ -30,10 +30,10 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-sm font-semibold mb-4 uppercase tracking-wider">CONECTE-SE</h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Instagram">
+              <a href="https://www.instagram.com/geneseez/" className="text-gray-400 hover:text-white transition-colors" aria-label="Instagram">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="YouTube">
+              <a href="https://www.youtube.com/@geneseez" className="text-gray-400 hover:text-white transition-colors" aria-label="YouTube">
                 <Youtube size={20} />
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Spotify">

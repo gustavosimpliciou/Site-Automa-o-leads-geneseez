@@ -76,7 +76,7 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
           ref={headlineRef}
           className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 transition-all duration-1000 opacity-0 translate-y-10 uppercase"
         >
-          FREQUÊNCIA DA VIDA
+          FREQUÊNCIA UNICA
         </h1>
         <div 
           ref={ctaRef}
