@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import ParticleAnimation from './ParticleAnimation';
+import { Instagram } from 'lucide-react';
 
 const Origem: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -50,16 +51,16 @@ const Origem: React.FC = () => {
       {/* Subtle particle animation */}
       <ParticleAnimation isDark={true} />
 
-      {/* Cristo image - centered */}
+      {/* Dicipulos image - centered */}
       <div 
         ref={sectionRef}
-        className="z-20 transition-all duration-1000 opacity-0 translate-y-10 flex items-center justify-center"
+        className="z-20 transition-all duration-1000 opacity-0 translate-y-10 flex flex-col items-center justify-center"
       >
-        <div className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto flex items-center justify-center">
+        <div className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto flex items-center justify-center">
           <img 
-            src="/cristo.png" 
-            alt="Cristo" 
-            className="w-full h-auto max-h-[55vh] sm:max-h-[60vh] md:max-h-[65vh] lg:max-h-[70vh] object-contain"
+            src="/dicipulos.png" 
+            alt="Dicipulos" 
+            className="w-full h-auto max-h-[50vh] sm:max-h-[55vh] md:max-h-[60vh] lg:max-h-[65vh] object-contain"
             style={{
               filter: 'none',
               boxShadow: 'none',
@@ -71,6 +72,28 @@ const Origem: React.FC = () => {
               target.style.display = 'none';
             }}
           />
+        </div>
+
+        {/* Instagram links for artists */}
+        <div className="flex items-center gap-8 mt-6">
+          <a 
+            href="https://instagram.com/diviinu" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
+          >
+            <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            <span className="text-sm font-medium">DIVIINU</span>
+          </a>
+          <a 
+            href="https://instagram.com/lopz" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
+          >
+            <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            <span className="text-sm font-medium">LOPZ</span>
+          </a>
         </div>
       </div>
 
