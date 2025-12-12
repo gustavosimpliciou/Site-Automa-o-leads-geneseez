@@ -1,87 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, Heart, MoreHorizontal, Clock, Music2 } from 'lucide-react';
 
-interface Project {
+interface Track {
   id: number;
   title: string;
-  description: string;
-  image: string;
+  duration: string;
+  isPlaying?: boolean;
 }
 
 const Projects: React.FC = () => {
-  const projectsData: Project[] = [
-    {
-      id: 1,
-      title: "Automação de CRM",
-      description: "Automatizamos fluxos de trabalho de CRM para um cliente do varejo usando n8n, resultando em redução de 40% na entrada manual de dados.",
-      image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    },
-    {
-      id: 2,
-      title: "Processamento de Notas Fiscais",
-      description: "Desenvolvemos um sistema automatizado de processamento de notas fiscais para uma empresa de serviços financeiros, reduzindo o tempo de processamento em 75%.",
-      image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    },
-    {
-      id: 3,
-      title: "Integração de Dados",
-      description: "Criamos integração perfeita de dados entre múltiplas plataformas para um provedor de saúde, permitindo sincronização de dados em tempo real.",
-      image: "https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    },
-    {
-      id: 4,
-      title: "Automação de Marketing",
-      description: "Construímos um sistema abrangente de automação de marketing para um e-commerce, aumentando a eficiência das campanhas em 60%.",
-      image: "https://images.pexels.com/photos/905163/pexels-photo-905163.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-    }
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleProjects, setVisibleProjects] = useState<Project[]>([]);
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState(1);
+  const [liked, setLiked] = useState(false);
+  const [progress] = useState(35);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerPage(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerPage(2);
-      } else {
-        setItemsPerPage(3);
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    const endIndex = currentIndex + itemsPerPage;
-    setVisibleProjects(projectsData.slice(currentIndex, endIndex));
-  }, [currentIndex, itemsPerPage]);
-
-  const nextSlide = () => {
-    const newIndex = currentIndex + itemsPerPage;
-    if (newIndex < projectsData.length) {
-      setCurrentIndex(newIndex);
-    } else {
-      setCurrentIndex(0);
-    }
-  };
-
-  const prevSlide = () => {
-    const newIndex = currentIndex - itemsPerPage;
-    if (newIndex >= 0) {
-      setCurrentIndex(newIndex);
-    } else {
-      setCurrentIndex(Math.max(0, projectsData.length - itemsPerPage));
-    }
-  };
+  const tracks: Track[] = [
+    { id: 1, title: 'Intro - Genesis', duration: '1:47' },
+    { id: 2, title: 'Noite Infinita', duration: '3:22' },
+    { id: 3, title: 'Fragmentos', duration: '2:58' },
+    { id: 4, title: 'Caos Interior', duration: '4:15' },
+    { id: 5, title: 'Despertar', duration: '3:44' },
+    { id: 6, title: 'Extase', duration: '4:02' },
+    { id: 7, title: 'Limiar', duration: '3:31' },
+    { id: 8, title: 'Renascimento', duration: '2:49' },
+    { id: 9, title: 'Outro - 999', duration: '1:56' },
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -97,64 +41,200 @@ const Projects: React.FC = () => {
     );
 
     if (containerRef.current) {
-      const projectCards = containerRef.current.querySelectorAll('.project-card');
-      projectCards.forEach(card => observer.observe(card));
+      observer.observe(containerRef.current);
     }
 
     return () => {
       if (containerRef.current) {
-        const projectCards = containerRef.current.querySelectorAll('.project-card');
-        projectCards.forEach(card => observer.unobserve(card));
+        observer.unobserve(containerRef.current);
       }
     };
-  }, [visibleProjects]);
+  }, []);
+
+  const handleTrackClick = (trackId: number) => {
+    setCurrentTrack(trackId);
+    setIsPlaying(true);
+  };
 
   return (
-    <section id="projects" className="py-24 bg-white">
+    <section id="projects" className="py-24 bg-gradient-to-b from-gray-900 via-black to-black min-h-screen">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Nossos Projetos</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center text-white">Nossos Projetos</h2>
+        <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+          Cada projeto e uma jornada. Aqui voce encontra o que criamos com paixao e dedicacao.
+        </p>
         
-        <div className="relative">
-          <div className="flex justify-between items-center mb-8">
-            <h3 className="text-xl font-semibold">Projetos em Destaque</h3>
-            <div className="flex space-x-2">
-              <button 
-                onClick={prevSlide}
-                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
-                aria-label="Projetos anteriores"
-              >
-                <ChevronLeft size={20} className="text-black" />
-              </button>
-              <button 
-                onClick={nextSlide}
-                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
-                aria-label="Próximos projetos"
-              >
-                <ChevronRight size={20} className="text-black" />
-              </button>
+        {/* Album Container - Spotify Style */}
+        <div 
+          ref={containerRef}
+          className="max-w-4xl mx-auto bg-gradient-to-b from-purple-900/40 to-black/80 rounded-xl overflow-hidden transition-all duration-700 opacity-0 translate-y-10"
+        >
+          {/* Album Header */}
+          <div className="p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center md:items-end">
+            {/* Album Cover */}
+            <div className="w-48 h-48 md:w-56 md:h-56 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 rounded-lg shadow-2xl flex items-center justify-center relative overflow-hidden group">
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+              <div className="text-center z-10">
+                <p className="text-white/80 text-xs uppercase tracking-[0.3em] mb-2">Album</p>
+                <h3 className="text-white text-3xl md:text-4xl font-black tracking-tight">EXTASE</h3>
+                <p className="text-white text-5xl md:text-6xl font-black">999</p>
+              </div>
+              {/* Play overlay on hover */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <button 
+                  onClick={() => setIsPlaying(!isPlaying)}
+                  className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 transition-transform"
+                >
+                  {isPlaying ? <Pause className="w-7 h-7 text-black" /> : <Play className="w-7 h-7 text-black ml-1" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Album Info */}
+            <div className="text-center md:text-left flex-1">
+              <p className="text-white/60 text-xs uppercase tracking-wider mb-1">Album</p>
+              <h3 className="text-white text-4xl md:text-5xl font-bold mb-3">EXTASE 999</h3>
+              <div className="flex items-center justify-center md:justify-start gap-2 text-sm text-gray-300 flex-wrap">
+                <span className="font-semibold text-white">DIIVINU</span>
+                <span className="text-gray-500">x</span>
+                <span className="font-semibold text-white">LOPZ</span>
+                <span className="text-gray-500 mx-2">|</span>
+                <span>2024</span>
+                <span className="text-gray-500 mx-2">|</span>
+                <span>9 faixas</span>
+              </div>
+              <p className="text-gray-400 text-sm mt-4 max-w-md">
+                Uma viagem sonora entre o caos e a transcendencia. Nove faixas que exploram 
+                os limites da criatividade e da expressao humana.
+              </p>
             </div>
           </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" ref={containerRef}>
-            {visibleProjects.map((project, index) => (
-              <div 
-                key={project.id}
-                className="project-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-700 opacity-0 translate-y-10"
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-gray-700 mb-4">{project.description}</p>
-                  <button className="text-black font-medium hover:underline">Saiba Mais</button>
+
+          {/* Action Buttons */}
+          <div className="px-6 md:px-8 pb-4 flex items-center gap-4">
+            <button 
+              onClick={() => setIsPlaying(!isPlaying)}
+              className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center hover:scale-105 transition-transform hover:bg-green-400"
+            >
+              {isPlaying ? <Pause className="w-6 h-6 text-black" /> : <Play className="w-6 h-6 text-black ml-1" />}
+            </button>
+            <button 
+              onClick={() => setLiked(!liked)}
+              className={`p-2 transition-colors ${liked ? 'text-green-500' : 'text-gray-400 hover:text-white'}`}
+            >
+              <Heart className={`w-8 h-8 ${liked ? 'fill-current' : ''}`} />
+            </button>
+            <button className="p-2 text-gray-400 hover:text-white transition-colors">
+              <MoreHorizontal className="w-8 h-8" />
+            </button>
+          </div>
+
+          {/* Track List */}
+          <div className="px-4 md:px-8 pb-8">
+            {/* Header */}
+            <div className="grid grid-cols-[auto_1fr_auto] md:grid-cols-[40px_1fr_100px] gap-4 px-4 py-2 text-gray-400 text-xs uppercase tracking-wider border-b border-white/10 mb-2">
+              <span className="text-center">#</span>
+              <span>Titulo</span>
+              <span className="text-right flex items-center justify-end">
+                <Clock className="w-4 h-4" />
+              </span>
+            </div>
+
+            {/* Tracks */}
+            <div className="space-y-1">
+              {tracks.map((track) => (
+                <div
+                  key={track.id}
+                  onClick={() => handleTrackClick(track.id)}
+                  className={`grid grid-cols-[auto_1fr_auto] md:grid-cols-[40px_1fr_100px] gap-4 px-4 py-3 rounded-md cursor-pointer group transition-colors ${
+                    currentTrack === track.id 
+                      ? 'bg-white/20' 
+                      : 'hover:bg-white/10'
+                  }`}
+                >
+                  <span className={`text-center text-sm ${currentTrack === track.id ? 'text-green-500' : 'text-gray-400'}`}>
+                    {currentTrack === track.id && isPlaying ? (
+                      <Music2 className="w-4 h-4 mx-auto animate-pulse" />
+                    ) : (
+                      <span className="group-hover:hidden">{track.id}</span>
+                    )}
+                    <Play className="w-4 h-4 mx-auto hidden group-hover:block" />
+                  </span>
+                  <div className="flex flex-col">
+                    <span className={`text-sm font-medium ${currentTrack === track.id ? 'text-green-500' : 'text-white'}`}>
+                      {track.title}
+                    </span>
+                    <span className="text-xs text-gray-400">DIIVINU, LOPZ</span>
+                  </div>
+                  <span className="text-right text-sm text-gray-400">{track.duration}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mini Player */}
+          {currentTrack && (
+            <div className="bg-gradient-to-r from-purple-900/80 to-black border-t border-white/10 p-4">
+              <div className="flex items-center justify-between gap-4">
+                {/* Current Track Info */}
+                <div className="flex items-center gap-3 min-w-0 flex-1">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 rounded flex-shrink-0 flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">999</span>
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-white text-sm font-medium truncate">
+                      {tracks.find(t => t.id === currentTrack)?.title}
+                    </p>
+                    <p className="text-gray-400 text-xs truncate">DIIVINU, LOPZ</p>
+                  </div>
+                </div>
+
+                {/* Controls */}
+                <div className="flex items-center gap-4">
+                  <button className="text-gray-400 hover:text-white transition-colors hidden sm:block">
+                    <SkipBack className="w-5 h-5" />
+                  </button>
+                  <button 
+                    onClick={() => setIsPlaying(!isPlaying)}
+                    className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:scale-105 transition-transform"
+                  >
+                    {isPlaying ? <Pause className="w-5 h-5 text-black" /> : <Play className="w-5 h-5 text-black ml-0.5" />}
+                  </button>
+                  <button className="text-gray-400 hover:text-white transition-colors hidden sm:block">
+                    <SkipForward className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Volume */}
+                <div className="hidden md:flex items-center gap-2 flex-1 justify-end">
+                  <Volume2 className="w-5 h-5 text-gray-400" />
+                  <div className="w-24 h-1 bg-gray-600 rounded-full overflow-hidden">
+                    <div className="w-3/4 h-full bg-white rounded-full" />
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+
+              {/* Progress Bar */}
+              <div className="mt-3 flex items-center gap-2">
+                <span className="text-xs text-gray-400 w-10">1:12</span>
+                <div className="flex-1 h-1 bg-gray-600 rounded-full overflow-hidden group cursor-pointer">
+                  <div 
+                    className="h-full bg-white group-hover:bg-green-500 rounded-full transition-colors"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+                <span className="text-xs text-gray-400 w-10 text-right">
+                  {tracks.find(t => t.id === currentTrack)?.duration}
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Coming Soon */}
+        <div className="max-w-4xl mx-auto mt-12 text-center">
+          <p className="text-gray-500 text-sm uppercase tracking-wider mb-2">Em breve</p>
+          <p className="text-gray-400">Mais projetos estao a caminho. Fique ligado.</p>
         </div>
       </div>
     </section>

@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import ParticleAnimation from './ParticleAnimation';
 
 interface HeroProps {
-  onContactClick: () => void;
+  onProjectsClick: () => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
+const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -61,28 +61,36 @@ const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
       <ParticleAnimation />
 
       <div className="container mx-auto px-4 z-20 text-center">
+        <p 
+          className="text-sm md:text-base text-gray-400 uppercase tracking-[0.3em] mb-4 transition-all duration-1000 opacity-0 translate-y-10"
+          ref={subheadlineRef}
+          style={{ transitionDelay: '100ms' }}
+        >
+          Onde tudo comeca
+        </p>
         <h1 
           ref={headlineRef}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 transition-all duration-1000 opacity-0 translate-y-10"
+          className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 transition-all duration-1000 opacity-0 translate-y-10"
         >
-          Transforme Sua Empresa com Automação Geneseez
+          Criamos o que ainda nao existe
         </h1>
         <p 
-          ref={subheadlineRef}
-          className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8 transition-all duration-1000 delay-300 opacity-0 translate-y-10"
+          className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 transition-all duration-1000 delay-300 opacity-0 translate-y-10"
         >
-          Utilizando o poder do n8n para entregar automação de processos perfeita e experiências excepcionais aos clientes.
+          Musica. Arte. Design. Video. Fotografia. Somos a ponte entre a imaginacao e a realidade. 
+          Cada projeto e uma historia que merece ser contada com autenticidade.
         </p>
         <div 
           ref={ctaRef}
-          className="transition-all duration-1000 delay-500 opacity-0 translate-y-10"
+          className="transition-all duration-1000 delay-500 opacity-0 translate-y-10 flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <button 
-            onClick={onContactClick}
+            onClick={onProjectsClick}
             className="bg-white text-black font-medium py-3 px-8 rounded-md hover:bg-gray-200 transition-colors duration-300 transform hover:scale-105"
           >
-            Solicitar Demonstração
+            Conhecer Projetos
           </button>
+          <span className="text-gray-500 text-sm">Novo lancamento: EXTASE 999</span>
         </div>
       </div>
     </section>

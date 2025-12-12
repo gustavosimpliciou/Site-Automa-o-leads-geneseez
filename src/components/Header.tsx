@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, ArrowLeft } from 'lucide-react';
 
-type ViewType = 'home' | 'about' | 'projects' | 'contact' | 'partners' | 'origem';
+type ViewType = 'home' | 'about' | 'projects' | 'origem';
 
 interface HeaderProps {
   onViewChange: (view: ViewType) => void;
@@ -35,16 +35,14 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
   };
 
   const menuItems: { id: ViewType; label: string }[] = [
-    { id: 'home', label: 'Início' },
+    { id: 'home', label: 'Inicio' },
     { id: 'about', label: 'Sobre' },
     { id: 'projects', label: 'Projetos' },
-    { id: 'contact', label: 'Contato' },
-    { id: 'partners', label: 'Tecnologias' },
     { id: 'origem', label: 'Origem' }
   ];
 
   const isSpecialView = currentView !== 'home';
-  const isDarkBackground = currentView === 'home' && !isScrolled;
+  const isDarkBackground = !isSpecialView && !isScrolled;
 
   return (
     <header 
@@ -54,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
-          {isSpecialView && currentView !== 'home' && (
+          {isSpecialView && (
             <button
               onClick={() => onViewChange('home')}
               className="mr-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
