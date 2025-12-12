@@ -111,7 +111,7 @@ const Projects: React.FC = () => {
                 <span>9 FAIXAS</span>
               </div>
               <p className="text-gray-400 text-sm mt-4 max-w-md">
-               O primeiro álbum de lançamentos da Geneseez tem como 
+               O primeiro álbum da Geneseez tem como 
                intuito explorar a musicalidade e talento dos artistas 
                DIIVINU e LOPZ através de composições autorais, o objetivo desse 
                projeto é obter resultados inovadores com todo o esforço e conhecimento 
