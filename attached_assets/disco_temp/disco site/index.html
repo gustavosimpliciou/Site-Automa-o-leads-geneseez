@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Disco Girando</title>
+
+<style>
+    body {
+        margin: 0;
+        background: transparent; /* fundo transparente */
+        overflow: hidden; /* permite o disco ficar cortado */
+    }
+
+    .container {
+        position: fixed;
+        right: -150px; /* disco parcialmente para fora da tela */
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
+    .vinil {
+        width: 650px;
+        height: 650px;
+        background-image: url("disco.png"); /* certifique-se que é PNG transparente */
+        background-size: cover;
+        background-position: center;
+        animation: girar 14s linear infinite;
+    }
+
+    @keyframes girar {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="vinil"></div>
+</div>
+
+</body>
+</html>
