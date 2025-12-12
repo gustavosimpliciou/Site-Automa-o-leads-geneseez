@@ -66,19 +66,19 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
           ref={subheadlineRef}
           style={{ transitionDelay: '100ms' }}
         >
-          Onde tudo comeca
+          ONDE TUDO COMEÇA
         </p>
         <h1 
           ref={headlineRef}
-          className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 transition-all duration-1000 opacity-0 translate-y-10"
+          className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 transition-all duration-1000 opacity-0 translate-y-10 uppercase"
         >
-          Criamos o que ainda nao existe
+          CRIAMOS O QUE AINDA NÃO EXISTE
         </h1>
         <p 
-          className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 transition-all duration-1000 delay-300 opacity-0 translate-y-10"
+          className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 transition-all duration-1000 delay-300 opacity-0 translate-y-10 uppercase"
         >
-          Musica. Arte. Design. Video. Fotografia. Somos a ponte entre a imaginacao e a realidade. 
-          Cada projeto e uma historia que merece ser contada com autenticidade.
+          MÚSICA. ARTE. DESIGN. VÍDEO. FOTOGRAFIA. SOMOS A PONTE ENTRE A IMAGINAÇÃO E A REALIDADE. 
+          CADA PROJETO É UMA HISTÓRIA QUE MERECE SER CONTADA COM AUTENTICIDADE.
         </p>
         <div 
           ref={ctaRef}
@@ -86,11 +86,11 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
         >
           <button 
             onClick={onProjectsClick}
-            className="bg-white text-black font-medium py-3 px-8 rounded-md hover:bg-gray-200 transition-colors duration-300 transform hover:scale-105"
+            className="bg-white text-black font-medium py-3 px-8 rounded-md hover:bg-gray-200 transition-colors duration-300 transform hover:scale-105 uppercase"
           >
-            Conhecer Projetos
+            CONHECER PROJETOS
           </button>
-          <span className="text-gray-500 text-sm">Novo lancamento: EXTASE 999</span>
+          <span className="text-gray-500 text-sm uppercase">NOVO LANÇAMENTO: ÊXTASE 999</span>
         </div>
       </div>
     </section>

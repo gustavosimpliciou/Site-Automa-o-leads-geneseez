@@ -35,10 +35,10 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
   };
 
   const menuItems: { id: ViewType; label: string }[] = [
-    { id: 'home', label: 'Inicio' },
-    { id: 'about', label: 'Sobre' },
-    { id: 'projects', label: 'Projetos' },
-    { id: 'origem', label: 'Origem' }
+    { id: 'home', label: 'INÍCIO' },
+    { id: 'about', label: 'SOBRE' },
+    { id: 'projects', label: 'PROJETOS' },
+    { id: 'origem', label: 'ORIGEM' }
   ];
 
   const isSpecialView = currentView !== 'home';

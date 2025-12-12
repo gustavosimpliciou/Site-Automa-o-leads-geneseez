@@ -35,10 +35,10 @@ const About: React.FC = () => {
   }, []);
 
   const services = [
-    { icon: Music, title: 'Musica', desc: 'Producao musical completa' },
-    { icon: Palette, title: 'Arte & Design', desc: 'Identidade visual unica' },
-    { icon: Video, title: 'Video', desc: 'Narrativas audiovisuais' },
-    { icon: Camera, title: 'Fotografia', desc: 'Momentos eternizados' },
+    { icon: Music, title: 'MÚSICA', desc: 'PRODUÇÃO MUSICAL COMPLETA' },
+    { icon: Palette, title: 'ARTE & DESIGN', desc: 'IDENTIDADE VISUAL ÚNICA' },
+    { icon: Video, title: 'VÍDEO', desc: 'NARRATIVAS AUDIOVISUAIS' },
+    { icon: Camera, title: 'FOTOGRAFIA', desc: 'MOMENTOS ETERNIZADOS' },
   ];
 
   return (
@@ -49,22 +49,22 @@ const About: React.FC = () => {
             className="transition-all duration-1000 opacity-0 translate-x-[-50px]" 
             ref={textRef}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-black">Quem Somos</h2>
-            <p className="text-gray-700 mb-6 leading-relaxed">
-              <strong>Geneseez</strong> nasce da palavra genesis - o inicio de tudo. Somos um coletivo criativo 
-              que acredita que cada ideia merece ganhar vida. Nao seguimos tendencias; criamos caminhos.
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-black uppercase">QUEM SOMOS</h2>
+            <p className="text-gray-700 mb-6 leading-relaxed uppercase">
+              <strong>GENESEEZ</strong> NASCE DA PALAVRA GENESIS - O INÍCIO DE TUDO. SOMOS UM COLETIVO CRIATIVO 
+              QUE ACREDITA QUE CADA IDEIA MERECE GANHAR VIDA. NÃO SEGUIMOS TENDÊNCIAS; CRIAMOS CAMINHOS.
             </p>
-            <p className="text-gray-700 mb-6 leading-relaxed">
-              Nascemos da vontade de fazer diferente. De dar voz a quem tem algo a dizer. 
-              De transformar sonhos em obras que tocam, que marcam, que permanecem.
+            <p className="text-gray-700 mb-6 leading-relaxed uppercase">
+              NASCEMOS DA VONTADE DE FAZER DIFERENTE. DE DAR VOZ A QUEM TEM ALGO A DIZER. 
+              DE TRANSFORMAR SONHOS EM OBRAS QUE TOCAM, QUE MARCAM, QUE PERMANECEM.
             </p>
-            <p className="text-gray-700 mb-6 leading-relaxed">
-              Cada projeto que abraçamos carrega nossa essencia: autenticidade, dedicacao e a busca 
-              incansavel pela excelencia. Trabalhamos com pessoas, nao apenas com ideias.
+            <p className="text-gray-700 mb-6 leading-relaxed uppercase">
+              CADA PROJETO QUE ABRAÇAMOS CARREGA NOSSA ESSÊNCIA: AUTENTICIDADE, DEDICAÇÃO E A BUSCA 
+              INCANSÁVEL PELA EXCELÊNCIA. TRABALHAMOS COM PESSOAS, NÃO APENAS COM IDEIAS.
             </p>
             <div className="flex items-center gap-3 text-gray-500">
               <Sparkles size={20} />
-              <span className="text-sm uppercase tracking-wider">Criando desde o inicio</span>
+              <span className="text-sm uppercase tracking-wider">CRIANDO DESDE O INÍCIO</span>
             </div>
           </div>
           <div 
@@ -86,11 +86,11 @@ const About: React.FC = () => {
               ))}
             </div>
             <div className="mt-6 p-6 bg-black rounded-lg text-white">
-              <p className="text-sm leading-relaxed">
-                "Nao fazemos apenas arte. Fazemos o que ainda nao foi feito. 
-                Cada criacao e um pedaco de nos que entregamos ao mundo."
+              <p className="text-sm leading-relaxed uppercase">
+                "NÃO FAZEMOS APENAS ARTE. FAZEMOS O QUE AINDA NÃO FOI FEITO. 
+                CADA CRIAÇÃO É UM PEDAÇO DE NÓS QUE ENTREGAMOS AO MUNDO."
               </p>
-              <p className="text-gray-400 text-xs mt-3 uppercase tracking-wider">- Equipe Geneseez</p>
+              <p className="text-gray-400 text-xs mt-3 uppercase tracking-wider">- EQUIPE GENESEEZ</p>
             </div>
           </div>
         </div>

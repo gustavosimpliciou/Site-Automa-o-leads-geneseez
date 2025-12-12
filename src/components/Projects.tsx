@@ -16,15 +16,15 @@ const Projects: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const tracks: Track[] = [
-    { id: 1, title: 'Intro - Genesis', duration: '1:47' },
-    { id: 2, title: 'Noite Infinita', duration: '3:22' },
-    { id: 3, title: 'Fragmentos', duration: '2:58' },
-    { id: 4, title: 'Caos Interior', duration: '4:15' },
-    { id: 5, title: 'Despertar', duration: '3:44' },
-    { id: 6, title: 'Extase', duration: '4:02' },
-    { id: 7, title: 'Limiar', duration: '3:31' },
-    { id: 8, title: 'Renascimento', duration: '2:49' },
-    { id: 9, title: 'Outro - 999', duration: '1:56' },
+    { id: 1, title: 'INTRO - GENESIS', duration: '1:47' },
+    { id: 2, title: 'NOITE INFINITA', duration: '3:22' },
+    { id: 3, title: 'FRAGMENTOS', duration: '2:58' },
+    { id: 4, title: 'CAOS INTERIOR', duration: '4:15' },
+    { id: 5, title: 'DESPERTAR', duration: '3:44' },
+    { id: 6, title: 'ÊXTASE', duration: '4:02' },
+    { id: 7, title: 'LIMIAR', duration: '3:31' },
+    { id: 8, title: 'RENASCIMENTO', duration: '2:49' },
+    { id: 9, title: 'OUTRO - 999', duration: '1:56' },
   ];
 
   useEffect(() => {
@@ -59,9 +59,9 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="py-24 bg-gradient-to-b from-gray-900 via-black to-black min-h-screen">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center text-white">Nossos Projetos</h2>
-        <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-          Cada projeto e uma jornada. Aqui voce encontra o que criamos com paixao e dedicacao.
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center text-white uppercase">NOSSOS PROJETOS</h2>
+        <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto uppercase">
+          CADA PROJETO É UMA JORNADA. AQUI VOCÊ ENCONTRA O QUE CRIAMOS COM PAIXÃO E DEDICAÇÃO.
         </p>
         
         {/* Album Container - Spotify Style */}
@@ -75,8 +75,8 @@ const Projects: React.FC = () => {
             <div className="w-48 h-48 md:w-56 md:h-56 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 rounded-lg shadow-2xl flex items-center justify-center relative overflow-hidden group">
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
               <div className="text-center z-10">
-                <p className="text-white/80 text-xs uppercase tracking-[0.3em] mb-2">Album</p>
-                <h3 className="text-white text-3xl md:text-4xl font-black tracking-tight">EXTASE</h3>
+                <p className="text-white/80 text-xs uppercase tracking-[0.3em] mb-2">ÁLBUM</p>
+                <h3 className="text-white text-3xl md:text-4xl font-black tracking-tight">ÊXTASE</h3>
                 <p className="text-white text-5xl md:text-6xl font-black">999</p>
               </div>
               {/* Play overlay on hover */}
@@ -92,20 +92,20 @@ const Projects: React.FC = () => {
 
             {/* Album Info */}
             <div className="text-center md:text-left flex-1">
-              <p className="text-white/60 text-xs uppercase tracking-wider mb-1">Album</p>
-              <h3 className="text-white text-4xl md:text-5xl font-bold mb-3">EXTASE 999</h3>
+              <p className="text-white/60 text-xs uppercase tracking-wider mb-1">ÁLBUM</p>
+              <h3 className="text-white text-4xl md:text-5xl font-bold mb-3">ÊXTASE 999</h3>
               <div className="flex items-center justify-center md:justify-start gap-2 text-sm text-gray-300 flex-wrap">
                 <span className="font-semibold text-white">DIIVINU</span>
-                <span className="text-gray-500">x</span>
+                <span className="text-gray-500">X</span>
                 <span className="font-semibold text-white">LOPZ</span>
                 <span className="text-gray-500 mx-2">|</span>
                 <span>2024</span>
                 <span className="text-gray-500 mx-2">|</span>
-                <span>9 faixas</span>
+                <span>9 FAIXAS</span>
               </div>
-              <p className="text-gray-400 text-sm mt-4 max-w-md">
-                Uma viagem sonora entre o caos e a transcendencia. Nove faixas que exploram 
-                os limites da criatividade e da expressao humana.
+              <p className="text-gray-400 text-sm mt-4 max-w-md uppercase">
+                UMA VIAGEM SONORA ENTRE O CAOS E A TRANSCENDÊNCIA. NOVE FAIXAS QUE EXPLORAM 
+                OS LIMITES DA CRIATIVIDADE E DA EXPRESSÃO HUMANA.
               </p>
             </div>
           </div>
@@ -134,7 +134,7 @@ const Projects: React.FC = () => {
             {/* Header */}
             <div className="grid grid-cols-[auto_1fr_auto] md:grid-cols-[40px_1fr_100px] gap-4 px-4 py-2 text-gray-400 text-xs uppercase tracking-wider border-b border-white/10 mb-2">
               <span className="text-center">#</span>
-              <span>Titulo</span>
+              <span>TÍTULO</span>
               <span className="text-right flex items-center justify-end">
                 <Clock className="w-4 h-4" />
               </span>
@@ -233,8 +233,8 @@ const Projects: React.FC = () => {
 
         {/* Coming Soon */}
         <div className="max-w-4xl mx-auto mt-12 text-center">
-          <p className="text-gray-500 text-sm uppercase tracking-wider mb-2">Em breve</p>
-          <p className="text-gray-400">Mais projetos estao a caminho. Fique ligado.</p>
+          <p className="text-gray-500 text-sm uppercase tracking-wider mb-2">EM BREVE</p>
+          <p className="text-gray-400 uppercase">MAIS PROJETOS ESTÃO A CAMINHO. FIQUE LIGADO.</p>
         </div>
       </div>
     </section>
