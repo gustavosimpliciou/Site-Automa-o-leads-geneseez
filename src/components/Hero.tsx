@@ -72,7 +72,7 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
           ref={headlineRef}
           className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 transition-all duration-1000 opacity-0 translate-y-10 uppercase"
         >
-          CRIAMOS O QUE AINDA NÃO EXISTE
+          CRIAMOS A FREQUÊNCIA DE NOSSA VIDA
         </h1>
         <p 
           className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 transition-all duration-1000 delay-300 opacity-0 translate-y-10 uppercase"
