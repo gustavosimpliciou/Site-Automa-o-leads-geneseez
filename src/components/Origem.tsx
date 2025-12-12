@@ -97,8 +97,8 @@ const Origem: React.FC = () => {
         </div>
       </div>
 
-      {/* Spinning Disco image - bottom right on mobile/tablet, right center on desktop */}
-      <div className="absolute right-0 bottom-0 translate-x-1/3 translate-y-1/3 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:translate-x-1/3 z-10">
+      {/* Spinning Disco image - center right */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 z-10">
         <img 
           src="/disco.png" 
           alt="Disco" 
