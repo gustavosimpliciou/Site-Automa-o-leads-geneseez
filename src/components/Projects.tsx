@@ -69,10 +69,7 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="py-24 bg-gradient-to-b from-gray-900 via-black to-black min-h-screen">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center text-white uppercase">NOSSOS PROJETOS</h2>
-        <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-          Cada projeto é uma jornada. Aqui você encontra o que criamos com paixão e dedicação.
-        </p>
+        <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-white uppercase tracking-wide">IMERSÃO COMPLETA</h2>
         
         {/* Album Container - Spotify Style */}
         <div 

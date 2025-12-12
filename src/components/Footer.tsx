@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-2 text-gray-400 text-sm">
               <li><span className="hover:text-white cursor-pointer transition-colors">Início</span></li>
               <li><span className="hover:text-white cursor-pointer transition-colors">Sobre</span></li>
-              <li><span className="hover:text-white cursor-pointer transition-colors">Projetos</span></li>
+              <li><span className="hover:text-white cursor-pointer transition-colors">Imersão Completa</span></li>
               <li><span className="hover:text-white cursor-pointer transition-colors">Origem</span></li>
             </ul>
           </div>

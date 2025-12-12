@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
   const menuItems: { id: ViewType; label: string }[] = [
     { id: 'home', label: 'Início' },
     { id: 'about', label: 'Sobre' },
-    { id: 'projects', label: 'Projetos' },
+    { id: 'projects', label: 'Imersão Completa' },
     { id: 'origem', label: 'Origem' }
   ];
 
