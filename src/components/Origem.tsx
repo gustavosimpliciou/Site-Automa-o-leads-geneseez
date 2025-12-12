@@ -77,7 +77,7 @@ const Origem: React.FC = () => {
         {/* Instagram links for artists */}
         <div className="flex items-center gap-8 mt-6">
           <a 
-            href="https://www.instagram.com/lopz.of/" 
+            href="https://instagram.com/lopz.of" 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
