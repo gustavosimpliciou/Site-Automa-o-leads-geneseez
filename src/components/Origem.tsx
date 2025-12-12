@@ -97,12 +97,12 @@ const Origem: React.FC = () => {
         </div>
       </div>
 
-      {/* Spinning Disco image - bottom right on mobile, lower right on desktop */}
-      <div className="absolute right-0 bottom-0 translate-x-1/4 translate-y-1/4 md:bottom-8 md:translate-y-0 md:translate-x-1/4 z-10">
+      {/* Spinning Disco image - bottom right */}
+      <div className="absolute right-0 bottom-0 translate-x-1/4 translate-y-1/4 z-10">
         <img 
           src="/disco.png" 
           alt="Disco" 
-          className="w-64 h-64 sm:w-72 sm:h-72 md:w-[40rem] md:h-[40rem] lg:w-[48rem] lg:h-[48rem] xl:w-[54rem] xl:h-[54rem] object-contain animate-spin-slow"
+          className="w-64 h-64 sm:w-72 sm:h-72 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 object-contain animate-spin-slow"
           style={{
             filter: 'none',
             boxShadow: 'none',
