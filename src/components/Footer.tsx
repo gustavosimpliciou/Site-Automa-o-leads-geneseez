@@ -11,19 +11,19 @@ const Footer: React.FC = () => {
               alt="Geneseez" 
               className="h-8 mb-4"
             />
-            <p className="text-gray-400 text-sm leading-relaxed uppercase">
-              ONDE TUDO COMEÇA. MÚSICA, ARTE, DESIGN, VÍDEO E FOTOGRAFIA. 
-              TRANSFORMAMOS IDEIAS EM OBRAS QUE PERMANECEM.
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Onde tudo começa. Música, arte, design, vídeo e fotografia. 
+              Transformamos ideias em obras que permanecem.
             </p>
           </div>
           
           <div>
             <h3 className="text-sm font-semibold mb-4 uppercase tracking-wider">NAVEGAÇÃO</h3>
-            <ul className="space-y-2 text-gray-400 text-sm uppercase">
-              <li><span className="hover:text-white cursor-pointer transition-colors">INÍCIO</span></li>
-              <li><span className="hover:text-white cursor-pointer transition-colors">SOBRE</span></li>
-              <li><span className="hover:text-white cursor-pointer transition-colors">PROJETOS</span></li>
-              <li><span className="hover:text-white cursor-pointer transition-colors">ORIGEM</span></li>
+            <ul className="space-y-2 text-gray-400 text-sm">
+              <li><span className="hover:text-white cursor-pointer transition-colors">Início</span></li>
+              <li><span className="hover:text-white cursor-pointer transition-colors">Sobre</span></li>
+              <li><span className="hover:text-white cursor-pointer transition-colors">Projetos</span></li>
+              <li><span className="hover:text-white cursor-pointer transition-colors">Origem</span></li>
             </ul>
           </div>
           
@@ -40,15 +40,15 @@ const Footer: React.FC = () => {
                 <Music size={20} />
               </a>
             </div>
-            <p className="text-gray-500 text-xs mt-4 uppercase">
-              NOVO LANÇAMENTO: ÊXTASE 999
+            <p className="text-gray-500 text-xs mt-4">
+              Novo lançamento: ÊXTASE 999
             </p>
           </div>
         </div>
         
         <div className="pt-6 border-t border-gray-800 text-center">
-          <p className="text-gray-500 text-sm uppercase">
-            {new Date().getFullYear()} GENESEEZ. CRIANDO DESDE O INÍCIO.
+          <p className="text-gray-500 text-sm">
+            {new Date().getFullYear()} Geneseez. Criando desde o início.
           </p>
         </div>
       </div>

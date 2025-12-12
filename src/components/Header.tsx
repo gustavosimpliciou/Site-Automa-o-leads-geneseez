@@ -35,10 +35,10 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
   };
 
   const menuItems: { id: ViewType; label: string }[] = [
-    { id: 'home', label: 'INÍCIO' },
-    { id: 'about', label: 'SOBRE' },
-    { id: 'projects', label: 'PROJETOS' },
-    { id: 'origem', label: 'ORIGEM' }
+    { id: 'home', label: 'Início' },
+    { id: 'about', label: 'Sobre' },
+    { id: 'projects', label: 'Projetos' },
+    { id: 'origem', label: 'Origem' }
   ];
 
   const isSpecialView = currentView !== 'home';
@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
             <img 
               src={isScrolled || isSpecialView ? '/logo3.png' : '/logo2.png'}
               alt="Geneseez" 
-              className="h-8 transition-opacity duration-300"
+              className="h-9 transition-opacity duration-300"
             />
           </button>
         </div>
