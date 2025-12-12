@@ -87,10 +87,10 @@ const About: React.FC = () => {
             </div>
             <div className="mt-6 p-6 bg-black rounded-lg text-white">
               <p className="text-sm leading-relaxed">
-                "Não fazemos apenas arte. Fazemos o que ainda não foi feito. 
+                "Não fazemos apenas arte. criamos o novo. 
                 Cada criação é um pedaço de nós que entregamos ao mundo."
               </p>
-              <p className="text-gray-400 text-xs mt-3 tracking-wider">- Equipe Geneseez</p>
+              <p className="text-gray-400 text-xs mt-3 tracking-wider">- CEO Geneseez</p>
             </div>
           </div>
         </div>

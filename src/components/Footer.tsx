@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
               className="h-8 mb-4"
             />
             <p className="text-gray-400 text-sm leading-relaxed">
-              Onde tudo começa. Música, arte, design, vídeo e fotografia. 
+              Onde tudo começa. 
               Transformamos ideias em obras que permanecem.
             </p>
           </div>

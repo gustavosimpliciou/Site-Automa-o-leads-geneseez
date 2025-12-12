@@ -198,7 +198,7 @@ const Projects: React.FC = () => {
         {/* Coming Soon */}
         <div className="max-w-4xl mx-auto mt-12 text-center">
           <p className="text-gray-500 text-sm uppercase tracking-wider mb-2">EM BREVE</p>
-          <p className="text-gray-400">Mais projetos estão a caminho. Fique ligado.</p>
+          <p className="text-gray-400">Novo Album. Fique ligado.</p>
         </div>
       </div>
     </section>
