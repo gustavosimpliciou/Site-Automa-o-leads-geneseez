@@ -59,8 +59,8 @@ function App() {
         return (
           <div className={transitionClasses}>
             <Hero onProjectsClick={handleProjectsClick} />
-            <About />
-            <Projects onHomeClick={() => handleViewChange('home')} />
+            <About showCristo={false} />
+            <Projects onHomeClick={() => handleViewChange('home')} showCristo={false} />
             <Footer onViewChange={handleViewChange} />
           </div>
         );
@@ -69,7 +69,7 @@ function App() {
         return (
           <div className={transitionClasses}>
             <div className="pt-24">
-              <About />
+              <About showCristo={true} />
             </div>
             <Footer onViewChange={handleViewChange} />
           </div>
@@ -79,7 +79,7 @@ function App() {
         return (
           <div className={transitionClasses}>
             <div className="pt-24">
-              <Projects onHomeClick={() => handleViewChange('home')} />
+              <Projects onHomeClick={() => handleViewChange('home')} showCristo={true} />
             </div>
             <Footer onViewChange={handleViewChange} />
           </div>
@@ -96,8 +96,8 @@ function App() {
         return (
           <div className={transitionClasses}>
             <Hero onProjectsClick={handleProjectsClick} />
-            <About />
-            <Projects onHomeClick={() => handleViewChange('home')} />
+            <About showCristo={false} />
+            <Projects onHomeClick={() => handleViewChange('home')} showCristo={false} />
             <Footer onViewChange={handleViewChange} />
           </div>
         );

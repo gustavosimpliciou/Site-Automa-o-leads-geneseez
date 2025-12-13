@@ -2,7 +2,11 @@ import { useEffect, useRef } from 'react';
 import { Music, Palette, Video, Camera, Sparkles } from 'lucide-react';
 import ParticleAnimation from './ParticleAnimation';
 
-const About: React.FC = () => {
+interface AboutProps {
+  showCristo?: boolean;
+}
+
+const About: React.FC<AboutProps> = ({ showCristo = false }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
@@ -99,14 +103,15 @@ const About: React.FC = () => {
           </div>
         </div>
         
-      </div>
-      
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-        <img 
-          src="/cristo.png" 
-          alt="Cristo" 
-          className="w-32 h-auto object-contain rounded-lg opacity-90"
-        />
+        {showCristo && (
+          <div className="mt-12 flex justify-center">
+            <img 
+              src="/cristo.png" 
+              alt="Cristo" 
+              className="w-24 h-auto object-contain"
+            />
+          </div>
+        )}
       </div>
     </section>
   );

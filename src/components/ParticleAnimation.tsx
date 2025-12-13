@@ -324,15 +324,15 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
 
   if (containerMode) {
     return (
-      <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <canvas ref={canvasRef} className="absolute inset-0" />
+      <div ref={containerRef} className="absolute inset-0 overflow-hidden z-0" style={{ pointerEvents: 'auto' }}>
+        <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
       </div>
     );
   }
 
   return (
-    <div ref={containerRef} className="fixed inset-0 overflow-hidden pointer-events-none z-10">
-      <canvas ref={canvasRef} className="absolute inset-0" />
+    <div ref={containerRef} className="fixed inset-0 overflow-hidden z-10" style={{ pointerEvents: 'auto' }}>
+      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
     </div>
   );
 };

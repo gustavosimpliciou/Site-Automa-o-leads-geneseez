@@ -11,9 +11,10 @@ interface Track {
 
 interface ProjectsProps {
   onHomeClick?: () => void;
+  showCristo?: boolean;
 }
 
-const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
+const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(1);
   const [liked, setLiked] = useState(false);
@@ -232,10 +233,15 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto mt-12 text-center">
-          <p className="text-gray-500 text-sm uppercase tracking-wider mb-2">EM BREVE</p>
-          <p className="text-gray-400">Novo Album. Fique ligado.</p>
-        </div>
+        {showCristo && (
+          <div className="max-w-4xl mx-auto mt-12 flex justify-center">
+            <img 
+              src="/cristo.png" 
+              alt="Cristo" 
+              className="w-24 h-auto object-contain"
+            />
+          </div>
+        )}
       </div>
     </section>
   );
