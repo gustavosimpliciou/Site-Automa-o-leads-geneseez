@@ -51,7 +51,10 @@ npm run start   # Preview production build
 - New creative copy focused on music, art, design
 
 ## Recent Changes (December 13, 2024)
-- Added cristo.png image below CEO quote in About section
+- Added cristo.png image below CEO quote in About section (50% smaller, centered)
 - Made ParticleAnimation fixed/global (doesn't scroll with page)
+- Restored mouse interactivity for particles (follows cursor globally)
 - Added entrance animations for images in Artists (Origem) section
 - Added phrase carousel in Hero (9 second intervals): "FREQUÊNCIA UNICA", "ÊXTASE 999", "ARTE É O CAMINHO"
+- Fixed Footer navigation - all links now work correctly
+- "Ouvir Album" button redirects to home page with countdown
