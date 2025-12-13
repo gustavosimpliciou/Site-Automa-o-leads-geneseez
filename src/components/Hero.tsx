@@ -1,16 +1,32 @@
-import { useEffect, useRef } from 'react';
-import ParticleAnimation from './ParticleAnimation';
+import { useEffect, useRef, useState } from 'react';
 import Countdown from './Countdown';
 
 interface HeroProps {
   onProjectsClick: () => void;
 }
 
+const PHRASES = ['FREQUÊNCIA UNICA', 'ÊXTASE 999', 'ARTE É O CAMINHO'];
+const PHRASE_DURATION = 9000;
+
 const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const countdownRef = useRef<HTMLDivElement>(null);
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentPhraseIndex((prev) => (prev + 1) % PHRASES.length);
+        setIsAnimating(false);
+      }, 500);
+    }, PHRASE_DURATION);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -62,8 +78,6 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/90" />
       </div>
 
-      <ParticleAnimation />
-
       <div className="container mx-auto px-4 z-20 text-center">
         <p 
           className="text-sm md:text-base text-gray-400 uppercase tracking-[0.3em] mb-4 transition-all duration-1000 opacity-0 translate-y-10"
@@ -74,9 +88,11 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
         </p>
         <h1 
           ref={headlineRef}
-          className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 transition-all duration-1000 opacity-0 translate-y-10 uppercase"
+          className={`text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 transition-all duration-500 uppercase ${
+            isAnimating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+          }`}
         >
-          FREQUÊNCIA UNICA
+          {PHRASES[currentPhraseIndex]}
         </h1>
         <div 
           ref={ctaRef}

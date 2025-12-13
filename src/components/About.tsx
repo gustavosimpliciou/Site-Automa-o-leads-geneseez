@@ -92,6 +92,13 @@ const About: React.FC = () => {
               </p>
               <p className="text-gray-400 text-xs mt-3 tracking-wider">- CEO Geneseez</p>
             </div>
+            <div className="mt-8 flex justify-center">
+              <img 
+                src="/cristo.png" 
+                alt="Cristo" 
+                className="w-64 h-auto object-contain rounded-lg"
+              />
+            </div>
           </div>
         </div>
       </div>

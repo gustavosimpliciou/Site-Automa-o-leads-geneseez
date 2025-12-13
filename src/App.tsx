@@ -6,6 +6,7 @@ import Projects from './components/Projects';
 import Footer from './components/Footer';
 import Origem from './components/Origem';
 import Countdown from './components/Countdown';
+import ParticleAnimation from './components/ParticleAnimation';
 
 type ViewType = 'home' | 'about' | 'projects' | 'origem';
 
@@ -104,8 +105,11 @@ function App() {
     }
   };
 
+  const isDarkBackground = currentView === 'home' || currentView === 'projects';
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen interactive-particle">
+      <ParticleAnimation isDark={!isDarkBackground} />
       {currentView !== 'home' && <Countdown isHome={false} />}
       <Header 
         onViewChange={handleViewChange}

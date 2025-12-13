@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import ParticleAnimation from './ParticleAnimation';
+import React, { useEffect, useRef, useState } from 'react';
 import { Instagram } from 'lucide-react';
 
 const Origem: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [discoLoaded, setDiscoLoaded] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -48,9 +49,6 @@ const Origem: React.FC = () => {
         </div>
       </div>
 
-      {/* Subtle particle animation */}
-      <ParticleAnimation isDark={true} />
-
       {/* Dicipulos image - centered */}
       <div 
         ref={sectionRef}
@@ -60,13 +58,16 @@ const Origem: React.FC = () => {
           <img 
             src="/dicipulos.png" 
             alt="Dicipulos" 
-            className="w-full h-auto max-h-[50vh] sm:max-h-[55vh] md:max-h-[60vh] lg:max-h-[65vh] object-contain"
+            className={`w-full h-auto max-h-[50vh] sm:max-h-[55vh] md:max-h-[60vh] lg:max-h-[65vh] object-contain transition-all duration-1000 ease-out ${
+              imageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'
+            }`}
             style={{
               filter: 'none',
               boxShadow: 'none',
               border: 'none',
               outline: 'none'
             }}
+            onLoad={() => setImageLoaded(true)}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';
@@ -98,7 +99,9 @@ const Origem: React.FC = () => {
       </div>
 
       {/* Spinning Disco image - bottom right */}
-      <div className="absolute right-0 bottom-0 translate-x-1/4 translate-y-1/4 z-10">
+      <div className={`absolute right-0 bottom-0 translate-x-1/4 translate-y-1/4 z-10 transition-all duration-1000 delay-300 ease-out ${
+        discoLoaded ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-75 -rotate-45'
+      }`}>
         <img 
           src="/disco.png" 
           alt="Disco" 
@@ -109,6 +112,7 @@ const Origem: React.FC = () => {
             border: 'none',
             outline: 'none'
           }}
+          onLoad={() => setDiscoLoaded(true)}
         />
       </div>
 
