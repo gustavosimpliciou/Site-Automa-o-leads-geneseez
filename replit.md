@@ -58,3 +58,14 @@ npm run start   # Preview production build
 - Added phrase carousel in Hero (9 second intervals): "FREQUÊNCIA UNICA", "ÊXTASE 999", "ARTE É O CAMINHO"
 - Fixed Footer navigation - all links now work correctly
 - "Ouvir Album" button redirects to home page with countdown
+
+## Latest Changes (December 13, 2024 - Session 2)
+- Refactored ParticleAnimation to support containerMode for specific sections
+- Particle animation now only appears in:
+  - Hero section (with countdown timer)
+  - Artistas (Origem) section behind images
+  - CEO comment box in About section
+- Removed global particle animation from App.tsx
+- No particle animation on Imersão (Projects) page
+- Moved Cristo image to be absolutely positioned at the center-bottom of About section
+- Added letter-by-letter entrance animation for "IMERSÃO" title on Projects page
