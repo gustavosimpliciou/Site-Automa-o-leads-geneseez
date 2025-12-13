@@ -69,3 +69,17 @@ npm run start   # Preview production build
 - No particle animation on Imersão (Projects) page
 - Moved Cristo image to be absolutely positioned at the center-bottom of About section
 - Added letter-by-letter entrance animation for "IMERSÃO" title on Projects page
+
+## Latest Changes (December 13, 2024 - Session 3)
+- Improved particle animation sensitivity and coverage:
+  - Particles now cover the entire hero section (title, button, countdown, etc)
+  - Interaction works everywhere the mouse passes in the section
+  - Slightly reduced sensitivity (30ms interval, 3 particles per movement)
+- CEO comment section: black background, white text, white particles
+- Created AlbumPopup component (Spotify-style):
+  - Shows album cover and community invitation
+  - "Participar da Comunidade" button links to WhatsApp
+  - "Ir Para o Album" button navigates to home
+  - Responsive design for all screen sizes
+- Increased Cristo image size by 30% (w-24 to w-32)
+- All changes are responsive and work across desktop/mobile
