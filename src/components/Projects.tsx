@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Play, Pause, Heart, MoreHorizontal, Clock, Music2 } from 'lucide-react';
+import AlbumPopup from './AlbumPopup';
 
 interface Track {
   id: number;
@@ -19,6 +20,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
   const [currentTrack, setCurrentTrack] = useState(1);
   const [liked, setLiked] = useState(false);
   const [titleVisible, setTitleVisible] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -225,20 +227,22 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
           <div className="px-6 md:px-8 pb-8">
             <button 
               id="listen-album-btn"
-              onClick={onHomeClick}
+              onClick={() => setShowPopup(true)}
               className="block w-full bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-8 rounded-full text-center uppercase tracking-wider transition-all duration-300 hover:scale-[1.02]"
             >
-              OUVIR ÁLBUM
+              OUVIR ALBUM
             </button>
           </div>
         </div>
+
+        <AlbumPopup isOpen={showPopup} onClose={() => setShowPopup(false)} onListenClick={onHomeClick} />
 
         {showCristo && (
           <div className="max-w-4xl mx-auto mt-12 flex justify-center">
             <img 
               src="/cristo.png" 
               alt="Cristo" 
-              className="w-24 h-auto object-contain"
+              className="w-32 h-auto object-contain"
             />
           </div>
         )}

@@ -77,6 +77,8 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
           </div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/90" />
+      </div>
+      <div className="absolute inset-0 z-10">
         <ParticleAnimation isDark={false} containerMode={true} />
       </div>
 

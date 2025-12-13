@@ -90,14 +90,14 @@ const About: React.FC<AboutProps> = ({ showCristo = false }) => {
                 </div>
               ))}
             </div>
-            <div className="mt-6 p-6 bg-gray-100 rounded-lg text-black relative overflow-hidden">
-              <ParticleAnimation isDark={true} containerMode={true} />
+            <div className="mt-6 p-6 bg-black rounded-lg text-white relative overflow-hidden">
+              <ParticleAnimation isDark={false} containerMode={true} />
               <div className="relative z-10">
-                <p className="text-sm leading-relaxed text-gray-800">
+                <p className="text-sm leading-relaxed text-white">
                   "Não fazemos apenas arte. criamos o novo. 
                   Cada criação é um pedaço de nós que entregamos ao mundo."
                 </p>
-                <p className="text-gray-600 text-xs mt-3 tracking-wider">- CEO Geneseez</p>
+                <p className="text-gray-400 text-xs mt-3 tracking-wider">- CEO Geneseez</p>
               </div>
             </div>
           </div>
@@ -108,7 +108,7 @@ const About: React.FC<AboutProps> = ({ showCristo = false }) => {
             <img 
               src="/cristo.png" 
               alt="Cristo" 
-              className="w-24 h-auto object-contain"
+              className="w-32 h-auto object-contain"
             />
           </div>
         )}
