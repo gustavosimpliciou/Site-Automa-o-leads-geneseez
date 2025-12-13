@@ -252,12 +252,8 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
 
     initializeActivationPoints();
 
-    const interactiveElements = document.querySelectorAll('.interactive-particle');
-    interactiveElements.forEach(element => {
-      element.addEventListener('mousemove', handleMouseMove, { passive: true });
-      element.addEventListener('touchmove', handleTouchMove, { passive: true });
-    });
-
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('resize', resizeCanvas);
 
     resizeCanvas();
@@ -266,11 +262,8 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resizeCanvas);
-      
-      interactiveElements.forEach(element => {
-        element.removeEventListener('mousemove', handleMouseMove);
-        element.removeEventListener('touchmove', handleTouchMove);
-      });
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
 
       particles.forEach(particle => {
         if (particle.element.parentNode) {
@@ -281,8 +274,8 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
   }, [isDark]);
 
   return (
-    <div ref={containerRef} className="fixed inset-0 overflow-hidden pointer-events-none">
-      <canvas ref={canvasRef} className="absolute inset-0 z-10" />
+    <div ref={containerRef} className="fixed inset-0 overflow-hidden pointer-events-none z-10">
+      <canvas ref={canvasRef} className="absolute inset-0" />
     </div>
   );
 };

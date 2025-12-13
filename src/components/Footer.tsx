@@ -1,6 +1,18 @@
 import { Instagram, Youtube, Music } from 'lucide-react';
 
-const Footer: React.FC = () => {
+type ViewType = 'home' | 'about' | 'projects' | 'origem';
+
+interface FooterProps {
+  onViewChange?: (view: ViewType) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onViewChange }) => {
+  const handleNavClick = (view: ViewType) => {
+    if (onViewChange) {
+      onViewChange(view);
+    }
+  };
+
   return (
     <footer className="bg-black text-white py-12">
       <div className="container mx-auto px-4">
@@ -20,10 +32,10 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-sm font-semibold mb-4 uppercase tracking-wider">NAVEGAÇÃO</h3>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li><span className="hover:text-white cursor-pointer transition-colors">Início</span></li>
-              <li><span className="hover:text-white cursor-pointer transition-colors">Sobre</span></li>
-              <li><span className="hover:text-white cursor-pointer transition-colors">Imersão Completa</span></li>
-              <li><span className="hover:text-white cursor-pointer transition-colors">Origem</span></li>
+              <li><button onClick={() => handleNavClick('home')} className="hover:text-white cursor-pointer transition-colors">Início</button></li>
+              <li><button onClick={() => handleNavClick('about')} className="hover:text-white cursor-pointer transition-colors">Sobre</button></li>
+              <li><button onClick={() => handleNavClick('projects')} className="hover:text-white cursor-pointer transition-colors">Imersão Completa</button></li>
+              <li><button onClick={() => handleNavClick('origem')} className="hover:text-white cursor-pointer transition-colors">Artistas</button></li>
             </ul>
           </div>
           

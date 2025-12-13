@@ -9,7 +9,11 @@ interface Track {
   isPlaying?: boolean;
 }
 
-const Projects: React.FC = () => {
+interface ProjectsProps {
+  onHomeClick?: () => void;
+}
+
+const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(1);
   const [liked, setLiked] = useState(false);
@@ -184,13 +188,13 @@ const Projects: React.FC = () => {
 
           {/* Listen Button */}
           <div className="px-6 md:px-8 pb-8">
-            <a 
+            <button 
               id="listen-album-btn"
-              href="#" 
+              onClick={onHomeClick}
               className="block w-full bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-8 rounded-full text-center uppercase tracking-wider transition-all duration-300 hover:scale-[1.02]"
             >
               OUVIR ÁLBUM
-            </a>
+            </button>
           </div>
         </div>
 

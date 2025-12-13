@@ -96,7 +96,7 @@ const About: React.FC = () => {
               <img 
                 src="/cristo.png" 
                 alt="Cristo" 
-                className="w-64 h-auto object-contain rounded-lg"
+                className="w-32 h-auto object-contain rounded-lg mx-auto"
               />
             </div>
           </div>
