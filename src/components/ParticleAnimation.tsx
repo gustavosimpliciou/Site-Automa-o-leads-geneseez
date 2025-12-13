@@ -40,11 +40,11 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
     const ctx = canvas.getContext('2d');
     const container = containerRef.current;
     const particles = particlesRef.current;
-    const maxParticles = containerMode ? 50 : 100;
+    const maxParticles = containerMode ? 80 : 100;
     const maxDistance = containerMode ? 150 : 250;
     const fadeTime = 3000;
-    const particleInterval = containerMode ? 100 : 60;
-    const numActivationPoints = containerMode ? 12 : 25;
+    const particleInterval = containerMode ? 15 : 20;
+    const numActivationPoints = containerMode ? 15 : 25;
 
     let width: number;
     let height: number;
@@ -244,19 +244,19 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
         
         if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
           mousePositionRef.current = { x, y };
-          for (let i = 0; i < 2; i++) {
+          for (let i = 0; i < 4; i++) {
             createParticle(
-              x + (Math.random() - 0.5) * 30,
-              y + (Math.random() - 0.5) * 30
+              x + (Math.random() - 0.5) * 60,
+              y + (Math.random() - 0.5) * 60
             );
           }
         }
       } else {
         mousePositionRef.current = { x: e.clientX, y: e.clientY };
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 4; i++) {
           createParticle(
-            e.clientX + (Math.random() - 0.5) * 40,
-            e.clientY + (Math.random() - 0.5) * 40
+            e.clientX + (Math.random() - 0.5) * 60,
+            e.clientY + (Math.random() - 0.5) * 60
           );
         }
       }
@@ -270,19 +270,19 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
         
         if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
           mousePositionRef.current = { x, y };
-          for (let i = 0; i < 2; i++) {
+          for (let i = 0; i < 4; i++) {
             createParticle(
-              x + (Math.random() - 0.5) * 30,
-              y + (Math.random() - 0.5) * 30
+              x + (Math.random() - 0.5) * 60,
+              y + (Math.random() - 0.5) * 60
             );
           }
         }
       } else {
         mousePositionRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 4; i++) {
           createParticle(
-            e.touches[0].clientX + (Math.random() - 0.5) * 40,
-            e.touches[0].clientY + (Math.random() - 0.5) * 40
+            e.touches[0].clientX + (Math.random() - 0.5) * 60,
+            e.touches[0].clientY + (Math.random() - 0.5) * 60
           );
         }
       }
