@@ -49,3 +49,9 @@ npm run start   # Preview production build
 - Added Spotify-style album player for EXTASE 999
 - Updated menu to: Inicio, Sobre, Projetos, Origem
 - New creative copy focused on music, art, design
+
+## Recent Changes (December 13, 2024)
+- Added cristo.png image below CEO quote in About section
+- Made ParticleAnimation fixed/global (doesn't scroll with page)
+- Added entrance animations for images in Artists (Origem) section
+- Added phrase carousel in Hero (9 second intervals): "FREQUÊNCIA UNICA", "ÊXTASE 999", "ARTE É O CAMINHO"
