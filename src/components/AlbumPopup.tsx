@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { X, Music, Users, Bell } from 'lucide-react';
 
 interface AlbumPopupProps {
@@ -7,16 +8,30 @@ interface AlbumPopupProps {
 }
 
 const AlbumPopup: React.FC<AlbumPopupProps> = ({ isOpen, onClose, onListenClick }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div 
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+    >
       <div 
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
         onClick={onClose}
       />
       
-      <div className="relative bg-gradient-to-b from-gray-900 to-black rounded-2xl overflow-hidden w-full mx-4 shadow-2xl animate-fadeIn max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+      <div className="relative bg-gradient-to-b from-gray-900 to-black rounded-2xl overflow-hidden overflow-y-auto max-h-[90vh] w-full mx-4 shadow-2xl animate-fadeIn max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors"
