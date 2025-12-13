@@ -17,7 +17,9 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(1);
   const [liked, setLiked] = useState(false);
+  const [titleVisible, setTitleVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   const tracks: Track[] = [
     { id: 1, title: 'DESACREDITOU', duration: '3:12', artist: 'LOPZ, DIIVINU' },
@@ -55,6 +57,30 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const titleObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTitleVisible(true);
+            titleObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (titleRef.current) {
+      titleObserver.observe(titleRef.current);
+    }
+
+    return () => {
+      if (titleRef.current) {
+        titleObserver.unobserve(titleRef.current);
+      }
+    };
+  }, []);
+
   const handleTrackClick = (trackId: number) => {
     setCurrentTrack(trackId);
     setIsPlaying(true);
@@ -74,23 +100,37 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
   return (
     <section id="projects" className="py-24 bg-gradient-to-b from-gray-900 via-black to-black min-h-screen">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-white uppercase tracking-wide">IMERSÃO</h2>
+        <h2 
+          ref={titleRef}
+          className={`text-4xl md:text-5xl font-bold mb-16 text-center text-white uppercase tracking-wide transition-all duration-1000 ease-out ${
+            titleVisible 
+              ? 'opacity-100 translate-y-0 scale-100' 
+              : 'opacity-0 translate-y-8 scale-95'
+          }`}
+          style={{
+            textShadow: titleVisible ? '0 0 30px rgba(255,255,255,0.3)' : 'none',
+          }}
+        >
+          <span className={`inline-block transition-all duration-700 delay-100 ${titleVisible ? 'opacity-100' : 'opacity-0'}`}>I</span>
+          <span className={`inline-block transition-all duration-700 delay-150 ${titleVisible ? 'opacity-100' : 'opacity-0'}`}>M</span>
+          <span className={`inline-block transition-all duration-700 delay-200 ${titleVisible ? 'opacity-100' : 'opacity-0'}`}>E</span>
+          <span className={`inline-block transition-all duration-700 delay-250 ${titleVisible ? 'opacity-100' : 'opacity-0'}`}>R</span>
+          <span className={`inline-block transition-all duration-700 delay-300 ${titleVisible ? 'opacity-100' : 'opacity-0'}`}>S</span>
+          <span className={`inline-block transition-all duration-700 delay-350 ${titleVisible ? 'opacity-100' : 'opacity-0'}`}>Ã</span>
+          <span className={`inline-block transition-all duration-700 delay-400 ${titleVisible ? 'opacity-100' : 'opacity-0'}`}>O</span>
+        </h2>
         
-        {/* Album Container - Spotify Style */}
         <div 
           ref={containerRef}
           className="max-w-4xl mx-auto bg-gradient-to-b from-purple-900/40 to-black/80 rounded-xl overflow-hidden transition-all duration-700 opacity-0 translate-y-10"
         >
-          {/* Album Header */}
           <div className="p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center md:items-end">
-            {/* Album Cover */}
             <div className="w-48 h-48 md:w-56 md:h-56 rounded-lg shadow-2xl relative overflow-hidden group">
               <img 
                 src="/capaextase999.png" 
                 alt="ÊXTASE 999" 
                 className="w-full h-full object-cover"
               />
-              {/* Play overlay on hover */}
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <button 
                   onClick={scrollToListenButton}
@@ -101,7 +141,6 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
               </div>
             </div>
 
-            {/* Album Info */}
             <div className="text-center md:text-left flex-1">
               <p className="text-white/60 text-xs uppercase tracking-wider mb-1">ÁLBUM 2026</p>
               <h3 className="text-white text-4xl md:text-5xl font-bold mb-3 uppercase">ÊXTASE 999</h3>
@@ -124,7 +163,6 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="px-6 md:px-8 pb-4 flex items-center gap-4">
             <button 
               onClick={scrollToListenButton}
@@ -143,9 +181,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
             </button>
           </div>
 
-          {/* Track List */}
           <div className="px-4 md:px-8 pb-8">
-            {/* Header */}
             <div className="grid grid-cols-[auto_1fr_auto] md:grid-cols-[40px_1fr_100px] gap-4 px-4 py-2 text-gray-400 text-xs uppercase tracking-wider border-b border-white/10 mb-2">
               <span className="text-center">#</span>
               <span>TÍTULO</span>
@@ -154,7 +190,6 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
               </span>
             </div>
 
-            {/* Tracks */}
             <div className="space-y-1">
               {tracks.map((track) => (
                 <div
@@ -186,7 +221,6 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
             </div>
           </div>
 
-          {/* Listen Button */}
           <div className="px-6 md:px-8 pb-8">
             <button 
               id="listen-album-btn"
@@ -198,7 +232,6 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick }) => {
           </div>
         </div>
 
-        {/* Coming Soon */}
         <div className="max-w-4xl mx-auto mt-12 text-center">
           <p className="text-gray-500 text-sm uppercase tracking-wider mb-2">EM BREVE</p>
           <p className="text-gray-400">Novo Album. Fique ligado.</p>

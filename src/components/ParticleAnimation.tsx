@@ -9,6 +9,7 @@ interface Particle {
   size: number;
   createdAt: number;
   element: HTMLDivElement;
+  updatePosition: () => void;
 }
 
 interface ActivationPoint {
@@ -21,14 +22,14 @@ interface ActivationPoint {
 
 interface ParticleAnimationProps {
   isDark?: boolean;
+  containerMode?: boolean;
 }
 
-const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false }) => {
+const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, containerMode = false }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const activationPointsRef = useRef<ActivationPoint[]>([]);
-  const isInteractingRef = useRef(false);
   const lastParticleTimeRef = useRef(0);
   const mousePositionRef = useRef({ x: 0, y: 0 });
 
@@ -39,30 +40,45 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
     const ctx = canvas.getContext('2d');
     const container = containerRef.current;
     const particles = particlesRef.current;
-    const maxParticles = 100; // Increased for more coverage
-    const maxDistance = 250; // Increased connection distance
-    const fadeTime = 3000; // Longer fade time
-    const particleInterval = 60; // Faster particle creation
-    const numActivationPoints = 25; // More activation points for better coverage
+    const maxParticles = containerMode ? 50 : 100;
+    const maxDistance = containerMode ? 150 : 250;
+    const fadeTime = 3000;
+    const particleInterval = containerMode ? 100 : 60;
+    const numActivationPoints = containerMode ? 12 : 25;
 
     let width: number;
     let height: number;
     let animationFrameId: number;
+    let containerRect: DOMRect;
 
     const resizeCanvas = () => {
-      width = canvas.width = window.innerWidth * window.devicePixelRatio;
-      height = canvas.height = window.innerHeight * window.devicePixelRatio;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
+      if (containerMode) {
+        containerRect = container.getBoundingClientRect();
+        width = canvas.width = containerRect.width * window.devicePixelRatio;
+        height = canvas.height = containerRect.height * window.devicePixelRatio;
+        canvas.style.width = `${containerRect.width}px`;
+        canvas.style.height = `${containerRect.height}px`;
+      } else {
+        width = canvas.width = window.innerWidth * window.devicePixelRatio;
+        height = canvas.height = window.innerHeight * window.devicePixelRatio;
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+      }
       if (ctx) ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
       
       initializeActivationPoints();
     };
 
+    const getContainerDimensions = () => {
+      if (containerMode) {
+        return { w: containerRect?.width || 400, h: containerRect?.height || 400 };
+      }
+      return { w: window.innerWidth, h: window.innerHeight * 0.8 };
+    };
+
     const getRandomPosition = (section: 'top' | 'middle' | 'bottom' | 'left' | 'right') => {
-      const w = window.innerWidth;
-      const h = window.innerHeight * 0.8;
-      const spread = 0.4; // Increased spread factor
+      const { w, h } = getContainerDimensions();
+      const spread = 0.4;
 
       switch (section) {
         case 'top':
@@ -89,7 +105,7 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
           x: pos.x,
           y: pos.y,
           lastTrigger: Date.now(),
-          interval: 1500 + Math.random() * 1000, // Faster intervals
+          interval: 1500 + Math.random() * 1000,
           section
         };
       });
@@ -108,10 +124,10 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
       constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
-        this.vx = (Math.random() - 0.5) * 1.2; // Increased velocity
-        this.vy = (Math.random() - 0.5) * 1.2;
+        this.vx = (Math.random() - 0.5) * (containerMode ? 0.8 : 1.2);
+        this.vy = (Math.random() - 0.5) * (containerMode ? 0.8 : 1.2);
         this.opacity = 0.8;
-        this.size = Math.random() * 4 + 2;
+        this.size = Math.random() * (containerMode ? 3 : 4) + 2;
         this.createdAt = Date.now();
         this.element = document.createElement('div');
         this.element.className = isDark ? 'particle-dark' : 'particle';
@@ -122,12 +138,12 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
       }
 
       updatePosition() {
+        const { w, h } = getContainerDimensions();
         this.x += this.vx;
         this.y += this.vy;
         
-        // Bounce with more energy
-        if (this.x < 0 || this.x > window.innerWidth) this.vx *= -0.8;
-        if (this.y < 0 || this.y > window.innerHeight) this.vy *= -0.8;
+        if (this.x < 0 || this.x > w) this.vx *= -0.8;
+        if (this.y < 0 || this.y > h) this.vy *= -0.8;
         
         this.element.style.transform = `translate(${this.x}px, ${this.y}px)`;
         this.element.style.opacity = String(this.opacity);
@@ -139,7 +155,6 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
       
       if (now - lastParticleTimeRef.current > particleInterval) {
         if (particles.length >= maxParticles) {
-          // Remove oldest particle
           const oldestParticle = particles.shift();
           if (oldestParticle?.element.parentNode) {
             oldestParticle.element.parentNode.removeChild(oldestParticle.element);
@@ -147,7 +162,7 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
         }
         
         particles.push(new ParticleClass(
-          x + (Math.random() - 0.5) * 50, // Add spread to new particles
+          x + (Math.random() - 0.5) * 50,
           y + (Math.random() - 0.5) * 50
         ));
         lastParticleTimeRef.current = now;
@@ -162,7 +177,7 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
           point.lastTrigger = now;
           
           const newPos = getRandomPosition(point.section);
-          point.x += (newPos.x - point.x) * 0.05; // Faster point movement
+          point.x += (newPos.x - point.x) * 0.05;
           point.y += (newPos.y - point.y) * 0.05;
         }
       });
@@ -171,10 +186,10 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
     const drawConnections = () => {
       if (!ctx) return;
       
-      ctx.clearRect(0, 0, width, height);
+      const { w, h } = getContainerDimensions();
+      ctx.clearRect(0, 0, w, h);
       const now = Date.now();
 
-      // Update and fade particles
       for (let i = particles.length - 1; i >= 0; i--) {
         const particle = particles[i];
         const age = now - particle.createdAt;
@@ -194,7 +209,6 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
         particle.updatePosition();
       }
 
-      // Draw connections with gradient opacity
       ctx.lineWidth = 0.5;
       
       for (let i = 0; i < particles.length; i++) {
@@ -205,7 +219,6 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
 
           if (distance < maxDistance) {
             const opacity = (1 - (distance / maxDistance)) * 0.3;
-            // Use black lines for dark mode, white for light mode
             const color = isDark ? `rgba(0, 0, 0, ${opacity})` : `rgba(255, 255, 255, ${opacity})`;
             ctx.strokeStyle = color;
             ctx.beginPath();
@@ -224,36 +237,66 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      mousePositionRef.current = {
-        x: e.clientX,
-        y: e.clientY
-      };
-      // Create multiple particles on mouse move
-      for (let i = 0; i < 3; i++) {
-        createParticle(
-          e.clientX + (Math.random() - 0.5) * 40,
-          e.clientY + (Math.random() - 0.5) * 40
-        );
+      if (containerMode) {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+          mousePositionRef.current = { x, y };
+          for (let i = 0; i < 2; i++) {
+            createParticle(
+              x + (Math.random() - 0.5) * 30,
+              y + (Math.random() - 0.5) * 30
+            );
+          }
+        }
+      } else {
+        mousePositionRef.current = { x: e.clientX, y: e.clientY };
+        for (let i = 0; i < 3; i++) {
+          createParticle(
+            e.clientX + (Math.random() - 0.5) * 40,
+            e.clientY + (Math.random() - 0.5) * 40
+          );
+        }
       }
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      mousePositionRef.current = {
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY
-      };
-      for (let i = 0; i < 3; i++) {
-        createParticle(
-          e.touches[0].clientX + (Math.random() - 0.5) * 40,
-          e.touches[0].clientY + (Math.random() - 0.5) * 40
-        );
+      if (containerMode) {
+        const rect = container.getBoundingClientRect();
+        const x = e.touches[0].clientX - rect.left;
+        const y = e.touches[0].clientY - rect.top;
+        
+        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+          mousePositionRef.current = { x, y };
+          for (let i = 0; i < 2; i++) {
+            createParticle(
+              x + (Math.random() - 0.5) * 30,
+              y + (Math.random() - 0.5) * 30
+            );
+          }
+        }
+      } else {
+        mousePositionRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        for (let i = 0; i < 3; i++) {
+          createParticle(
+            e.touches[0].clientX + (Math.random() - 0.5) * 40,
+            e.touches[0].clientY + (Math.random() - 0.5) * 40
+          );
+        }
       }
     };
 
     initializeActivationPoints();
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    if (containerMode) {
+      container.addEventListener('mousemove', handleMouseMove as EventListener, { passive: true });
+      container.addEventListener('touchmove', handleTouchMove as EventListener, { passive: true });
+    } else {
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+      window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    }
     window.addEventListener('resize', resizeCanvas);
 
     resizeCanvas();
@@ -262,16 +305,30 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false })
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
+      if (containerMode) {
+        container.removeEventListener('mousemove', handleMouseMove as EventListener);
+        container.removeEventListener('touchmove', handleTouchMove as EventListener);
+      } else {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('touchmove', handleTouchMove);
+      }
 
       particles.forEach(particle => {
         if (particle.element.parentNode) {
           particle.element.parentNode.removeChild(particle.element);
         }
       });
+      particlesRef.current = [];
     };
-  }, [isDark]);
+  }, [isDark, containerMode]);
+
+  if (containerMode) {
+    return (
+      <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <canvas ref={canvasRef} className="absolute inset-0" />
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className="fixed inset-0 overflow-hidden pointer-events-none z-10">

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Countdown from './Countdown';
+import ParticleAnimation from './ParticleAnimation';
 
 interface HeroProps {
   onProjectsClick: () => void;
@@ -58,7 +59,7 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
   return (
     <section 
       id="home" 
-      className="interactive-particle relative min-h-screen flex items-center justify-center pt-24 pb-16"
+      className="relative min-h-screen flex items-center justify-center pt-24 pb-16"
     >
       <div className="absolute inset-0 bg-black overflow-hidden">
         <div className="absolute inset-0 opacity-20">
@@ -76,6 +77,7 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
           </div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/90" />
+        <ParticleAnimation isDark={false} containerMode={true} />
       </div>
 
       <div className="container mx-auto px-4 z-20 text-center">

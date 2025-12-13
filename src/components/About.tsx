@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Music, Palette, Video, Camera, Sparkles } from 'lucide-react';
+import ParticleAnimation from './ParticleAnimation';
 
 const About: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -42,7 +43,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-24 bg-white">
+    <section id="about" className="py-24 bg-white relative">
       <div className="container mx-auto px-4" ref={sectionRef}>
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div 
@@ -85,22 +86,27 @@ const About: React.FC = () => {
                 </div>
               ))}
             </div>
-            <div className="mt-6 p-6 bg-black rounded-lg text-white">
-              <p className="text-sm leading-relaxed">
-                "Não fazemos apenas arte. criamos o novo. 
-                Cada criação é um pedaço de nós que entregamos ao mundo."
-              </p>
-              <p className="text-gray-400 text-xs mt-3 tracking-wider">- CEO Geneseez</p>
-            </div>
-            <div className="mt-8 flex justify-center">
-              <img 
-                src="/cristo.png" 
-                alt="Cristo" 
-                className="w-32 h-auto object-contain rounded-lg mx-auto"
-              />
+            <div className="mt-6 p-6 bg-black rounded-lg text-white relative overflow-hidden">
+              <ParticleAnimation isDark={false} containerMode={true} />
+              <div className="relative z-10">
+                <p className="text-sm leading-relaxed">
+                  "Não fazemos apenas arte. criamos o novo. 
+                  Cada criação é um pedaço de nós que entregamos ao mundo."
+                </p>
+                <p className="text-gray-400 text-xs mt-3 tracking-wider">- CEO Geneseez</p>
+              </div>
             </div>
           </div>
         </div>
+        
+      </div>
+      
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+        <img 
+          src="/cristo.png" 
+          alt="Cristo" 
+          className="w-32 h-auto object-contain rounded-lg opacity-90"
+        />
       </div>
     </section>
   );

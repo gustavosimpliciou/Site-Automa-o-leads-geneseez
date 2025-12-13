@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Instagram } from 'lucide-react';
+import ParticleAnimation from './ParticleAnimation';
 
 const Origem: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -30,9 +31,8 @@ const Origem: React.FC = () => {
   return (
     <section 
       id="origem" 
-      className="interactive-particle relative h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden"
+      className="relative h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden"
     >
-      {/* Clean white background with subtle pattern */}
       <div className="absolute inset-0 bg-white overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="grid grid-cols-12 grid-rows-12 h-full w-full">
@@ -47,18 +47,18 @@ const Origem: React.FC = () => {
             ))}
           </div>
         </div>
+        <ParticleAnimation isDark={true} containerMode={true} />
       </div>
 
-      {/* Dicipulos image - centered */}
       <div 
         ref={sectionRef}
         className="z-20 transition-all duration-1000 opacity-0 translate-y-10 flex flex-col items-center justify-center"
       >
-        <div className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto flex items-center justify-center">
+        <div className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto flex items-center justify-center relative">
           <img 
             src="/dicipulos.png" 
             alt="Dicipulos" 
-            className={`w-full h-auto max-h-[50vh] sm:max-h-[55vh] md:max-h-[60vh] lg:max-h-[65vh] object-contain transition-all duration-1000 ease-out ${
+            className={`w-full h-auto max-h-[50vh] sm:max-h-[55vh] md:max-h-[60vh] lg:max-h-[65vh] object-contain transition-all duration-1000 ease-out relative z-10 ${
               imageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'
             }`}
             style={{
@@ -75,7 +75,6 @@ const Origem: React.FC = () => {
           />
         </div>
 
-        {/* Instagram links for artists */}
         <div className="flex items-center gap-8 mt-6">
           <a 
             href="https://instagram.com/lopz.of" 
@@ -98,7 +97,6 @@ const Origem: React.FC = () => {
         </div>
       </div>
 
-      {/* Spinning Disco image - bottom right */}
       <div className={`absolute right-0 bottom-0 translate-x-1/4 translate-y-1/4 z-10 transition-all duration-1000 delay-300 ease-out ${
         discoLoaded ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-75 -rotate-45'
       }`}>
@@ -116,7 +114,6 @@ const Origem: React.FC = () => {
         />
       </div>
 
-      {/* Spotify button - bottom left */}
       <a 
         href="#" 
         className="absolute bottom-8 left-8 z-20 flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 text-gray-400 transition-all duration-300 hover:border-[#1DB954] hover:text-[#1DB954] hover:bg-[#1DB954]/10 group"
