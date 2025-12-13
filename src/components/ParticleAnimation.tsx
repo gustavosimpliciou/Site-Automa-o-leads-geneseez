@@ -239,6 +239,7 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
     const handleMouseMove = (e: MouseEvent) => {
       if (containerMode) {
         const rect = container.getBoundingClientRect();
+        containerRect = rect;
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         
@@ -265,6 +266,7 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
     const handleTouchMove = (e: TouchEvent) => {
       if (containerMode) {
         const rect = container.getBoundingClientRect();
+        containerRect = rect;
         const x = e.touches[0].clientX - rect.left;
         const y = e.touches[0].clientY - rect.top;
         
@@ -290,13 +292,8 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
 
     initializeActivationPoints();
 
-    if (containerMode) {
-      container.addEventListener('mousemove', handleMouseMove as EventListener, { passive: true });
-      container.addEventListener('touchmove', handleTouchMove as EventListener, { passive: true });
-    } else {
-      window.addEventListener('mousemove', handleMouseMove, { passive: true });
-      window.addEventListener('touchmove', handleTouchMove, { passive: true });
-    }
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('resize', resizeCanvas);
 
     resizeCanvas();
@@ -305,13 +302,8 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resizeCanvas);
-      if (containerMode) {
-        container.removeEventListener('mousemove', handleMouseMove as EventListener);
-        container.removeEventListener('touchmove', handleTouchMove as EventListener);
-      } else {
-        window.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('touchmove', handleTouchMove);
-      }
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
 
       particles.forEach(particle => {
         if (particle.element.parentNode) {
