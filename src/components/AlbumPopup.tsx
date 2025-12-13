@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Music, Users, Bell } from 'lucide-react';
 
 interface AlbumPopupProps {
@@ -11,6 +12,7 @@ const AlbumPopup: React.FC<AlbumPopupProps> = ({ isOpen, onClose, onListenClick 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      window.scrollTo({ top: 0, behavior: 'instant' });
     } else {
       document.body.style.overflow = '';
     }
@@ -21,10 +23,18 @@ const AlbumPopup: React.FC<AlbumPopupProps> = ({ isOpen, onClose, onListenClick 
 
   if (!isOpen) return null;
 
-  return (
+  const popupContent = (
     <div 
       className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-      style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+      style={{ 
+        position: 'fixed', 
+        top: 0, 
+        left: 0, 
+        right: 0, 
+        bottom: 0,
+        width: '100vw',
+        height: '100vh'
+      }}
     >
       <div 
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
@@ -120,6 +130,8 @@ const AlbumPopup: React.FC<AlbumPopupProps> = ({ isOpen, onClose, onListenClick 
       </div>
     </div>
   );
+
+  return createPortal(popupContent, document.body);
 };
 
 export default AlbumPopup;
