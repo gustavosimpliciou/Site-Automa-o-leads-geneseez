@@ -16,7 +16,7 @@ const AlbumPopup: React.FC<AlbumPopupProps> = ({ isOpen, onClose, onListenClick 
         onClick={onClose}
       />
       
-      <div className="relative bg-gradient-to-b from-gray-900 to-black rounded-2xl overflow-hidden max-w-md w-full mx-4 shadow-2xl animate-fadeIn">
+      <div className="relative bg-gradient-to-b from-gray-900 to-black rounded-2xl overflow-hidden max-w-xs w-full mx-4 shadow-2xl animate-fadeIn scale-[0.7] origin-center">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors"
@@ -43,7 +43,7 @@ const AlbumPopup: React.FC<AlbumPopupProps> = ({ isOpen, onClose, onListenClick 
 
         <div className="p-6 space-y-4">
           <div className="text-center">
-            <h4 className="text-white text-lg font-semibold mb-2">Faca Parte da Nossa Comunidade</h4>
+            <h4 className="text-white text-lg font-semibold mb-2">Faca Parte do Nosso Canal</h4>
             <p className="text-gray-400 text-sm leading-relaxed">
               Fique por dentro de todos os lancamentos, bastidores exclusivos e conteudos especiais. 
               Seja o primeiro a ouvir!
@@ -61,7 +61,7 @@ const AlbumPopup: React.FC<AlbumPopupProps> = ({ isOpen, onClose, onListenClick 
               <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
                 <Users className="w-5 h-5 text-green-500" />
               </div>
-              <span className="text-xs text-gray-400">Comunidade</span>
+              <span className="text-xs text-gray-400">Canal</span>
             </div>
             <div className="flex flex-col items-center gap-1">
               <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
@@ -73,12 +73,12 @@ const AlbumPopup: React.FC<AlbumPopupProps> = ({ isOpen, onClose, onListenClick 
 
           <div className="space-y-3">
             <a 
-              href="https://wa.me/5511999999999?text=Quero%20fazer%20parte%20da%20comunidade%20GENESEEZ!"
+              href="https://www.instagram.com/channel/AbaqTZjsIPKyKebz/"
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-6 rounded-full text-center uppercase tracking-wider transition-all duration-300 hover:scale-[1.02]"
             >
-              Participar da Comunidade
+              Participar do Canal
             </a>
             {onListenClick && (
               <button 
@@ -97,7 +97,7 @@ const AlbumPopup: React.FC<AlbumPopupProps> = ({ isOpen, onClose, onListenClick 
           </div>
 
           <p className="text-center text-gray-500 text-xs">
-            Ao participar, voce concorda em receber atualizacoes sobre lancamentos.
+            Ao participar do canal, voce recebera atualizacoes sobre lancamentos.
           </p>
         </div>
       </div>
