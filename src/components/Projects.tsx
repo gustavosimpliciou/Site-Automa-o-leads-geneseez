@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Play, Pause, Heart, MoreHorizontal, Clock, Music2 } from 'lucide-react';
 import AlbumPopup from './AlbumPopup';
+import GlobeMap from './GlobeMap';
 
 interface Track {
   id: number;
@@ -241,13 +242,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
 
         {showCristo && (
           <div className="max-w-4xl mx-auto mt-12 flex justify-center">
-            <img 
-              src="/cristo.png" 
-              alt="Cristo" 
-              className="w-32 h-auto object-contain transition-opacity duration-700 opacity-0"
-              loading="lazy"
-              onLoad={(e) => e.currentTarget.classList.replace('opacity-0', 'opacity-100')}
-            />
+            <GlobeMap />
           </div>
         )}
       </div>
