@@ -21,7 +21,9 @@ const Footer: React.FC<FooterProps> = ({ onViewChange }) => {
             <img 
               src="/logo2.png" 
               alt="Geneseez" 
-              className="h-8 mb-4"
+              className="h-8 mb-4 transition-opacity duration-500 opacity-0"
+              loading="lazy"
+              onLoad={(e) => e.currentTarget.classList.replace('opacity-0', 'opacity-100')}
             />
             <p className="text-gray-400 text-sm leading-relaxed">
               Onde tudo começa. 

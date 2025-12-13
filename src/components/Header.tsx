@@ -68,7 +68,8 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
             <img 
               src={isScrolled || isSpecialView ? '/logo3.png' : '/logo2.png'}
               alt="Geneseez" 
-              className="h-9 transition-opacity duration-300"
+              className="h-9 transition-all duration-500"
+              loading="eager"
             />
           </button>
         </div>

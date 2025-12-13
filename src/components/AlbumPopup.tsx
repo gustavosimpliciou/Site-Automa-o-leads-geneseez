@@ -16,7 +16,7 @@ const AlbumPopup: React.FC<AlbumPopupProps> = ({ isOpen, onClose, onListenClick 
         onClick={onClose}
       />
       
-      <div className="relative bg-gradient-to-b from-gray-900 to-black rounded-2xl overflow-hidden max-w-xs w-full mx-4 shadow-2xl animate-fadeIn scale-[0.7] origin-center">
+      <div className="relative bg-gradient-to-b from-gray-900 to-black rounded-2xl overflow-hidden w-full mx-4 shadow-2xl animate-fadeIn max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors"
@@ -29,7 +29,9 @@ const AlbumPopup: React.FC<AlbumPopupProps> = ({ isOpen, onClose, onListenClick 
             <img 
               src="/capaextase999.png" 
               alt="EXTASE 999" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-opacity duration-700 opacity-0"
+              loading="lazy"
+              onLoad={(e) => e.currentTarget.classList.replace('opacity-0', 'opacity-100')}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
           </div>

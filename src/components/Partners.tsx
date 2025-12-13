@@ -93,7 +93,9 @@ const Partners: React.FC<PartnersProps> = ({ onContactClick }) => {
               <img 
                 src={partner.logo} 
                 alt={partner.name} 
-                className="max-h-12 max-w-full grayscale hover:grayscale-0 transition-all duration-300"
+                className="max-h-12 max-w-full grayscale hover:grayscale-0 transition-all duration-500 opacity-0"
+                loading="lazy"
+                onLoad={(e) => e.currentTarget.classList.replace('opacity-0', 'opacity-100')}
               />
             </div>
           ))}

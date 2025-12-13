@@ -132,7 +132,9 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
               <img 
                 src="/capaextase999.png" 
                 alt="ÊXTASE 999" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-opacity duration-700 opacity-0"
+                loading="lazy"
+                onLoad={(e) => e.currentTarget.classList.replace('opacity-0', 'opacity-100')}
               />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <button 
@@ -242,7 +244,9 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
             <img 
               src="/cristo.png" 
               alt="Cristo" 
-              className="w-32 h-auto object-contain"
+              className="w-32 h-auto object-contain transition-opacity duration-700 opacity-0"
+              loading="lazy"
+              onLoad={(e) => e.currentTarget.classList.replace('opacity-0', 'opacity-100')}
             />
           </div>
         )}

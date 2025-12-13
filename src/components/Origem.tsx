@@ -67,6 +67,7 @@ const Origem: React.FC = () => {
               border: 'none',
               outline: 'none'
             }}
+            loading="lazy"
             onLoad={() => setImageLoaded(true)}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
@@ -110,6 +111,7 @@ const Origem: React.FC = () => {
             border: 'none',
             outline: 'none'
           }}
+          loading="lazy"
           onLoad={() => setDiscoLoaded(true)}
         />
       </div>

@@ -108,7 +108,9 @@ const About: React.FC<AboutProps> = ({ showCristo = false }) => {
             <img 
               src="/cristo.png" 
               alt="Cristo" 
-              className="w-32 h-auto object-contain"
+              className="w-32 h-auto object-contain transition-opacity duration-700 opacity-0"
+              loading="lazy"
+              onLoad={(e) => e.currentTarget.classList.replace('opacity-0', 'opacity-100')}
             />
           </div>
         )}
