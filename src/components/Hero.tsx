@@ -6,7 +6,7 @@ interface HeroProps {
   onProjectsClick: () => void;
 }
 
-const PHRASES = ['FREQUÊNCIA UNICA', 'ÊXTASE 999', 'ARTE É O CAMINHO'];
+const PHRASES = ['FREQUÊNCIA UNICA', 'ÊXTASE 999', 'VOCÊ É O CAMINHO'];
 const PHRASE_DURATION = 9000;
 
 const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
