@@ -44,8 +44,6 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
     setError('');
 
     try {
-      const webhookUrl = 'https://geneseez01.app.n8n.cloud/webhook-test/captura-leads';
-      
       const payload = {
         email,
         instagram,
@@ -53,35 +51,39 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
         source: 'pre-save-popup'
       };
 
-      console.log('Enviando para webhook:', webhookUrl);
-      console.log('Dados:', payload);
+      console.log('Enviando dados:', payload);
 
-      const response = await fetch(webhookUrl, {
+      // Enviar para o servidor backend local que repassa para N8N
+      const response = await fetch('http://localhost:3001/api/leads', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
       });
 
-      console.log('Resposta do webhook:', response.status, response.type);
+      const result = await response.json();
+      console.log('Resposta do servidor:', result);
 
-      // Com mode: 'no-cors', a resposta será do tipo 'opaque' então sempre consideramos como sucesso
-      setSubmitted(true);
-      setEmail('');
-      setInstagram('');
-      setError('Dados enviados com sucesso!');
-      
-      setTimeout(() => {
-        onClose();
-        setSubmitted(false);
-      }, 2000);
+      if (response.ok) {
+        setSubmitted(true);
+        setEmail('');
+        setInstagram('');
+        setError('Dados enviados com sucesso!');
+        
+        setTimeout(() => {
+          onClose();
+          setSubmitted(false);
+        }, 2000);
+      } else {
+        setError('Erro ao enviar. Tente novamente.');
+      }
     } catch (err) {
       console.error('Erro ao enviar:', err);
-      setError('Dados enviados com sucesso!');
+      setError('Enviando...tente novamente');
       setTimeout(() => {
-        onClose();
+        setError('');
+        setLoading(false);
       }, 2000);
     } finally {
       setLoading(false);
