@@ -110,7 +110,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
       />
       
       {/* Popup com Partículas */}
-      <div className="relative bg-gradient-to-b from-black via-gray-800 to-white rounded-2xl overflow-hidden w-full max-w-md shadow-2xl animate-fadeIn border border-gray-700">
+      <div className="relative bg-gradient-to-br from-gray-900 via-gray-900 to-black rounded-2xl overflow-hidden w-full max-w-md shadow-2xl animate-fadeIn border border-gray-800">
         {/* Partículas de fundo */}
         <div className="absolute inset-0 overflow-hidden z-0">
           <ParticleAnimation isDark={true} containerMode={true} />
@@ -127,11 +127,9 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
           </button>
 
           {/* Header */}
-          <div className="px-6 pt-8 pb-6 text-center">
-            <h2 className="text-white text-5xl font-black mb-2 tracking-tighter" style={{ fontFamily: 'Impact, Arial Black, sans-serif', letterSpacing: '-2px' }}>
-              PRÉ-SAVE
-            </h2>
-            <p className="text-gray-600 text-sm font-medium">
+          <div className="px-6 pt-8 pb-6">
+            <h2 className="text-white text-3xl font-bold mb-2">PRÉ-SAVE</h2>
+            <p className="text-gray-300 text-sm">
               Seja o primeiro a escutar nossos novos lançamentos
             </p>
           </div>
@@ -141,7 +139,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
             <form onSubmit={handleSubmit} className="px-6 pb-8 space-y-4 relative z-20">
               {/* Email Input */}
               <div className="relative">
-                <label className="block text-gray-700 text-sm font-medium mb-2">
+                <label className="block text-gray-300 text-sm font-medium mb-2">
                   Email
                 </label>
                 <div className="relative flex items-center">
@@ -151,7 +149,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="seu@email.com"
-                    className="w-full bg-gray-700/50 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
+                    className="w-full bg-gray-800/50 border border-gray-700 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
                     disabled={loading}
                   />
                 </div>
@@ -159,7 +157,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
 
               {/* Instagram Input */}
               <div className="relative">
-                <label className="block text-gray-700 text-sm font-medium mb-2">
+                <label className="block text-gray-300 text-sm font-medium mb-2">
                   Instagram
                 </label>
                 <div className="relative flex items-center">
@@ -169,7 +167,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
                     value={instagram}
                     onChange={(e) => setInstagram(e.target.value)}
                     placeholder="@seu_usuario"
-                    className="w-full bg-gray-700/50 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
+                    className="w-full bg-gray-800/50 border border-gray-700 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
                     disabled={loading}
                   />
                 </div>
@@ -177,7 +175,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
 
               {/* Erro */}
               {error && (
-                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-red-600 text-sm">
+                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-red-400 text-sm">
                   {error}
                 </div>
               )}
@@ -195,7 +193,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
               <button
                 type="button"
                 onClick={onClose}
-                className="w-full text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors flex flex-col items-center gap-3 py-2"
+                className="w-full text-gray-400 hover:text-gray-300 text-sm font-medium transition-colors flex flex-col items-center gap-3 py-2"
               >
                 <span>Pular por enquanto</span>
                 <img 
@@ -222,8 +220,8 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
           )}
 
           {/* Info */}
-          <div className="px-6 pb-4 text-center border-t border-gray-400/30">
-            <p className="text-gray-600 text-xs mt-4">
+          <div className="px-6 pb-4 text-center border-t border-gray-800/50">
+            <p className="text-gray-500 text-xs mt-4">
               Nós respeitamos sua privacidade. Sem spam.
             </p>
           </div>
