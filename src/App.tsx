@@ -30,23 +30,13 @@ function App() {
 
     document.body.style.fontFamily = "'Roboto', sans-serif";
 
-    // Mostrar popup de pré-save ao carregar a página (apenas uma vez por sessão)
-    const hasShownPreSavePopup = sessionStorage.getItem('preSavePopupShown');
-    if (!hasShownPreSavePopup) {
-      // Aguardar 1 segundo para melhor UX
-      const timer = setTimeout(() => {
-        setIsPreSavePopupOpen(true);
-        sessionStorage.setItem('preSavePopupShown', 'true');
-      }, 1000);
-      
-      return () => {
-        clearTimeout(timer);
-        document.head.removeChild(fontLink);
-        document.body.style.fontFamily = '';
-      };
-    }
+    // Mostrar popup de pré-save ao carregar a página
+    const timer = setTimeout(() => {
+      setIsPreSavePopupOpen(true);
+    }, 500);
     
     return () => {
+      clearTimeout(timer);
       document.head.removeChild(fontLink);
       document.body.style.fontFamily = '';
     };

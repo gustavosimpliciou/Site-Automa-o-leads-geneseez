@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Mail, Instagram, Heart } from 'lucide-react';
+import { X, Mail, Instagram } from 'lucide-react';
 import ParticleAnimation from './ParticleAnimation';
 
 interface PreSavePopupProps {
@@ -198,7 +198,11 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
                 className="w-full text-gray-700 hover:text-gray-900 text-sm font-medium transition-colors flex flex-col items-center gap-3 py-2"
               >
                 <span>Pular por enquanto</span>
-                <Heart className="w-6 h-6 text-red-500 fill-red-500 animate-pulse" />
+                <img 
+                  src="/heart-brain.png" 
+                  alt="Heart and Brain" 
+                  className="w-12 h-12 animate-pulse object-contain"
+                />
               </button>
             </form>
           ) : (
