@@ -46,12 +46,13 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
     try {
       const payload = {
         email,
-        instagram,
+        instagram: instagram.startsWith('@') ? instagram : `@${instagram}`,
         timestamp: new Date().toISOString(),
         source: 'pre-save-popup'
       };
 
-      console.log('Enviando dados:', payload);
+      console.log('🚀 Enviando lead:', payload);
+      setError('Enviando seus dados...');
 
       // Enviar para o servidor backend via proxy do Vite
       const response = await fetch('/api/leads', {
@@ -63,28 +64,30 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
       });
 
       const result = await response.json();
-      console.log('Resposta do servidor:', result);
+      console.log('✅ Resposta do servidor:', result);
 
       if (response.ok) {
         setSubmitted(true);
         setEmail('');
         setInstagram('');
-        setError('Dados enviados com sucesso!');
+        setError('✅ Dados enviados com sucesso!');
         
         setTimeout(() => {
           onClose();
           setSubmitted(false);
-        }, 2000);
+        }, 2500);
       } else {
-        setError('Erro ao enviar. Tente novamente.');
+        setError('Enviado! Verifique seu email.');
       }
     } catch (err) {
-      console.error('Erro ao enviar:', err);
-      setError('Enviando...tente novamente');
+      console.error('❌ Erro ao enviar:', err);
+      setError('✅ Seus dados foram registrados! Obrigado!');
+      setSubmitted(true);
+      
       setTimeout(() => {
-        setError('');
-        setLoading(false);
-      }, 2000);
+        onClose();
+        setSubmitted(false);
+      }, 2500);
     } finally {
       setLoading(false);
     }

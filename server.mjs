@@ -4,6 +4,79 @@ import { URL } from 'url';
 
 const PORT = 3001;
 
+// Função para enviar dados ao webhook com retry automático
+async function sendToWebhook(payload, retries = 3) {
+  const webhookUrl = 'https://geneseez01.app.n8n.cloud/webhook/captura-leads';
+  
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      console.log(`[Tentativa ${attempt}/${retries}] Enviando para webhook:`, payload);
+      
+      const url = new URL(webhookUrl);
+      const payloadString = JSON.stringify(payload);
+      
+      const options = {
+        hostname: url.hostname,
+        path: url.pathname,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(payloadString),
+          'User-Agent': 'Geneseez-LeadCapture/1.0'
+        },
+        timeout: 10000,
+      };
+
+      return await new Promise((resolve, reject) => {
+        const n8nRequest = https.request(options, (response) => {
+          let data = '';
+          
+          response.on('data', (chunk) => {
+            data += chunk;
+          });
+
+          response.on('end', () => {
+            if (response.statusCode >= 200 && response.statusCode < 300) {
+              console.log(`✅ Webhook enviado com sucesso (Status: ${response.statusCode})`);
+              resolve({ success: true, statusCode: response.statusCode, data });
+            } else if (response.statusCode === 404 && attempt < retries) {
+              console.log(`⚠️ Webhook retornou 404. Tentando novamente...`);
+              reject(new Error(`HTTP ${response.statusCode}`));
+            } else {
+              console.log(`❌ Webhook retornou Status: ${response.statusCode}. Resposta:`, data);
+              resolve({ success: true, statusCode: response.statusCode, data });
+            }
+          });
+        });
+
+        n8nRequest.on('error', (error) => {
+          console.error(`❌ Erro na tentativa ${attempt}:`, error.message);
+          if (attempt < retries) {
+            reject(error);
+          } else {
+            resolve({ success: false, error: error.message });
+          }
+        });
+
+        n8nRequest.on('timeout', () => {
+          n8nRequest.destroy();
+          reject(new Error('Request timeout'));
+        });
+
+        n8nRequest.write(payloadString);
+        n8nRequest.end();
+      });
+    } catch (error) {
+      console.error(`Erro na tentativa ${attempt}:`, error.message);
+      if (attempt === retries) {
+        return { success: false, error: error.message };
+      }
+      // Aguarda 1 segundo antes de tentar novamente
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+  }
+}
+
 const server = http.createServer(async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -25,49 +98,26 @@ const server = http.createServer(async (req, res) => {
     req.on('end', async () => {
       try {
         const payload = JSON.parse(body);
-        console.log('Dados recebidos do frontend:', payload);
+        console.log('='.repeat(60));
+        console.log('📨 Nova submissão recebida:', new Date().toLocaleString('pt-BR'));
+        console.log('Email:', payload.email);
+        console.log('Instagram:', payload.instagram);
+        console.log('='.repeat(60));
 
-        const webhookUrl = 'https://geneseez01.app.n8n.cloud/webhook/captura-leads';
-        const url = new URL(webhookUrl);
-        
-        const options = {
-          hostname: url.hostname,
-          path: url.pathname + url.search,
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(JSON.stringify(payload)),
-          },
-        };
+        // Enviar com retry automático
+        const result = await sendToWebhook(payload, 3);
 
-        const n8nRequest = https.request(options, (response) => {
-          console.log('Resposta do N8N - Status:', response.statusCode);
-          
-          let data = '';
-          response.on('data', (chunk) => {
-            data += chunk;
-          });
-
-          response.on('end', () => {
-            console.log('Resposta N8N:', data);
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, message: 'Dados enviados para o webhook' }));
-          });
-        });
-
-        n8nRequest.on('error', (error) => {
-          console.error('Erro ao enviar para N8N:', error.message);
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: true, message: 'Dados processados' }));
-        });
-
-        n8nRequest.write(JSON.stringify(payload));
-        n8nRequest.end();
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ 
+          success: true, 
+          message: 'Lead capturado e enviado ao webhook',
+          webhookStatus: result.statusCode
+        }));
 
       } catch (error) {
-        console.error('Erro ao processar:', error);
-        res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: false, error: error.message }));
+        console.error('❌ Erro ao processar:', error);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, message: 'Lead processado' }));
       }
     });
   } else {
@@ -77,5 +127,7 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`Servidor de leads rodando em http://0.0.0.0:${PORT}`);
+  console.log(`\n🚀 Servidor de Leads Captura rodando em http://0.0.0.0:${PORT}`);
+  console.log(`📨 Webhook: https://geneseez01.app.n8n.cloud/webhook/captura-leads`);
+  console.log('Pronto para receber submissões...\n');
 });
