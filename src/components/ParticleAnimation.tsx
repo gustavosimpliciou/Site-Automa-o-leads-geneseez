@@ -37,14 +37,14 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
     if (!canvasRef.current || !containerRef.current) return;
 
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     const container = containerRef.current;
     const particles = particlesRef.current;
-    const maxParticles = containerMode ? 60 : 80;
-    const maxDistance = containerMode ? 150 : 250;
-    const fadeTime = 3000;
-    const particleInterval = containerMode ? 30 : 35;
-    const numActivationPoints = containerMode ? 12 : 20;
+    const maxParticles = containerMode ? 20 : 50;
+    const maxDistance = containerMode ? 100 : 200;
+    const fadeTime = 2000;
+    const particleInterval = containerMode ? 50 : 60;
+    const numActivationPoints = containerMode ? 8 : 12;
 
     let animationFrameId: number;
     let containerRect: DOMRect;
@@ -52,17 +52,16 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
     const resizeCanvas = () => {
       if (containerMode) {
         containerRect = container.getBoundingClientRect();
-        canvas.width = containerRect.width * window.devicePixelRatio;
-        canvas.height = containerRect.height * window.devicePixelRatio;
+        canvas.width = containerRect.width;
+        canvas.height = containerRect.height;
         canvas.style.width = `${containerRect.width}px`;
         canvas.style.height = `${containerRect.height}px`;
       } else {
-        canvas.width = window.innerWidth * window.devicePixelRatio;
-        canvas.height = window.innerHeight * window.devicePixelRatio;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
         canvas.style.width = `${window.innerWidth}px`;
         canvas.style.height = `${window.innerHeight}px`;
       }
-      if (ctx) ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
       
       initializeActivationPoints();
     };
@@ -187,13 +186,14 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
       const { w, h } = getContainerDimensions();
       ctx.clearRect(0, 0, w, h);
       const now = Date.now();
+      const maxDistanceSq = maxDistance * maxDistance;
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const particle = particles[i];
         const age = now - particle.createdAt;
         
         if (age > fadeTime) {
-          particle.opacity = Math.max(0, 0.8 * (1 - (age - fadeTime) / 1000));
+          particle.opacity = Math.max(0, 0.8 * (1 - (age - fadeTime) / 500));
           
           if (particle.opacity <= 0) {
             if (particle.element.parentNode) {
@@ -207,16 +207,20 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
         particle.updatePosition();
       }
 
+      if (particles.length < 3) return;
+
       ctx.lineWidth = 0.5;
+      const maxConnections = Math.min(particles.length, 10);
       
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
+      for (let i = 0; i < Math.min(particles.length, maxConnections); i++) {
+        for (let j = i + 1; j < Math.min(particles.length, maxConnections + i); j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const distanceSq = dx * dx + dy * dy;
 
-          if (distance < maxDistance) {
-            const opacity = (1 - (distance / maxDistance)) * 0.3;
+          if (distanceSq < maxDistanceSq) {
+            const distance = Math.sqrt(distanceSq);
+            const opacity = (1 - (distance / maxDistance)) * 0.2;
             const color = isDark ? `rgba(0, 0, 0, ${opacity})` : `rgba(255, 255, 255, ${opacity})`;
             ctx.strokeStyle = color;
             ctx.beginPath();
