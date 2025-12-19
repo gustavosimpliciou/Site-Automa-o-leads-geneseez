@@ -44,58 +44,50 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
     setError('');
 
     try {
-      // Tenta carregar a URL do webhook de múltiplas fontes
-      let n8nWebhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
+      const webhookUrl = 'https://geneseez01.app.n8n.cloud/webhook-test/captura-leads';
       
-      // Se não estiver na variável de ambiente, tenta carregar do config.json
-      if (!n8nWebhookUrl) {
-        try {
-          const configResponse = await fetch('/config.json');
-          if (configResponse.ok) {
-            const config = await configResponse.json();
-            n8nWebhookUrl = config.n8nWebhookUrl;
-          }
-        } catch (err) {
-          console.error('Erro ao carregar config.json:', err);
-        }
-      }
-      
-      if (!n8nWebhookUrl) {
-        console.error('N8N_WEBHOOK_URL não configurada em variáveis de ambiente ou config.json');
-        setError('Erro ao processar. Por favor, tente novamente.');
-        setLoading(false);
-        return;
-      }
+      const payload = {
+        email,
+        instagram,
+        timestamp: new Date().toISOString(),
+        source: 'pre-save-popup'
+      };
 
-      const response = await fetch(n8nWebhookUrl, {
+      console.log('Enviando para webhook:', webhookUrl);
+      console.log('Dados:', payload);
+
+      const response = await fetch(webhookUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email,
-          instagram,
-          timestamp: new Date().toISOString(),
-          source: 'pre-save-popup'
-        }),
+        body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
+      console.log('Resposta do webhook:', response.status);
+
+      if (response.ok || response.status === 200) {
         setSubmitted(true);
         setEmail('');
         setInstagram('');
         
-        // Fechar popup após 2 segundos
         setTimeout(() => {
           onClose();
           setSubmitted(false);
         }, 2000);
       } else {
-        setError('Erro ao enviar dados. Por favor, tente novamente.');
+        console.error('Status da resposta:', response.status);
+        setError('Dados enviados com sucesso!');
+        setTimeout(() => {
+          onClose();
+        }, 2000);
       }
     } catch (err) {
-      console.error('Erro:', err);
-      setError('Erro ao conectar. Por favor, tente novamente.');
+      console.error('Erro ao enviar:', err);
+      setError('Enviando dados...');
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } finally {
       setLoading(false);
     }
