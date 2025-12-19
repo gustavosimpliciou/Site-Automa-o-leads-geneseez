@@ -47,7 +47,7 @@ const Countdown: React.FC<CountdownProps> = ({ isHome, isPopup = false }) => {
   if (isPopup) {
     return (
       <div className="flex flex-col items-center gap-2">
-        <span className="text-gray-400 text-xs uppercase tracking-wider">Lançamento em</span>
+        <span className="text-gray-400 text-xs uppercase tracking-wider">Lançamento ÊXTASE 999</span>
         <div className="flex items-center gap-2 text-white">
           <span className="font-bold text-lg">{formatNumber(timeLeft.days)}d</span>
           <span className="text-gray-500">:</span>
@@ -64,7 +64,7 @@ const Countdown: React.FC<CountdownProps> = ({ isHome, isPopup = false }) => {
   if (isHome) {
     return (
       <div className="flex flex-col items-center gap-2 mt-8">
-        <span className="text-gray-500 text-xs uppercase tracking-wider">Lançamento em</span>
+        <span className="text-gray-500 text-xs uppercase tracking-wider">Lançamento ÊXTASE 999</span>
         <div className="flex items-center gap-3 text-white">
           <div className="flex flex-col items-center">
             <span className="text-2xl md:text-3xl font-bold">{formatNumber(timeLeft.days)}</span>
@@ -93,7 +93,7 @@ const Countdown: React.FC<CountdownProps> = ({ isHome, isPopup = false }) => {
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-cyan-500/90 via-black/90 to-cyan-500/90 backdrop-blur-sm py-2">
       <div className="container mx-auto px-4 flex items-center justify-center gap-4">
-        <span className="text-gray-300 text-xs uppercase tracking-wider hidden sm:inline">Lançamento em</span>
+        <span className="text-gray-300 text-xs uppercase tracking-wider hidden sm:inline">Lançamento ÊXTASE 999</span>
         <div className="flex items-center gap-2 text-white text-sm">
           <span className="font-bold">{formatNumber(timeLeft.days)}d</span>
           <span className="text-gray-500">:</span>
