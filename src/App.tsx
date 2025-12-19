@@ -6,12 +6,14 @@ import Projects from './components/Projects';
 import Footer from './components/Footer';
 import Origem from './components/Origem';
 import Countdown from './components/Countdown';
+import PreSavePopup from './components/PreSavePopup';
 
 type ViewType = 'home' | 'about' | 'projects' | 'origem';
 
 function App() {
   const [currentView, setCurrentView] = useState<ViewType>('home');
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isPreSavePopupOpen, setIsPreSavePopupOpen] = useState(false);
 
   useEffect(() => {
     document.title = 'Geneseez - Onde Tudo Comeca';
@@ -27,8 +29,14 @@ function App() {
     document.head.appendChild(fontLink);
 
     document.body.style.fontFamily = "'Roboto', sans-serif";
+
+    // Mostrar popup de pré-save ao carregar a página
+    const timer = setTimeout(() => {
+      setIsPreSavePopupOpen(true);
+    }, 500);
     
     return () => {
+      clearTimeout(timer);
       document.head.removeChild(fontLink);
       document.body.style.fontFamily = '';
     };
@@ -113,6 +121,11 @@ function App() {
       />
       
       {renderCurrentView()}
+      
+      <PreSavePopup 
+        isOpen={isPreSavePopupOpen}
+        onClose={() => setIsPreSavePopupOpen(false)}
+      />
     </div>
   );
 }
