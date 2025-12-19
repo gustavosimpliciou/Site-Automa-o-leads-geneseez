@@ -46,21 +46,19 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
     const particleInterval = containerMode ? 30 : 35;
     const numActivationPoints = containerMode ? 12 : 20;
 
-    let width: number;
-    let height: number;
     let animationFrameId: number;
     let containerRect: DOMRect;
 
     const resizeCanvas = () => {
       if (containerMode) {
         containerRect = container.getBoundingClientRect();
-        width = canvas.width = containerRect.width * window.devicePixelRatio;
-        height = canvas.height = containerRect.height * window.devicePixelRatio;
+        canvas.width = containerRect.width * window.devicePixelRatio;
+        canvas.height = containerRect.height * window.devicePixelRatio;
         canvas.style.width = `${containerRect.width}px`;
         canvas.style.height = `${containerRect.height}px`;
       } else {
-        width = canvas.width = window.innerWidth * window.devicePixelRatio;
-        height = canvas.height = window.innerHeight * window.devicePixelRatio;
+        canvas.width = window.innerWidth * window.devicePixelRatio;
+        canvas.height = window.innerHeight * window.devicePixelRatio;
         canvas.style.width = `${window.innerWidth}px`;
         canvas.style.height = `${window.innerHeight}px`;
       }
