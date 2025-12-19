@@ -127,7 +127,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
           </button>
 
           {/* Header */}
-          <div className="px-6 pt-8 pb-6">
+          <div className="px-6 pt-8 pb-6 text-center">
             <h2 className="text-white text-3xl font-bold mb-2">PRÉ-SAVE</h2>
             <p className="text-gray-300 text-sm">
               Seja o primeiro a escutar nossos novos lançamentos
