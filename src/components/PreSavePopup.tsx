@@ -53,8 +53,8 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
 
       console.log('Enviando dados:', payload);
 
-      // Enviar para o servidor backend local que repassa para N8N
-      const response = await fetch('http://localhost:3001/api/leads', {
+      // Enviar para o servidor backend via proxy do Vite
+      const response = await fetch('/api/leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
