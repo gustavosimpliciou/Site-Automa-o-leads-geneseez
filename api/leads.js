@@ -1,5 +1,5 @@
-import https from 'https';
-import { URL } from 'url';
+const https = require('https');
+const { URL } = require('url');
 
 // Função para enviar dados ao webhook com retry automático
 async function sendToWebhook(payload, retries = 3) {
@@ -73,7 +73,7 @@ async function sendToWebhook(payload, retries = 3) {
   }
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
