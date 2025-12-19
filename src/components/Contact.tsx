@@ -5,6 +5,7 @@ interface ContactFormData {
   name: string;
   email: string;
   phone: string;
+  instagram: string;
   subject: string;
   message: string;
 }
@@ -19,6 +20,7 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
     name: '',
     email: '',
     phone: '',
+    instagram: '',
     subject: 'duvidas',
     message: ''
   });
@@ -32,14 +34,36 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        console.log('Dados enviados com sucesso:', formData);
+        alert('Mensagem enviada com sucesso!');
+      } else {
+        console.error('Erro ao enviar dados');
+        alert('Erro ao enviar mensagem. Tente novamente.');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar para o servidor:', error);
+      alert('Erro ao enviar mensagem. Tente novamente.');
+    }
+
     onClose();
     setFormData({
       name: '',
       email: '',
       phone: '',
+      instagram: '',
       subject: 'duvidas',
       message: ''
     });
@@ -161,6 +185,21 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
                   </div>
 
                   <div>
+                    <label htmlFor="instagram" className="block text-gray-700 font-medium mb-2">
+                      Instagram
+                    </label>
+                    <input
+                      type="text"
+                      id="instagram"
+                      name="instagram"
+                      value={formData.instagram}
+                      onChange={handleChange}
+                      placeholder="@seu_usuario"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                    />
+                  </div>
+
+                  <div>
                     <label htmlFor="subject" className="block text-gray-700 font-medium mb-2">
                       Assunto
                     </label>
@@ -265,6 +304,21 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
                     onChange={handleChange}
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                     required
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="modal-instagram" className="block text-gray-700 font-medium mb-2">
+                    Instagram
+                  </label>
+                  <input
+                    type="text"
+                    id="modal-instagram"
+                    name="instagram"
+                    value={formData.instagram}
+                    onChange={handleChange}
+                    placeholder="@seu_usuario"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                   />
                 </div>
 

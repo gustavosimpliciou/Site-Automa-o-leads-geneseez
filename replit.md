@@ -85,15 +85,22 @@ npm run start   # Preview production build
 - All changes are responsive and work across desktop/mobile
 
 ## Latest Changes (December 19, 2024 - Production Migration)
-- **Lead Capture Integration**: When user clicks "OUVIR ALBUM":
-  - Opens PreSavePopup (email + instagram form)
-  - Sends data to N8N webhook: https://geneseez01.app.n8n.cloud/webhook/captura-leads
-  - Form includes timestamp and source tracking
-- **Environment Configuration**:
-  - Added VITE_N8N_WEBHOOK_URL environment variable
-  - Implemented fallback to config.json for production deployments
-  - PreSavePopup now tries multiple sources for webhook URL
+- **Lead Capture Integration Complete**: ✅
+  - **Pre-Save Popup**: Appears automatically on page load (email + instagram)
+  - **Contact Form**: Full form with all fields (name, email, phone, instagram, subject, message)
+  - **N8N Webhook**: https://geneseez01.app.n8n.cloud/webhook/captura-leads
+  - **Backend Server**: Node.js server on port 3001 handles all requests
+  - **Vite Proxy**: Configured to route /api calls to backend
+- **Data Flow**:
+  - Frontend Form → Vite Proxy (/api/leads) → Node.js Server → N8N Webhook → Google Sheets
+  - All form submissions include email and Instagram data
+  - Automatic timestamp and source tracking
+- **Technical Configuration**:
+  - Backend: `server.mjs` - handles POST requests, sends to webhook
+  - Frontend: `Contact.tsx` - contact form with Instagram field
+  - PreSave: `PreSavePopup.tsx` - lead capture popup (working)
+  - Proxy: `vite.config.ts` - routes /api to localhost:3001
 - **Documentation**:
-  - Created DEPLOYMENT_SETUP.md with production configuration guide
-  - Created .env.example and public/config.example.json
-  - Updated .gitignore to protect config.json and .env files
+  - Created WEBHOOK_INTEGRATION.md with complete setup guide
+  - All files are ready for production
+  - Webhook URL must be active in N8N dashboard

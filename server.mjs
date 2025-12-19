@@ -27,7 +27,7 @@ const server = http.createServer(async (req, res) => {
         const payload = JSON.parse(body);
         console.log('Dados recebidos do frontend:', payload);
 
-        const webhookUrl = 'https://geneseez01.app.n8n.cloud/webhook-test/captura-leads';
+        const webhookUrl = 'https://geneseez01.app.n8n.cloud/webhook/captura-leads';
         const url = new URL(webhookUrl);
         
         const options = {
