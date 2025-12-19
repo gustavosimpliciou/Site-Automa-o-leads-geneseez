@@ -4,30 +4,27 @@ import { URL } from 'url';
 
 const PORT = 3001;
 
-// Função para enviar dados ao webhook com retry automático (GET method)
+// Função para enviar dados ao webhook com retry automático (POST method com JSON body)
 async function sendToWebhook(payload, retries = 3) {
   const webhookUrl = 'https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b';
   
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
-      console.log(`[Tentativa ${attempt}/${retries}] Enviando para webhook (GET):`, payload);
+      console.log(`[Tentativa ${attempt}/${retries}] Enviando para webhook (POST):`, payload);
       
       const url = new URL(webhookUrl);
-      
-      // Adicionar dados como query parameters
-      url.searchParams.append('email', payload.email);
-      url.searchParams.append('instagram', payload.instagram);
-      url.searchParams.append('timestamp', payload.timestamp);
-      url.searchParams.append('source', payload.source);
+      const bodyJSON = JSON.stringify(payload);
       
       const options = {
         hostname: url.hostname,
-        path: url.pathname + url.search,
-        method: 'GET',
+        path: url.pathname,
+        method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(bodyJSON),
           'User-Agent': 'Geneseez-LeadCapture/1.0'
         },
-        timeout: 10000,
+        timeout: 15000,
       };
 
       return await new Promise((resolve, reject) => {
@@ -66,6 +63,7 @@ async function sendToWebhook(payload, retries = 3) {
           reject(new Error('Request timeout'));
         });
 
+        n8nRequest.write(bodyJSON);
         n8nRequest.end();
       });
     } catch (error) {
