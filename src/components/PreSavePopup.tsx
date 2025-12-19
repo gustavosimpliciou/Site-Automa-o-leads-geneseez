@@ -178,9 +178,13 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Erro */}
+              {/* Mensagem */}
               {error && (
-                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-red-400 text-sm">
+                <div className={`rounded-lg p-3 text-sm ${
+                  error === 'Dados enviados com sucesso!'
+                    ? 'bg-green-500/10 border border-green-500/30 text-green-400'
+                    : 'bg-red-500/10 border border-red-500/30 text-red-400'
+                }`}>
                   {error}
                 </div>
               )}
