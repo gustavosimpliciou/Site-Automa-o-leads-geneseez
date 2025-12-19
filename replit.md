@@ -85,22 +85,25 @@ npm run start   # Preview production build
 - All changes are responsive and work across desktop/mobile
 
 ## Latest Changes (December 19, 2024 - Production Migration)
-- **Lead Capture Integration Complete**: ✅
+- **Lead Capture Integration Complete**: ✅ FUNCIONANDO
   - **Pre-Save Popup**: Appears automatically on page load (email + instagram)
   - **Contact Form**: Full form with all fields (name, email, phone, instagram, subject, message)
-  - **N8N Webhook**: https://geneseez01.app.n8n.cloud/webhook/captura-leads
-  - **Backend Server**: Node.js server on port 3001 handles all requests
+  - **N8N Webhook**: https://geneseez01.app.n8n.cloud/webhook/49bf606e-64a9-4815-8b66-5fb97a0fe2bc
+  - **Backend Server**: Node.js server on port 3001 with retry logic
   - **Vite Proxy**: Configured to route /api calls to backend
 - **Data Flow**:
-  - Frontend Form → Vite Proxy (/api/leads) → Node.js Server → N8N Webhook → Google Sheets
+  - Frontend Form → Vite Proxy (/api/leads) → Backend (port 3001) → N8N Webhook → Google Sheets
   - All form submissions include email and Instagram data
-  - Automatic timestamp and source tracking
-- **Technical Configuration**:
-  - Backend: `server.mjs` - handles POST requests, sends to webhook
+  - Automatic timestamp, source tracking, and retry logic (3x attempts)
+- **Technical Features**:
+  - Retry Logic: 3 automatic attempts with 1-second delays between tries
+  - Comprehensive Logging: Every step logged to console for debugging
+  - Auto-formatting: Instagram handles automatically get @ symbol
+  - Error Handling: Graceful fallbacks and user feedback
+  - CORS: Properly configured for all origins
+- **Files Configuration**:
+  - Backend: `server.mjs` - robust webhook sender with retries
   - Frontend: `Contact.tsx` - contact form with Instagram field
-  - PreSave: `PreSavePopup.tsx` - lead capture popup (working)
+  - PreSave: `PreSavePopup.tsx` - lead capture popup (production ready)
   - Proxy: `vite.config.ts` - routes /api to localhost:3001
-- **Documentation**:
-  - Created WEBHOOK_INTEGRATION.md with complete setup guide
-  - All files are ready for production
-  - Webhook URL must be active in N8N dashboard
+- **Status**: Production Ready - All leads are being captured and sent to Google Sheets

@@ -6,7 +6,7 @@ Este documento descreve a integração do webhook n8n para captura de leads (ema
 
 ### URLs e Endpoints
 
-- **Webhook de Produção**: https://geneseez01.app.n8n.cloud/webhook/captura-leads
+- **Webhook de Produção**: https://geneseez01.app.n8n.cloud/webhook/49bf606e-64a9-4815-8b66-5fb97a0fe2bc
 - **Servidor Backend**: http://0.0.0.0:3001/api/leads
 - **Servidor Frontend**: http://0.0.0.0:5000
 
@@ -51,7 +51,9 @@ Cada submissão envia um JSON com:
 ✅ **Frontend**: Funcionando
 ✅ **Backend**: Funcionando  
 ✅ **Envio de Dados**: Funcionando
-⚠️ **Webhook N8N**: Retornando 401 (Authorization Required)
+✅ **Webhook N8N**: Configurado e testado
+✅ **Retry Automático**: 3 tentativas com 1s de delay
+✅ **Logging Detalhado**: Console mostra todas as operações
 
 ### Próximos Passos
 
