@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 
 interface CountdownProps {
   isHome: boolean;
+  isPopup?: boolean;
 }
 
-const Countdown: React.FC<CountdownProps> = ({ isHome }) => {
+const Countdown: React.FC<CountdownProps> = ({ isHome, isPopup = false }) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -42,6 +43,23 @@ const Countdown: React.FC<CountdownProps> = ({ isHome }) => {
   }, []);
 
   const formatNumber = (num: number) => String(num).padStart(2, '0');
+
+  if (isPopup) {
+    return (
+      <div className="flex flex-col items-center gap-2">
+        <span className="text-gray-400 text-xs uppercase tracking-wider">Lançamento em</span>
+        <div className="flex items-center gap-2 text-white">
+          <span className="font-bold text-lg">{formatNumber(timeLeft.days)}d</span>
+          <span className="text-gray-500">:</span>
+          <span className="font-bold text-lg">{formatNumber(timeLeft.hours)}h</span>
+          <span className="text-gray-500">:</span>
+          <span className="font-bold text-lg">{formatNumber(timeLeft.minutes)}m</span>
+          <span className="text-gray-500">:</span>
+          <span className="font-bold text-lg">{formatNumber(timeLeft.seconds)}s</span>
+        </div>
+      </div>
+    );
+  }
 
   if (isHome) {
     return (
