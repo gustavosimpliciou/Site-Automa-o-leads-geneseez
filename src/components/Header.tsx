@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Menu, X, ArrowLeft } from 'lucide-react';
 
 type ViewType = 'home' | 'about' | 'projects' | 'origem';
@@ -8,20 +8,23 @@ interface HeaderProps {
   currentView: ViewType;
 }
 
-const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
+const HeaderComponent: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -139,4 +142,5 @@ const Header: React.FC<HeaderProps> = ({ onViewChange, currentView }) => {
   );
 };
 
+const Header = memo(HeaderComponent);
 export default Header;
