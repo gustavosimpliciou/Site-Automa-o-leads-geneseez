@@ -54,19 +54,24 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
       console.log('🚀 Enviando lead:', payload);
       setError('Enviando seus dados...');
 
-      // Enviar para o servidor backend via proxy do Vite
+      // Enviar para o servidor backend
       const response = await fetch('/api/leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
+        timeout: 10000
       });
+
+      if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+      }
 
       const result = await response.json();
       console.log('✅ Resposta do servidor:', result);
 
-      if (response.ok) {
+      if (result.success) {
         setSubmitted(true);
         setEmail('');
         setInstagram('');
@@ -77,18 +82,12 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
           setSubmitted(false);
         }, 2500);
       } else {
-        setError('Enviado! Verifique seu email.');
+        setError('❌ Erro ao enviar. Tente novamente.');
+        setLoading(false);
       }
     } catch (err) {
       console.error('❌ Erro ao enviar:', err);
-      setError('✅ Seus dados foram registrados! Obrigado!');
-      setSubmitted(true);
-      
-      setTimeout(() => {
-        onClose();
-        setSubmitted(false);
-      }, 2500);
-    } finally {
+      setError('❌ Falha na conexão. Verifique sua internet e tente novamente.');
       setLoading(false);
     }
   };

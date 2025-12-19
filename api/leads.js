@@ -84,9 +84,17 @@ export default async function handler(req, res) {
     return;
   }
 
-  if (req.method === 'POST' && req.url === '/api/leads') {
+  if (req.method === 'POST') {
     try {
       const payload = req.body;
+      
+      if (!payload.email || !payload.instagram) {
+        return res.status(400).json({ 
+          success: false, 
+          message: 'Email e Instagram são obrigatórios' 
+        });
+      }
+
       console.log('='.repeat(60));
       console.log('📨 Nova submissão recebida:', new Date().toLocaleString('pt-BR'));
       console.log('Email:', payload.email);
@@ -95,14 +103,26 @@ export default async function handler(req, res) {
 
       const result = await sendToWebhook(payload, 3);
 
-      res.status(200).json({ 
-        success: true, 
-        message: 'Lead capturado e enviado ao webhook',
-        webhookStatus: result.statusCode
-      });
+      if (result.success) {
+        res.status(200).json({ 
+          success: true, 
+          message: 'Lead capturado e enviado ao webhook',
+          webhookStatus: result.statusCode
+        });
+      } else {
+        res.status(500).json({ 
+          success: false, 
+          message: 'Erro ao enviar webhook',
+          error: result.error
+        });
+      }
     } catch (error) {
       console.error('❌ Erro ao processar:', error);
-      res.status(200).json({ success: true, message: 'Lead processado' });
+      res.status(500).json({ 
+        success: false, 
+        message: 'Erro ao processar requisição',
+        error: error.message
+      });
     }
   } else {
     res.status(404).json({ error: 'Not Found' });
