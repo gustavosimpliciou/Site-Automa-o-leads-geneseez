@@ -199,11 +199,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
                 <img 
                   src="/heart-brain.png" 
                   alt="Heart and Brain" 
-                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 animate-pulse object-contain"
-                  style={{ 
-                    imageRendering: 'crisp-edges',
-                    filter: 'contrast(1.1)'
-                  }}
+                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-14 md:h-14 animate-pulse object-contain"
                 />
               </button>
             </form>
