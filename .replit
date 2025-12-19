@@ -39,4 +39,4 @@ externalPort = 80
 [userenv]
 
 [userenv.shared]
-VITE_N8N_WEBHOOK_URL = "https://geneseez01.app.n8n.cloud/webhook/captura-leads"
+VITE_N8N_WEBHOOK_URL = "https://geneseez01.app.n8n.cloud/webhook-test/captura-leads"
