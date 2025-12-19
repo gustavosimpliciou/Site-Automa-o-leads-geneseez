@@ -22,4 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment and Configuration
 .env
+.env.local
+public/config.json

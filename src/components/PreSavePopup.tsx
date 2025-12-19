@@ -44,11 +44,24 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
     setError('');
 
     try {
-      // Substitua pela sua URL do n8n webhook
-      const n8nWebhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL || '';
+      // Tenta carregar a URL do webhook de múltiplas fontes
+      let n8nWebhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
+      
+      // Se não estiver na variável de ambiente, tenta carregar do config.json
+      if (!n8nWebhookUrl) {
+        try {
+          const configResponse = await fetch('/config.json');
+          if (configResponse.ok) {
+            const config = await configResponse.json();
+            n8nWebhookUrl = config.n8nWebhookUrl;
+          }
+        } catch (err) {
+          console.error('Erro ao carregar config.json:', err);
+        }
+      }
       
       if (!n8nWebhookUrl) {
-        console.error('N8N_WEBHOOK_URL não configurada');
+        console.error('N8N_WEBHOOK_URL não configurada em variáveis de ambiente ou config.json');
         setError('Erro ao processar. Por favor, tente novamente.');
         setLoading(false);
         return;
