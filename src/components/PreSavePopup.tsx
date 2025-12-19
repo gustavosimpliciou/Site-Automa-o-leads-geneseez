@@ -22,6 +22,12 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
       window.scrollTo({ top: 0, behavior: 'instant' });
     } else {
       document.body.style.overflow = '';
+      // Reseta o formulário quando fecha o popup
+      setEmail('');
+      setInstagram('');
+      setLoading(false);
+      setSubmitted(false);
+      setError('');
     }
     return () => {
       document.body.style.overflow = '';
@@ -73,14 +79,14 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
       console.log('✅ Resposta do servidor:', result);
 
       if (result.success) {
-        setSubmitted(true);
-        setEmail('');
-        setInstagram('');
         setError('✅ Dados enviados com sucesso!');
+        setLoading(false);
         
         setTimeout(() => {
+          setEmail('');
+          setInstagram('');
+          setError('');
           onClose();
-          setSubmitted(false);
         }, 2500);
       } else {
         setError('❌ Erro ao enviar. Tente novamente.');
@@ -183,9 +189,9 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
 
               {/* Mensagem */}
               {error && (
-                <div className={`rounded-lg p-3 text-sm ${
-                  error === 'Dados enviados com sucesso!'
-                    ? 'bg-green-500/10 border border-green-500/30 text-green-400'
+                <div className={`rounded-lg p-3 text-sm font-medium ${
+                  error.includes('Dados enviados com sucesso')
+                    ? 'bg-green-500/30 border border-green-400 text-green-200'
                     : 'bg-red-500/10 border border-red-500/30 text-red-400'
                 }`}>
                   {error}
