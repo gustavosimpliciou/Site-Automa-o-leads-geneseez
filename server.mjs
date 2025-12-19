@@ -6,7 +6,7 @@ const PORT = 3001;
 
 // Função para enviar dados ao webhook com retry automático
 async function sendToWebhook(payload, retries = 3) {
-  const webhookUrl = 'https://geneseez01.app.n8n.cloud/webhook/49bf606e-64a9-4815-8b66-5fb97a0fe2bc';
+  const webhookUrl = 'https://geneseez01.app.n8n.cloud/webhook-test/49bf606e-64a9-4815-8b66-5fb97a0fe2bc';
   
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {

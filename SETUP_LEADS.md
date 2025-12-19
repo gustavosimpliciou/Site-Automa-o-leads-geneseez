@@ -1,6 +1,11 @@
 # 🚀 Setup Completo - Captura de Leads Geneseez
 
-## URL do Webhook (FINAL)
+## URL do Webhook (AMBIENTE DE TESTE)
+```
+https://geneseez01.app.n8n.cloud/webhook-test/49bf606e-64a9-4815-8b66-5fb97a0fe2bc
+```
+
+## URL do Webhook (PRODUÇÃO - quando estiver pronto)
 ```
 https://geneseez01.app.n8n.cloud/webhook/49bf606e-64a9-4815-8b66-5fb97a0fe2bc
 ```
@@ -105,7 +110,12 @@ No terminal (logs do backend):
 
 **Passo 3**: Teste manualmente
 ```bash
-# Envie uma requisição manual:
+# Envie uma requisição manual (TESTE):
+curl -X POST https://geneseez01.app.n8n.cloud/webhook-test/49bf606e-64a9-4815-8b66-5fb97a0fe2bc \
+  -H "Content-Type: application/json" \
+  -d '{"email":"teste@example.com","instagram":"@teste"}'
+
+# Para produção (quando pronto):
 curl -X POST https://geneseez01.app.n8n.cloud/webhook/49bf606e-64a9-4815-8b66-5fb97a0fe2bc \
   -H "Content-Type: application/json" \
   -d '{"email":"teste@example.com","instagram":"@teste"}'
