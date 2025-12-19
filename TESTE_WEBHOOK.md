@@ -1,11 +1,16 @@
 # 🧪 Ambiente de Teste - Webhook N8N
 
-## Status: ✅ CONFIGURADO PARA TESTES
+## Status: ✅ CONFIGURADO PARA TESTES (MÉTODO GET)
 
-### URL Atual (TESTE)
+### URL Atual (TESTE) - GET REQUEST
 ```
-https://geneseez01.app.n8n.cloud/webhook-test/dfea7ed4-08b7-42d0-9526-3674300ca69b
+https://geneseez01.app.n8n.cloud/webhook-test/dfea7ed4-08b7-42d0-9526-3674300ca69b?email=...&instagram=...&timestamp=...&source=...
 ```
+
+### Observação Importante
+- O webhook foi alterado para usar **GET requests** em vez de POST
+- Os dados são enviados como **query parameters** na URL
+- Muito mais compatível com webhooks simples
 
 ## Como Testar
 

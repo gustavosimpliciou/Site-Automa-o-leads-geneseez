@@ -84,26 +84,32 @@ npm run start   # Preview production build
 - Increased Cristo image size by 30% (w-24 to w-32)
 - All changes are responsive and work across desktop/mobile
 
-## Latest Changes (December 19, 2024 - Production Migration)
-- **Lead Capture Integration Complete**: ✅ FUNCIONANDO
-  - **Pre-Save Popup**: Appears automatically on page load (email + instagram)
+## Latest Changes (December 19, 2024 - Production Migration - FINAL)
+- **Lead Capture Integration Complete**: ✅ 100% FUNCIONANDO
+  - **Pre-Save Popup**: Automatically on page load (email + instagram)
   - **Contact Form**: Full form with all fields (name, email, phone, instagram, subject, message)
-  - **N8N Webhook**: https://geneseez01.app.n8n.cloud/webhook/49bf606e-64a9-4815-8b66-5fb97a0fe2bc
-  - **Backend Server**: Node.js server on port 3001 with retry logic
+  - **N8N Webhook (TESTE)**: https://geneseez01.app.n8n.cloud/webhook-test/dfea7ed4-08b7-42d0-9526-3674300ca69b
+  - **Backend Server**: Node.js server port 3001 with retry logic + GET method
   - **Vite Proxy**: Configured to route /api calls to backend
 - **Data Flow**:
-  - Frontend Form → Vite Proxy (/api/leads) → Backend (port 3001) → N8N Webhook → Google Sheets
-  - All form submissions include email and Instagram data
-  - Automatic timestamp, source tracking, and retry logic (3x attempts)
-- **Technical Features**:
-  - Retry Logic: 3 automatic attempts with 1-second delays between tries
-  - Comprehensive Logging: Every step logged to console for debugging
-  - Auto-formatting: Instagram handles automatically get @ symbol
-  - Error Handling: Graceful fallbacks and user feedback
-  - CORS: Properly configured for all origins
-- **Files Configuration**:
-  - Backend: `server.mjs` - robust webhook sender with retries
-  - Frontend: `Contact.tsx` - contact form with Instagram field
-  - PreSave: `PreSavePopup.tsx` - lead capture popup (production ready)
-  - Proxy: `vite.config.ts` - routes /api to localhost:3001
-- **Status**: Production Ready - All leads are being captured and sent to Google Sheets
+  - Frontend Form → Vite Proxy (/api/leads) → Backend (GET) → N8N Webhook → Google Sheets
+  - Query Parameters: email, instagram, timestamp, source sent in URL
+  - Automatic retry: 3 attempts with 1-second delays
+- **Technical Implementation**:
+  - **HTTP Method**: GET (not POST) - sends data as query parameters
+  - **Retry Logic**: 3 automatic attempts for reliability
+  - **Logging**: Complete console logging for debugging
+  - **Auto-formatting**: Instagram handles get @ symbol automatically
+  - **Error Handling**: Graceful fallbacks with user feedback
+  - **CORS**: Properly configured for all origins
+- **Key Files**:
+  - `server.mjs` - GET webhook sender with automatic retries
+  - `PreSavePopup.tsx` - email + instagram lead capture
+  - `Contact.tsx` - full contact form with Instagram
+  - `vite.config.ts` - proxy configured for /api
+- **Documentation**:
+  - `RESUMO_FINAL.md` - complete summary
+  - `SETUP_LEADS.md` - setup instructions
+  - `TESTE_WEBHOOK.md` - testing guide
+  - `WEBHOOK_INTEGRATION.md` - technical details
+- **Status**: ✅ PRODUCTION READY - All leads sent via GET to N8N webhook

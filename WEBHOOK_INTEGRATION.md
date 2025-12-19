@@ -51,10 +51,11 @@ Cada submissão envia um JSON com:
 
 ✅ **Frontend**: Funcionando
 ✅ **Backend**: Funcionando  
-✅ **Envio de Dados**: Funcionando
-✅ **Webhook N8N**: Configurado e testado
+✅ **Envio de Dados**: Funcionando via GET
+✅ **Webhook N8N**: Configurado para GET requests
 ✅ **Retry Automático**: 3 tentativas com 1s de delay
 ✅ **Logging Detalhado**: Console mostra todas as operações
+✅ **Query Parameters**: Email, Instagram, Timestamp, Source enviados na URL
 
 ### Próximos Passos
 
