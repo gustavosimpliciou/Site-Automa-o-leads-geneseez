@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Play, Pause, Heart, MoreHorizontal, Clock, Music2 } from 'lucide-react';
 import AlbumPopup from './AlbumPopup';
+import PreSavePopup from './PreSavePopup';
 import GlobeMap from './GlobeMap';
 
 interface Track {
@@ -22,6 +23,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
   const [liked, setLiked] = useState(false);
   const [titleVisible, setTitleVisible] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showPreSavePopup, setShowPreSavePopup] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -230,7 +232,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
           <div className="px-6 md:px-8 pb-8">
             <button 
               id="listen-album-btn"
-              onClick={() => setShowPopup(true)}
+              onClick={() => setShowPreSavePopup(true)}
               className="block w-full bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-8 rounded-full text-center uppercase tracking-wider transition-all duration-300 hover:scale-[1.02]"
             >
               OUVIR ALBUM
@@ -239,6 +241,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
         </div>
 
         <AlbumPopup isOpen={showPopup} onClose={() => setShowPopup(false)} onListenClick={onHomeClick} />
+        <PreSavePopup isOpen={showPreSavePopup} onClose={() => setShowPreSavePopup(false)} />
 
         {showCristo && (
           <div className="max-w-4xl mx-auto mt-12 flex justify-center">

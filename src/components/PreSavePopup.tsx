@@ -44,45 +44,47 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
     setError('');
 
     try {
-      // Substitua pela sua URL do n8n webhook
-      const n8nWebhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL || '';
-      
-      if (!n8nWebhookUrl) {
-        console.error('N8N_WEBHOOK_URL não configurada');
-        setError('Erro ao processar. Por favor, tente novamente.');
-        setLoading(false);
-        return;
-      }
+      const payload = {
+        email,
+        instagram,
+        timestamp: new Date().toISOString(),
+        source: 'pre-save-popup'
+      };
 
-      const response = await fetch(n8nWebhookUrl, {
+      console.log('Enviando dados:', payload);
+
+      // Enviar para o servidor backend via proxy do Vite
+      const response = await fetch('/api/leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email,
-          instagram,
-          timestamp: new Date().toISOString(),
-          source: 'pre-save-popup'
-        }),
+        body: JSON.stringify(payload),
       });
+
+      const result = await response.json();
+      console.log('Resposta do servidor:', result);
 
       if (response.ok) {
         setSubmitted(true);
         setEmail('');
         setInstagram('');
+        setError('Dados enviados com sucesso!');
         
-        // Fechar popup após 2 segundos
         setTimeout(() => {
           onClose();
           setSubmitted(false);
         }, 2000);
       } else {
-        setError('Erro ao enviar dados. Por favor, tente novamente.');
+        setError('Erro ao enviar. Tente novamente.');
       }
     } catch (err) {
-      console.error('Erro:', err);
-      setError('Erro ao conectar. Por favor, tente novamente.');
+      console.error('Erro ao enviar:', err);
+      setError('Enviando...tente novamente');
+      setTimeout(() => {
+        setError('');
+        setLoading(false);
+      }, 2000);
     } finally {
       setLoading(false);
     }
@@ -127,7 +129,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
           </button>
 
           {/* Header */}
-          <div className="px-6 pt-8 pb-6">
+          <div className="px-6 pt-8 pb-6 text-center">
             <h2 className="text-white text-3xl font-bold mb-2">PRÉ-SAVE</h2>
             <p className="text-gray-300 text-sm">
               Seja o primeiro a escutar nossos novos lançamentos
@@ -173,9 +175,13 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Erro */}
+              {/* Mensagem */}
               {error && (
-                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-red-400 text-sm">
+                <div className={`rounded-lg p-3 text-sm ${
+                  error === 'Dados enviados com sucesso!'
+                    ? 'bg-green-500/10 border border-green-500/30 text-green-400'
+                    : 'bg-red-500/10 border border-red-500/30 text-red-400'
+                }`}>
                   {error}
                 </div>
               )}
@@ -199,7 +205,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
                 <img 
                   src="/heart-brain.png" 
                   alt="Heart and Brain" 
-                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-14 md:h-14 animate-pulse object-contain"
+                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-20 md:h-20 animate-pulse object-contain"
                 />
               </button>
             </form>

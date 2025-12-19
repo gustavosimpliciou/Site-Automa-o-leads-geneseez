@@ -83,3 +83,17 @@ npm run start   # Preview production build
   - Responsive design for all screen sizes
 - Increased Cristo image size by 30% (w-24 to w-32)
 - All changes are responsive and work across desktop/mobile
+
+## Latest Changes (December 19, 2024 - Production Migration)
+- **Lead Capture Integration**: When user clicks "OUVIR ALBUM":
+  - Opens PreSavePopup (email + instagram form)
+  - Sends data to N8N webhook: https://geneseez01.app.n8n.cloud/webhook/captura-leads
+  - Form includes timestamp and source tracking
+- **Environment Configuration**:
+  - Added VITE_N8N_WEBHOOK_URL environment variable
+  - Implemented fallback to config.json for production deployments
+  - PreSavePopup now tries multiple sources for webhook URL
+- **Documentation**:
+  - Created DEPLOYMENT_SETUP.md with production configuration guide
+  - Created .env.example and public/config.example.json
+  - Updated .gitignore to protect config.json and .env files

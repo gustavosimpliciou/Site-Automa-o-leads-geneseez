@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
-import Origem from './components/Origem';
 import Countdown from './components/Countdown';
 import PreSavePopup from './components/PreSavePopup';
+
+const Origem = lazy(() => import('./components/Origem'));
 
 type ViewType = 'home' | 'about' | 'projects' | 'origem';
 
@@ -18,27 +19,13 @@ function App() {
   useEffect(() => {
     document.title = 'Geneseez - Onde Tudo Comeca';
     
-    const link = document.querySelector("link[rel='icon']") as HTMLLinkElement;
-    if (link) {
-      link.href = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 3c4.971 0 9 4.029 9 9s-4.029 9-9 9-9-4.029-9-9 4.029-9 9-9z"/></svg>';
-    }
-
-    const fontLink = document.createElement('link');
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap';
-    fontLink.rel = 'stylesheet';
-    document.head.appendChild(fontLink);
-
-    document.body.style.fontFamily = "'Roboto', sans-serif";
-
     // Mostrar popup de pré-save ao carregar a página
     const timer = setTimeout(() => {
       setIsPreSavePopupOpen(true);
-    }, 500);
+    }, 1500);
     
     return () => {
       clearTimeout(timer);
-      document.head.removeChild(fontLink);
-      document.body.style.fontFamily = '';
     };
   }, []);
 
@@ -96,7 +83,9 @@ function App() {
       case 'origem':
         return (
           <div className={transitionClasses}>
-            <Origem />
+            <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Carregando...</div>}>
+              <Origem />
+            </Suspense>
           </div>
         );
       

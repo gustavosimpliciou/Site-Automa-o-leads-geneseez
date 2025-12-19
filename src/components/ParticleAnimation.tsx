@@ -40,11 +40,11 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
     const ctx = canvas.getContext('2d', { alpha: true });
     const container = containerRef.current;
     const particles = particlesRef.current;
-    const maxParticles = containerMode ? 20 : 50;
-    const maxDistance = containerMode ? 100 : 200;
-    const fadeTime = 2000;
-    const particleInterval = containerMode ? 50 : 60;
-    const numActivationPoints = containerMode ? 8 : 12;
+    const maxParticles = containerMode ? 10 : 25;
+    const maxDistance = containerMode ? 80 : 150;
+    const fadeTime = 1500;
+    const particleInterval = containerMode ? 80 : 120;
+    const numActivationPoints = containerMode ? 4 : 6;
 
     let animationFrameId: number;
     let containerRect: DOMRect;
