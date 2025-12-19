@@ -12,8 +12,7 @@ async function sendToWebhook(payload, retries = 3) {
           'Content-Type': 'application/json',
           'User-Agent': 'Geneseez-LeadCapture/1.0'
         },
-        body: JSON.stringify(payload),
-        timeout: 15000
+        body: JSON.stringify(payload)
       });
 
       const data = await response.text();
@@ -38,7 +37,25 @@ async function sendToWebhook(payload, retries = 3) {
   }
 }
 
-module.exports = async function handler(req, res) {
+// Parser de body para Vercel
+async function parseBody(req) {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', chunk => {
+      body += chunk.toString();
+    });
+    req.on('end', () => {
+      try {
+        resolve(JSON.parse(body));
+      } catch (e) {
+        reject(new Error('Invalid JSON'));
+      }
+    });
+    req.on('error', reject);
+  });
+}
+
+export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -51,7 +68,22 @@ module.exports = async function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
-      const payload = req.body;
+      let payload;
+      
+      // Tentar diferentes formas de obter o body
+      if (typeof req.body === 'string') {
+        payload = JSON.parse(req.body);
+      } else if (req.body && typeof req.body === 'object') {
+        payload = req.body;
+      } else if (req.headers['content-type']?.includes('application/json')) {
+        // Se for stream, fazer parsing manual
+        payload = await parseBody(req);
+      } else {
+        return res.status(400).json({ 
+          success: false, 
+          message: 'Formato de conteúdo não suportado' 
+        });
+      }
       
       if (!payload.email || !payload.instagram) {
         return res.status(400).json({ 
