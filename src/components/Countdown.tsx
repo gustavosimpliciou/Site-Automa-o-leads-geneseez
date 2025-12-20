@@ -93,7 +93,7 @@ const Countdown: React.FC<CountdownProps> = ({ isHome, isPopup = false }) => {
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-cyan-500/90 via-black/90 to-cyan-500/90 backdrop-blur-sm py-2">
       <div className="container mx-auto px-4 flex items-center justify-center gap-4">
-        <span className="text-gray-300 text-xs uppercase tracking-wider hidden sm:inline">Lançamento ÊXTASE 999</span>
+        <span className="text-gray-300 text-xs uppercase tracking-wider hidden sm:inline">Lançamento</span>
         <div className="flex items-center gap-2 text-white text-sm">
           <span className="font-bold">{formatNumber(timeLeft.days)}d</span>
           <span className="text-gray-500">:</span>
