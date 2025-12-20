@@ -47,7 +47,7 @@ const Countdown: React.FC<CountdownProps> = ({ isHome, isPopup = false }) => {
   if (isPopup) {
     return (
       <div className="flex flex-col items-center gap-2">
-        <span className="text-gray-400 text-xs uppercase tracking-wider">Lançamento ÊXTASE 999</span>
+        <span className="text-gray-400 text-xs uppercase tracking-wider">Lançamento</span>
         <div className="flex items-center gap-2 text-white">
           <span className="font-bold text-lg">{formatNumber(timeLeft.days)}d</span>
           <span className="text-gray-500">:</span>
@@ -64,7 +64,7 @@ const Countdown: React.FC<CountdownProps> = ({ isHome, isPopup = false }) => {
   if (isHome) {
     return (
       <div className="flex flex-col items-center gap-2 mt-8">
-        <span className="text-gray-500 text-xs uppercase tracking-wider">Lançamento ÊXTASE 999</span>
+        <span className="text-gray-500 text-xs uppercase tracking-wider">Lançamento</span>
         <div className="flex items-center gap-3 text-white">
           <div className="flex flex-col items-center">
             <span className="text-2xl md:text-3xl font-bold">{formatNumber(timeLeft.days)}</span>
