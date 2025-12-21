@@ -85,17 +85,17 @@ export default async function handler(req, res) {
         });
       }
       
-      if (!payload.email || !payload.instagram) {
+      if (!payload.email || !payload.phone) {
         return res.status(400).json({ 
           success: false, 
-          message: 'Email e Instagram são obrigatórios' 
+          message: 'Email e Telefone são obrigatórios' 
         });
       }
 
       console.log('='.repeat(60));
       console.log('📨 Nova submissão recebida:', new Date().toLocaleString('pt-BR'));
       console.log('Email:', payload.email);
-      console.log('Instagram:', payload.instagram);
+      console.log('Telefone:', payload.phone);
       console.log('='.repeat(60));
 
       const result = await sendToWebhook(payload, 3);
