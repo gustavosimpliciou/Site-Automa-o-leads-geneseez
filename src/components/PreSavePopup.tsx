@@ -74,7 +74,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
         throw new Error('Erro no servidor');
       }
 
-      setError('✅ Sucesso!');
+      setError('✅ Sucesso! Pré-save Concluído.');
       setLoading(false);
       
       setTimeout(() => {
@@ -180,9 +180,9 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
 
               {/* Mensagem */}
               {error && (
-                <div className={`rounded-lg p-3 text-sm font-medium ${
-                  error.includes('Dados enviados com sucesso')
-                    ? 'bg-green-500/30 border border-green-400 text-green-200'
+                <div className={`rounded-lg p-3 text-sm font-bold text-center uppercase tracking-wider ${
+                  error.includes('Sucesso')
+                    ? 'bg-green-500 text-white shadow-[0_0_15px_rgba(34,197,94,0.5)] border-2 border-green-400'
                     : 'bg-red-500/10 border border-red-500/30 text-red-400'
                 }`}>
                   {error}
