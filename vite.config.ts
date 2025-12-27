@@ -33,5 +33,6 @@ export default defineConfig({
     'import.meta.env.VITE_API_URL': JSON.stringify(
       process.env.VITE_API_URL || (process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001')
     ),
+    'import.meta.env.VITE_DISCORD_WEBHOOK_URL': JSON.stringify(process.env.DISCORD_WEBHOOK_URL),
   },
 });

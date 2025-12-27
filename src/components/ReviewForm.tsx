@@ -21,16 +21,12 @@ const ReviewForm: React.FC = () => {
     setFormStatus('submitting');
     
     try {
-      const webhookUrl = 'https://discord.com/api/webhooks/1321453258529341511/kX87p0S3I8t9-G0X3S3X3X3X3X3X3X3X';
-      
-      const response = await fetch(webhookUrl, {
+      const response = await fetch('/api/leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          content: `⭐ **Nova Avaliação Recebida!**\n**Nome:** ${formData.name}\n**Email:** ${formData.email}\n**Data:** ${new Date().toLocaleString('pt-BR')}`
-        })
+        body: JSON.stringify(formData)
       });
 
       if (response.ok) {

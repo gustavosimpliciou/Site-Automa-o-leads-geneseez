@@ -61,18 +61,13 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
       console.log('🚀 Enviando lead:', payload);
       setError('Enviando seus dados...');
 
-      // Enviar para o webhook externo (Discord/N8N/Zapier/etc)
-      // Usando o webhook do Discord fornecido ou um genérico se não houver
-      const webhookUrl = 'https://discord.com/api/webhooks/1321453258529341511/kX87p0S3I8t9-G0X3S3X3X3X3X3X3X3X'; // Substitua pelo seu webhook real
-      
-      const response = await fetch(webhookUrl, {
+      // Enviar para o servidor backend
+      const response = await fetch('/api/leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          content: `🆕 **Novo Pré-Save Recebido!**\n**Nome:** ${name}\n**Email:** ${email}\n**Origem:** Pré-Save Popup\n**Data:** ${new Date().toLocaleString('pt-BR')}`
-        })
+        body: JSON.stringify(payload)
       });
 
       if (!response.ok) {
