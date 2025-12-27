@@ -108,16 +108,10 @@ const server = http.createServer(async (req, res) => {
           return;
         }
 
-        // Estruturar o payload para o n8n (campos padrão + campos opcionais)
+        // Enviar APENAS nome e email para o webhook (conforme configurado no n8n)
         const structuredPayload = {
           name: payload.name,
-          email: payload.email,
-          phone: payload.phone || '',
-          instagram: payload.instagram || '',
-          subject: payload.subject || 'contato',
-          message: payload.message || '',
-          source: payload.source || 'web-form',
-          timestamp: payload.timestamp || new Date().toISOString()
+          email: payload.email
         };
 
         console.log('='.repeat(60));
