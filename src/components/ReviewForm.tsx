@@ -3,8 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 const ReviewForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
-    company: '',
-    review: ''
+    email: ''
   });
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const formRef = useRef<HTMLDivElement>(null);
@@ -26,8 +25,7 @@ const ReviewForm: React.FC = () => {
       
       setFormData({
         name: '',
-        company: '',
-        review: ''
+        email: ''
       });
       setFormStatus('success');
       
@@ -90,32 +88,18 @@ const ReviewForm: React.FC = () => {
               </div>
               
               <div className="mb-6">
-                <label htmlFor="company" className="block text-gray-700 font-medium mb-2">
-                  Empresa (opcional)
+                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+                  Email
                 </label>
                 <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  value={formData.company}
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
-                />
-              </div>
-              
-              <div className="mb-6">
-                <label htmlFor="review" className="block text-gray-700 font-medium mb-2">
-                  Avaliação
-                </label>
-                <textarea
-                  id="review"
-                  name="review"
-                  value={formData.review}
-                  onChange={handleChange}
-                  rows={4}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                   required
-                ></textarea>
+                />
               </div>
               
               <button
@@ -125,7 +109,7 @@ const ReviewForm: React.FC = () => {
                   formStatus === 'submitting' ? 'opacity-70 cursor-not-allowed' : ''
                 }`}
               >
-                {formStatus === 'submitting' ? 'Enviando...' : 'Enviar Avaliação'}
+                {formStatus === 'submitting' ? 'Enviando...' : 'Enviar'}
               </button>
             </form>
           )}

@@ -90,6 +90,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
   const handleTrackClick = (trackId: number) => {
     setCurrentTrack(trackId);
     setIsPlaying(true);
+    setShowPreSavePopup(true);
   };
 
   const scrollToListenButton = () => {
@@ -141,7 +142,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
               />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <button 
-                  onClick={scrollToListenButton}
+                  onClick={() => setShowPreSavePopup(true)}
                   className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 transition-transform"
                 >
                   {isPlaying ? <Pause className="w-7 h-7 text-black" /> : <Play className="w-7 h-7 text-black ml-1" />}
@@ -173,7 +174,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
 
           <div className="px-6 md:px-8 pb-4 flex items-center gap-4">
             <button 
-              onClick={scrollToListenButton}
+              onClick={() => setShowPreSavePopup(true)}
               className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center hover:scale-105 transition-transform hover:bg-green-400"
             >
               {isPlaying ? <Pause className="w-6 h-6 text-black" /> : <Play className="w-6 h-6 text-black ml-1" />}

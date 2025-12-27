@@ -10,6 +10,7 @@ const Origem: React.FC = () => {
   const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchStartXRef = useRef<number>(0);
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
+  const autoPlayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const carouselImages = [
     { src: '/diivinu1.png', artist: 'diivinu', instagram: 'https://www.instagram.com/diivinu/' },
@@ -44,6 +45,27 @@ const Origem: React.FC = () => {
     }
   };
 
+  const resetAutoPlay = () => {
+    if (autoPlayTimerRef.current) {
+      clearTimeout(autoPlayTimerRef.current);
+    }
+    autoPlayTimerRef.current = setTimeout(() => {
+      nextImage();
+    }, 15000);
+  };
+
+  const handleLeftArrowHover = () => {
+    hoverTimerRef.current = setTimeout(() => {
+      prevImage();
+    }, 1000);
+    resetAutoPlay();
+  };
+
+  const handleRightArrowHover = () => {
+    handleMouseEnter();
+    resetAutoPlay();
+  };
+
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartXRef.current = e.touches[0].clientX;
     setSwipeDirection(null);
@@ -67,12 +89,16 @@ const Origem: React.FC = () => {
   };
 
   useEffect(() => {
+    resetAutoPlay();
     return () => {
       if (hoverTimerRef.current) {
         clearTimeout(hoverTimerRef.current);
       }
+      if (autoPlayTimerRef.current) {
+        clearTimeout(autoPlayTimerRef.current);
+      }
     };
-  }, []);
+  }, [currentImageIndex]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -155,8 +181,9 @@ const Origem: React.FC = () => {
             
             {/* Left Arrow */}
             <button
-              onClick={prevImage}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 sm:-translate-x-14 z-20 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group"
+              onMouseEnter={handleLeftArrowHover}
+              onMouseLeave={handleMouseLeave}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 sm:-translate-x-14 z-20 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer"
               aria-label="Previous image"
             >
               <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600 group-hover:text-gray-900 transition-colors" />
@@ -164,8 +191,9 @@ const Origem: React.FC = () => {
             
             {/* Right Arrow */}
             <button
-              onClick={nextImage}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 sm:translate-x-14 z-20 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group"
+              onMouseEnter={handleRightArrowHover}
+              onMouseLeave={handleMouseLeave}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 sm:translate-x-14 z-20 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer"
               aria-label="Next image"
             >
               <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600 group-hover:text-gray-900 transition-colors" />
