@@ -23,8 +23,10 @@ const ReviewForm: React.FC = () => {
     try {
       const response = await fetch('https://geneseez-lecapture.replit.app/api/leads', {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify(formData)
       });
