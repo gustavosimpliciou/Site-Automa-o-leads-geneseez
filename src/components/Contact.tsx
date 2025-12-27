@@ -40,7 +40,7 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
     setSubmitStatus('submitting');
     
     try {
-      const response = await fetch('https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b', {
+      const response = await fetch('/api/leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
