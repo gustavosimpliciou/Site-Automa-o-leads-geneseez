@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Mail, Instagram, User } from 'lucide-react';
+import { X, Mail, User } from 'lucide-react';
 import ParticleAnimation from './ParticleAnimation';
 import Countdown from './Countdown';
 
@@ -12,7 +12,6 @@ interface PreSavePopupProps {
 const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [instagram, setInstagram] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -26,7 +25,6 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
       // Reseta o formulário quando fecha o popup
       setName('');
       setEmail('');
-      setInstagram('');
       setLoading(false);
       setSubmitted(false);
       setError('');
@@ -39,7 +37,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!name || !email || !instagram) {
+    if (!name || !email) {
       setError('Por favor, preencha todos os campos');
       return;
     }
@@ -56,7 +54,6 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
       const payload = {
         name,
         email,
-        instagram: instagram.startsWith('@') ? instagram : `@${instagram}`,
         timestamp: new Date().toISOString(),
         source: 'pre-save-popup'
       };
@@ -87,7 +84,6 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
         setTimeout(() => {
           setName('');
           setEmail('');
-          setInstagram('');
           setError('');
           onClose();
         }, 2500);
@@ -184,24 +180,6 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="seu@email.com"
-                    className="w-full bg-gray-800/50 border border-gray-700 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
-                    disabled={loading}
-                  />
-                </div>
-              </div>
-
-              {/* Instagram Input */}
-              <div className="relative">
-                <label className="block text-gray-300 text-sm font-medium mb-2">
-                  Instagram
-                </label>
-                <div className="relative flex items-center">
-                  <Instagram className="absolute left-3 w-4 h-4 text-green-500 pointer-events-none" />
-                  <input
-                    type="text"
-                    value={instagram}
-                    onChange={(e) => setInstagram(e.target.value)}
-                    placeholder="@seu_usuario"
                     className="w-full bg-gray-800/50 border border-gray-700 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
                     disabled={loading}
                   />
