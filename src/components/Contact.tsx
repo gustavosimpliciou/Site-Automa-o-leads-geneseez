@@ -40,11 +40,15 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
     setSubmitStatus('submitting');
     
     try {
-      // Envio direto para o n8n usando XMLHttpRequest para ignorar restrições de CORS do fetch
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', 'https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b', true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.send(JSON.stringify(formData));
+      // Envio direto para o n8n usando fetch com modo 'no-cors' para máxima compatibilidade no GitHub Pages
+      fetch('https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      }).catch(err => console.warn('Erro silencioso no envio:', err));
 
       setSubmitStatus('success');
       
