@@ -40,37 +40,29 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
     setSubmitStatus('submitting');
     
     try {
-      const response = await fetch('https://geneseez-lecapture.replit.app/api/leads', {
+      await fetch('https://geneseez-lecapture.replit.app/api/leads', {
         method: 'POST',
-        mode: 'cors',
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
         },
         body: JSON.stringify(formData)
       });
 
-      if (response.ok) {
-        console.log('Dados enviados com sucesso:', formData);
-        setSubmitStatus('success');
-        
-        setTimeout(() => {
-          setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            instagram: '',
-            subject: 'duvidas',
-            message: ''
-          });
-          setSubmitStatus('idle');
-          onClose();
-        }, 2000);
-      } else {
-        console.error('Erro ao enviar dados');
-        setSubmitStatus('error');
-        setTimeout(() => setSubmitStatus('idle'), 3000);
-      }
+      setSubmitStatus('success');
+      
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          instagram: '',
+          subject: 'duvidas',
+          message: ''
+        });
+        setSubmitStatus('idle');
+        onClose();
+      }, 2000);
     } catch (error) {
       console.error('Erro ao enviar para o servidor:', error);
       setSubmitStatus('error');

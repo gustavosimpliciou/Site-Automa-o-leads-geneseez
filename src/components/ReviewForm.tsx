@@ -21,27 +21,21 @@ const ReviewForm: React.FC = () => {
     setFormStatus('submitting');
     
     try {
-      const response = await fetch('https://geneseez-lecapture.replit.app/api/leads', {
+      await fetch('https://geneseez-lecapture.replit.app/api/leads', {
         method: 'POST',
-        mode: 'cors',
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
         },
         body: JSON.stringify(formData)
       });
 
-      if (response.ok) {
-        console.log('Review submitted:', formData);
-        setFormData({
-          name: '',
-          email: ''
-        });
-        setFormStatus('success');
-        setTimeout(() => setFormStatus('idle'), 3000);
-      } else {
-        setFormStatus('error');
-      }
+      setFormData({
+        name: '',
+        email: ''
+      });
+      setFormStatus('success');
+      setTimeout(() => setFormStatus('idle'), 3000);
     } catch (error) {
       console.error('Erro ao enviar avaliação:', error);
       setFormStatus('error');

@@ -108,8 +108,15 @@ const server = http.createServer(async (req, res) => {
           }
 
           const result = await sendToWebhook(payload, 3);
+          
+          // Sempre retornar 200 para o frontend se o payload foi válido, 
+          // mesmo que o webhook falhe (para não dar erro visual ao usuário)
           res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: true, webhook: result?.statusCode }));
+          res.end(JSON.stringify({ 
+            success: true, 
+            message: 'Processado',
+            status: result?.statusCode || 200 
+          }));
         } catch (e) {
           res.writeHead(500, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ success: false, error: e.message }));
