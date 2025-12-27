@@ -61,7 +61,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
       console.log('🚀 Enviando lead:', payload);
       setError('Enviando seus dados...');
 
-      // Enviar para o servidor backend
+      // Enviar para o servidor backend que já possui CORS configurado
       const response = await fetch('https://geneseez-lecapture.replit.app/api/leads', {
         method: 'POST',
         mode: 'cors',

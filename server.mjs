@@ -3,7 +3,7 @@ import https from 'https';
 import { URL } from 'url';
 
 const PORT = 3001;
-const WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || process.env.WEBHOOK_URL || 'https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b';
+const WEBHOOK_URL = 'https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b';
 
 // Função para enviar dados ao webhook com retry automático (POST method com JSON body)
 async function sendToWebhook(payload, retries = 3) {
