@@ -99,26 +99,57 @@ const server = http.createServer(async (req, res) => {
     req.on('end', async () => {
       try {
         const payload = JSON.parse(body);
+        
+        // Validar campos obrigatórios
+        if (!payload.email || !payload.name) {
+          console.error('❌ Email ou Name ausentes:', payload);
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: false, message: 'Email e Nome são obrigatórios' }));
+          return;
+        }
+
+        // Estruturar o payload para o n8n (campos padrão + campos opcionais)
+        const structuredPayload = {
+          name: payload.name,
+          email: payload.email,
+          phone: payload.phone || '',
+          instagram: payload.instagram || '',
+          subject: payload.subject || 'contato',
+          message: payload.message || '',
+          source: payload.source || 'web-form',
+          timestamp: payload.timestamp || new Date().toISOString()
+        };
+
         console.log('='.repeat(60));
         console.log('📨 Nova submissão recebida:', new Date().toLocaleString('pt-BR'));
-        console.log('Email:', payload.email);
-        console.log('Instagram:', payload.instagram);
+        console.log('Nome:', structuredPayload.name);
+        console.log('Email:', structuredPayload.email);
+        console.log('Origem:', structuredPayload.source);
         console.log('='.repeat(60));
 
         // Enviar com retry automático
-        const result = await sendToWebhook(payload, 3);
+        const result = await sendToWebhook(structuredPayload, 3);
 
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ 
-          success: true, 
-          message: 'Lead capturado e enviado ao webhook',
-          webhookStatus: result.statusCode
-        }));
+        if (result.success) {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ 
+            success: true, 
+            message: 'Lead capturado e enviado ao webhook',
+            webhookStatus: result.statusCode
+          }));
+        } else {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ 
+            success: false, 
+            message: 'Erro ao enviar para webhook',
+            error: result.error
+          }));
+        }
 
       } catch (error) {
         console.error('❌ Erro ao processar:', error);
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: true, message: 'Lead processado' }));
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Erro ao processar dados', error: error.message }));
       }
     });
   } else {
