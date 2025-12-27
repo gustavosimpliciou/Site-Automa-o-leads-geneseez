@@ -121,10 +121,10 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
       constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
-        this.vx = (Math.random() - 0.5) * (containerMode ? 1.2 : 2.0);
-        this.vy = (Math.random() - 0.5) * (containerMode ? 1.2 : 2.0);
-        this.opacity = 1.0;
-        this.size = Math.random() * (containerMode ? 4 : 6) + 3;
+        this.vx = (Math.random() - 0.5) * (containerMode ? 1.0 : 1.5);
+        this.vy = (Math.random() - 0.5) * (containerMode ? 1.0 : 1.5);
+        this.opacity = 0.9;
+        this.size = Math.random() * (containerMode ? 2 : 3) + 1.5;
         this.createdAt = Date.now();
         this.element = document.createElement('div');
         this.element.className = isDark ? 'particle-dark' : 'particle';
@@ -209,8 +209,8 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
 
       if (particles.length < 3) return;
 
-      ctx.lineWidth = 1.0;
-      const maxConnections = Math.min(particles.length, 20);
+      ctx.lineWidth = 0.7;
+      const maxConnections = Math.min(particles.length, 15);
       
       for (let i = 0; i < Math.min(particles.length, maxConnections); i++) {
         for (let j = i + 1; j < Math.min(particles.length, maxConnections + i); j++) {
@@ -220,7 +220,7 @@ const ParticleAnimation: React.FC<ParticleAnimationProps> = ({ isDark = false, c
 
           if (distanceSq < maxDistanceSq) {
             const distance = Math.sqrt(distanceSq);
-            const opacity = (1 - (distance / maxDistance)) * 0.4;
+            const opacity = (1 - (distance / maxDistance)) * 0.3;
             const color = isDark ? `rgba(0, 0, 0, ${opacity})` : `rgba(255, 255, 255, ${opacity})`;
             ctx.strokeStyle = color;
             ctx.beginPath();
