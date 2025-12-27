@@ -58,18 +58,15 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
         source: 'pre-save-popup'
       };
 
-      setError('Enviando seus dados...');
+      setError('Enviando...');
 
-      await fetch('https://geneseez-lecapture.replit.app/api/leads', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-      });
+      // Envio direto para o n8n usando XMLHttpRequest para ignorar restrições de CORS do fetch
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(payload));
 
-      // Em modo no-cors não conseguimos ler response.ok, então assumimos sucesso se não houver erro de rede
-      setError('✅ Dados enviados com sucesso!');
+      setError('✅ Sucesso!');
       setLoading(false);
       
       setTimeout(() => {
@@ -77,7 +74,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
         setEmail('');
         setError('');
         onClose();
-      }, 2500);
+      }, 2000);
     } catch (err) {
       console.error('❌ Erro ao enviar:', err);
       setError('❌ Falha na conexão. Verifique sua internet e tente novamente.');

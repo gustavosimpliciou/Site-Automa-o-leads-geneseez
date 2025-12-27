@@ -40,13 +40,11 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
     setSubmitStatus('submitting');
     
     try {
-      await fetch('https://geneseez-lecapture.replit.app/api/leads', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
+      // Envio direto para o n8n usando XMLHttpRequest para ignorar restrições de CORS do fetch
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(formData));
 
       setSubmitStatus('success');
       
