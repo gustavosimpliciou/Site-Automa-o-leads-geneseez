@@ -60,15 +60,19 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
 
       setError('Enviando...');
 
-      // Envio direto para o n8n usando fetch com modo 'no-cors' para máxima compatibilidade no GitHub Pages
-      fetch('https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b', {
+      // Envio direto para o n8n usando fetch com modo 'cors' 
+      // É necessário que o n8n aceite requisições CORS
+      const response = await fetch('https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload)
-      }).catch(err => console.warn('Erro silencioso no envio:', err));
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro no servidor');
+      }
 
       setError('✅ Sucesso!');
       setLoading(false);

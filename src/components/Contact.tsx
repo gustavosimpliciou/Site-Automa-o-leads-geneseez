@@ -40,15 +40,17 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
     setSubmitStatus('submitting');
     
     try {
-      // Envio direto para o n8n usando fetch com modo 'no-cors' para máxima compatibilidade no GitHub Pages
-      fetch('https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b', {
+      const response = await fetch('https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData)
-      }).catch(err => console.warn('Erro silencioso no envio:', err));
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro no envio');
+      }
 
       setSubmitStatus('success');
       
