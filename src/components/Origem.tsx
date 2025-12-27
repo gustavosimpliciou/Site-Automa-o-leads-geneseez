@@ -7,7 +7,7 @@ const Origem: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [discoLoaded, setDiscoLoaded] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(1);
   const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchStartXRef = useRef<number>(0);
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
