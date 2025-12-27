@@ -8,7 +8,7 @@ packages = ["unzip"]
 
 [deployment]
 deploymentTarget = "vm"
-run = ["npm", "run", "start"]
+run = ["bash", "-c", "node server.mjs & npm run preview"]
 build = ["npm", "run", "build"]
 
 [workflows]
@@ -44,3 +44,4 @@ externalPort = 80
 
 [userenv.shared]
 VITE_N8N_WEBHOOK_URL = "https://geneseez01.app.n8n.cloud/webhook-test/captura-leads"
+WEBHOOK_URL = "https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b"

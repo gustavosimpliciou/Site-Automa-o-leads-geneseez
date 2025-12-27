@@ -3,10 +3,11 @@ import https from 'https';
 import { URL } from 'url';
 
 const PORT = 3001;
+const WEBHOOK_URL = process.env.WEBHOOK_URL || 'https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b';
 
 // Função para enviar dados ao webhook com retry automático (POST method com JSON body)
 async function sendToWebhook(payload, retries = 3) {
-  const webhookUrl = 'https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b';
+  const webhookUrl = WEBHOOK_URL;
   
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
@@ -128,6 +129,6 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`\n🚀 Servidor de Leads Captura rodando em http://0.0.0.0:${PORT}`);
-  console.log(`📨 Webhook: https://geneseez01.app.n8n.cloud/webhook/captura-leads`);
-  console.log('Pronto para receber submissões...\n');
+  console.log(`📨 Webhook N8N conectado: ${WEBHOOK_URL}`);
+  console.log('✅ Pronto para receber submissões com retry automático (3 tentativas)...\n');
 });
