@@ -273,6 +273,7 @@ const Origem: React.FC = () => {
 
       {/* Left Arrow - Fixed Position */}
       <button
+        onClick={prevImage}
         onMouseEnter={handleLeftArrowHover}
         onMouseLeave={handleMouseLeave}
         className="fixed left-16 sm:left-24 top-1/2 -translate-y-1/2 z-50 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer pointer-events-auto"
@@ -283,6 +284,7 @@ const Origem: React.FC = () => {
       
       {/* Right Arrow - Fixed Position */}
       <button
+        onClick={nextImage}
         onMouseEnter={handleRightArrowHover}
         onMouseLeave={handleMouseLeave}
         className="fixed right-16 sm:right-24 top-1/2 -translate-y-1/2 z-50 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer pointer-events-auto"
