@@ -1,11 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Instagram } from 'lucide-react';
+import { Instagram, ChevronLeft, ChevronRight } from 'lucide-react';
 import ParticleAnimation from './ParticleAnimation';
 
 const Origem: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [discoLoaded, setDiscoLoaded] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const carouselImages = [
+    '/alien1.png',
+    '/alien2.png',
+    '/cubo.png',
+    '/diivinu1.png',
+    '/lopz1.png',
+    '/tv1.png',
+    '/dicipulos.png'
+  ];
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,25 +74,62 @@ const Origem: React.FC = () => {
         className="z-20 transition-all duration-1000 opacity-0 translate-y-10 flex flex-col items-center justify-center"
       >
         <div className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto flex items-center justify-center relative">
-          <img 
-            src="/dicipulos.png" 
-            alt="Dicipulos" 
-            className={`w-full h-auto max-h-[50vh] sm:max-h-[55vh] md:max-h-[60vh] lg:max-h-[65vh] object-contain transition-all duration-1000 ease-out relative z-10 ${
-              imageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'
-            }`}
-            style={{
-              filter: 'none',
-              boxShadow: 'none',
-              border: 'none',
-              outline: 'none'
-            }}
-            loading="lazy"
-            onLoad={() => setImageLoaded(true)}
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.style.display = 'none';
-            }}
-          />
+          <div className="relative w-full">
+            <img 
+              key={currentImageIndex}
+              src={carouselImages[currentImageIndex]} 
+              alt="Carousel Image" 
+              className={`w-full h-auto max-h-[50vh] sm:max-h-[55vh] md:max-h-[60vh] lg:max-h-[65vh] object-contain transition-all duration-700 ease-out relative z-10 ${
+                imageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'
+              }`}
+              style={{
+                filter: 'none',
+                boxShadow: 'none',
+                border: 'none',
+                outline: 'none'
+              }}
+              loading="lazy"
+              onLoad={() => setImageLoaded(true)}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+              }}
+            />
+            
+            {/* Left Arrow */}
+            <button
+              onClick={prevImage}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 sm:-translate-x-14 z-20 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600 group-hover:text-gray-900 transition-colors" />
+            </button>
+            
+            {/* Right Arrow */}
+            <button
+              onClick={nextImage}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 sm:translate-x-14 z-20 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600 group-hover:text-gray-900 transition-colors" />
+            </button>
+            
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-4">
+              {carouselImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`transition-all duration-300 rounded-full ${
+                    index === currentImageIndex 
+                      ? 'w-3 h-3 bg-gray-700' 
+                      : 'w-2 h-2 bg-gray-400 hover:bg-gray-600'
+                  }`}
+                  aria-label={`Go to image ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="flex items-center gap-8 mt-6">

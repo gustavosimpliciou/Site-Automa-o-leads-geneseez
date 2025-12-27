@@ -35,7 +35,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
     { id: 5, title: 'FICA+', duration: '3:00', artist: 'LOPZ' },
     { id: 6, title: 'GENESEEZ', duration: '2:00', artist: 'DIIVINU' },
     { id: 7, title: 'SINTONIA', duration: '3:04', artist: 'DIIVINU' },
-    { id: 8, title: 'APOGEU', duration: '3:00', artist: 'DIIVINU, LOPZ' },
+    { id: 8, title: '1996', duration: '3:00', artist: 'LOPZ, DENYS, DIIVINU' },
     { id: 9, title: '999!', duration: '4:26', artist: 'DIIVINU, LOPZ' },
   ];
 
