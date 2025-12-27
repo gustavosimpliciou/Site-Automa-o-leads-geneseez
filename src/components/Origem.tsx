@@ -9,13 +9,11 @@ const Origem: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const carouselImages = [
-    '/alien1.png',
-    '/alien2.png',
-    '/cubo.png',
-    '/diivinu1.png',
-    '/lopz1.png',
-    '/tv1.png',
-    '/dicipulos.png'
+    { src: '/diivinu1.png', artist: 'diivinu', instagram: 'https://www.instagram.com/diivinu/' },
+    { src: '/lopz1.png', artist: 'lopz', instagram: 'https://instagram.com/lopz.of' },
+    { src: '/tv1.png', artist: 'tv1', instagram: 'https://instagram.com/lopz.of' },
+    { src: '/denys.png', artist: 'denys', instagram: 'https://instagram.com/denys' },
+    { src: '/dicipulos.png', artist: 'dicipulos', instagram: 'https://instagram.com/lopz.of' }
   ];
 
   const nextImage = () => {
@@ -25,6 +23,10 @@ const Origem: React.FC = () => {
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
   };
+
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [currentImageIndex]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -77,7 +79,7 @@ const Origem: React.FC = () => {
           <div className="relative w-full">
             <img 
               key={currentImageIndex}
-              src={carouselImages[currentImageIndex]} 
+              src={carouselImages[currentImageIndex].src} 
               alt="Carousel Image" 
               className={`w-full h-auto max-h-[50vh] sm:max-h-[55vh] md:max-h-[60vh] lg:max-h-[65vh] object-contain transition-all duration-700 ease-out relative z-10 ${
                 imageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'
@@ -134,22 +136,13 @@ const Origem: React.FC = () => {
 
         <div className="flex items-center gap-8 mt-6">
           <a 
-            href="https://instagram.com/lopz.of" 
+            href={carouselImages[currentImageIndex].instagram} 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
           >
             <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            <span className="text-sm font-medium">LOPZ</span>
-          </a>
-          <a 
-            href="https://www.instagram.com/diivinu/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
-          >
-            <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            <span className="text-sm font-medium">DIIVINU</span>
+            <span className="text-sm font-medium uppercase">{carouselImages[currentImageIndex].artist}</span>
           </a>
         </div>
       </div>
