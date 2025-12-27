@@ -24,6 +24,7 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
     subject: 'duvidas',
     message: ''
   });
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -36,9 +37,10 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitStatus('submitting');
     
     try {
-      const response = await fetch('/api/leads', {
+      const response = await fetch('https://geneseez01.app.n8n.cloud/webhook/dfea7ed4-08b7-42d0-9526-3674300ca69b', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,25 +50,30 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
 
       if (response.ok) {
         console.log('Dados enviados com sucesso:', formData);
-        alert('Mensagem enviada com sucesso!');
+        setSubmitStatus('success');
+        
+        setTimeout(() => {
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            instagram: '',
+            subject: 'duvidas',
+            message: ''
+          });
+          setSubmitStatus('idle');
+          onClose();
+        }, 2000);
       } else {
         console.error('Erro ao enviar dados');
-        alert('Erro ao enviar mensagem. Tente novamente.');
+        setSubmitStatus('error');
+        setTimeout(() => setSubmitStatus('idle'), 3000);
       }
     } catch (error) {
       console.error('Erro ao enviar para o servidor:', error);
-      alert('Erro ao enviar mensagem. Tente novamente.');
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 3000);
     }
-
-    onClose();
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      instagram: '',
-      subject: 'duvidas',
-      message: ''
-    });
   };
 
   useEffect(() => {
@@ -236,9 +243,25 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
 
                 <button
                   type="submit"
-                  className="mt-6 w-full bg-black text-white py-3 px-6 rounded-md hover:bg-gray-800 transition-colors"
+                  disabled={submitStatus === 'submitting'}
+                  className={`mt-6 w-full py-3 px-6 rounded-md transition-colors font-medium ${
+                    submitStatus === 'submitting' 
+                      ? 'bg-gray-400 text-white cursor-not-allowed' 
+                      : submitStatus === 'success'
+                      ? 'bg-green-500 text-white'
+                      : submitStatus === 'error'
+                      ? 'bg-red-500 text-white'
+                      : 'bg-black text-white hover:bg-gray-800'
+                  }`}
                 >
-                  Enviar Mensagem
+                  {submitStatus === 'submitting' 
+                    ? 'Enviando...' 
+                    : submitStatus === 'success'
+                    ? '✓ Mensagem Enviada!'
+                    : submitStatus === 'error'
+                    ? 'Erro ao enviar. Tente novamente'
+                    : 'Enviar Mensagem'
+                  }
                 </button>
               </form>
             </div>
@@ -359,9 +382,25 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
 
               <button
                 type="submit"
-                className="mt-6 w-full bg-black text-white py-3 px-6 rounded-md hover:bg-gray-800 transition-colors"
+                disabled={submitStatus === 'submitting'}
+                className={`mt-6 w-full py-3 px-6 rounded-md transition-colors font-medium ${
+                  submitStatus === 'submitting' 
+                    ? 'bg-gray-400 text-white cursor-not-allowed' 
+                    : submitStatus === 'success'
+                    ? 'bg-green-500 text-white'
+                    : submitStatus === 'error'
+                    ? 'bg-red-500 text-white'
+                    : 'bg-black text-white hover:bg-gray-800'
+                }`}
               >
-                Enviar Mensagem
+                {submitStatus === 'submitting' 
+                  ? 'Enviando...' 
+                  : submitStatus === 'success'
+                  ? '✓ Mensagem Enviada!'
+                  : submitStatus === 'error'
+                  ? 'Erro ao enviar. Tente novamente'
+                  : 'Enviar Mensagem'
+                }
               </button>
             </form>
           </div>
