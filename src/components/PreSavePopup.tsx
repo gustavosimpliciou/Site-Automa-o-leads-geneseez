@@ -62,7 +62,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
       setError('Enviando seus dados...');
 
       // Enviar para o servidor backend
-      const response = await fetch('/api/leads', {
+      const response = await fetch('https://geneseez-lecapture.replit.app/api/leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

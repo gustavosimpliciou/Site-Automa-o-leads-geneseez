@@ -40,7 +40,7 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
     setSubmitStatus('submitting');
     
     try {
-      const response = await fetch('/api/leads', {
+      const response = await fetch('https://geneseez-lecapture.replit.app/api/leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
