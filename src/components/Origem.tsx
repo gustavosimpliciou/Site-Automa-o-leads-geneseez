@@ -126,7 +126,7 @@ const Origem: React.FC = () => {
   return (
     <section 
       id="origem" 
-      className="relative h-screen flex items-center justify-center pt-24 pb-16"
+      className="relative h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden"
     >
       <div className="absolute inset-0 bg-white overflow-hidden">
         <div className="absolute inset-0 opacity-5">
@@ -149,24 +149,20 @@ const Origem: React.FC = () => {
         ref={sectionRef}
         className="z-20 transition-all duration-1000 opacity-0 translate-y-10 flex flex-col items-center justify-center"
       >
-        <div className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto flex items-center justify-center relative">
+        <div className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl flex items-center justify-center relative">
           <div className="relative w-full">
             <div
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
-              className="cursor-grab active:cursor-grabbing"
+              className="cursor-grab active:cursor-grabbing h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh] flex items-center justify-center overflow-hidden"
             >
               <img 
                 key={currentImageIndex}
                 src={carouselImages[currentImageIndex].src} 
                 alt="Carousel Image" 
-                className={`w-full h-auto ${
-                  carouselImages[currentImageIndex].artist === 'denys' ? 'max-h-[35vh] sm:max-h-[40vh] md:max-h-[45vh] lg:max-h-[50vh]' : 
-                  carouselImages[currentImageIndex].artist === 'lopz' ? 'max-h-[40vh] sm:max-h-[45vh] md:max-h-[50vh] lg:max-h-[55vh]' : 
-                  'max-h-[50vh] sm:max-h-[55vh] md:max-h-[60vh] lg:max-h-[65vh]'
-                } object-contain transition-all duration-700 ease-out relative z-10 select-none ${
+                className={`w-full h-full object-contain transition-all duration-700 ease-out relative z-10 select-none ${
                   imageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'
                 } ${swipeDirection === 'left' ? 'animate-slide-left' : swipeDirection === 'right' ? 'animate-slide-right' : ''}`}
                 style={{
@@ -185,8 +181,8 @@ const Origem: React.FC = () => {
               />
             </div>
             
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-4">
+            {/* Dots Indicator - Fixed Position */}
+            <div className="flex justify-center gap-2 mt-4 h-6">
               {carouselImages.map((_, index) => (
                 <button
                   key={index}
@@ -203,7 +199,7 @@ const Origem: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-8 mt-6">
+        <div className="flex items-center gap-8 mt-4">
           {carouselImages[currentImageIndex].artist === 'denys' ? (
             <a 
               href={carouselImages[currentImageIndex].instagram} 
