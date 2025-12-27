@@ -62,7 +62,6 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
 
       await fetch('https://geneseez-lecapture.replit.app/api/leads', {
         method: 'POST',
-        mode: 'no-cors', // Garante que a requisição saia mesmo com problemas de política restrita
         headers: {
           'Content-Type': 'application/json',
         },

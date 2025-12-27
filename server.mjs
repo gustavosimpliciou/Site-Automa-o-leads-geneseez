@@ -78,15 +78,15 @@ async function sendToWebhook(payload, retries = 3) {
 }
 
 const server = http.createServer(async (req, res) => {
-  // CORS Headers - Allow EVERYTHING for maximum compatibility
+  // CORS Headers - MUST BE PRESENT ON EVERY RESPONSE INCLUDING PREFLIGHT
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Max-Age', '86400'); // Cache preflight for 24h
 
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
-    console.log('🔍 Recebida requisição OPTIONS de:', req.headers.origin);
+    console.log('🔍 Handling OPTIONS preflight for:', req.headers.origin);
     res.writeHead(204);
     res.end();
     return;

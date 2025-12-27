@@ -42,7 +42,6 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
     try {
       await fetch('https://geneseez-lecapture.replit.app/api/leads', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
