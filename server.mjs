@@ -78,85 +78,49 @@ async function sendToWebhook(payload, retries = 3) {
 }
 
 const server = http.createServer(async (req, res) => {
-  // CORS Headers - Allow everything from everywhere for maximum compatibility
+  // CORS Headers - Allow EVERYTHING for maximum compatibility
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Max-Age', '86400'); // Cache preflight for 24h
 
   if (req.method === 'OPTIONS') {
+    console.log('🔍 Recebida requisição OPTIONS de:', req.headers.origin);
     res.writeHead(204);
     res.end();
     return;
   }
 
-  if (req.method === 'POST' && req.url === '/api/leads') {
-    let body = '';
+  if (req.method === 'POST') {
+    console.log('📥 Recebida requisição POST em:', req.url);
+    if (req.url === '/api/leads' || req.url === '/api/leads/') {
+      let body = '';
+      req.on('data', chunk => body += chunk.toString());
+      req.on('end', async () => {
+        try {
+          console.log('📦 Corpo recebido:', body);
+          const payload = JSON.parse(body);
+          
+          if (!payload.email || !payload.name) {
+             res.writeHead(400, { 'Content-Type': 'application/json' });
+             return res.end(JSON.stringify({ success: false, message: 'Faltando campos' }));
+          }
 
-    req.on('data', (chunk) => {
-      body += chunk.toString();
-    });
-
-    req.on('end', async () => {
-      try {
-        const payload = JSON.parse(body);
-        
-        // Validar campos obrigatórios
-        if (!payload.email || !payload.name) {
-          console.error('❌ Email ou Name ausentes:', payload);
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: false, message: 'Email e Nome são obrigatórios' }));
-          return;
-        }
-
-        // Enviar todos os dados para o webhook
-        const structuredPayload = {
-          name: payload.name,
-          email: payload.email,
-          source: payload.source || 'direct',
-          phone: payload.phone || '',
-          instagram: payload.instagram || '',
-          subject: payload.subject || '',
-          message: payload.message || '',
-          timestamp: payload.timestamp || new Date().toISOString()
-        };
-
-        console.log('='.repeat(60));
-        console.log('📨 Nova submissão recebida:', new Date().toLocaleString('pt-BR'));
-        console.log('Nome:', structuredPayload.name);
-        console.log('Email:', structuredPayload.email);
-        console.log('Origem:', structuredPayload.source);
-        console.log('='.repeat(60));
-
-        // Enviar com retry automático
-        const result = await sendToWebhook(structuredPayload, 3);
-
-        if (result.success) {
+          const result = await sendToWebhook(payload, 3);
           res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ 
-            success: true, 
-            message: 'Lead capturado e enviado ao webhook',
-            webhookStatus: result.statusCode
-          }));
-        } else {
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ 
-            success: false, 
-            message: 'Erro ao enviar para webhook',
-            error: result.error
-          }));
+          res.end(JSON.stringify({ success: true, webhook: result?.statusCode }));
+        } catch (e) {
+          res.writeHead(500, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: false, error: e.message }));
         }
-
-      } catch (error) {
-        console.error('❌ Erro ao processar:', error);
-        res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: false, message: 'Erro ao processar dados', error: error.message }));
-      }
-    });
-  } else {
-    res.writeHead(404);
-    res.end();
+      });
+      return;
+    }
   }
+
+  res.writeHead(404);
+  res.end();
 });
 
 server.listen(PORT, '0.0.0.0', () => {
