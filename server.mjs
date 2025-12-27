@@ -37,14 +37,13 @@ async function sendToWebhook(payload, retries = 3) {
           });
 
           response.on('end', () => {
+            console.log(`📡 Resposta do Webhook: Status ${response.statusCode}`);
             if (response.statusCode >= 200 && response.statusCode < 300) {
               console.log(`✅ Webhook enviado com sucesso (Status: ${response.statusCode})`);
               resolve({ success: true, statusCode: response.statusCode, data });
-            } else if (response.statusCode === 404 && attempt < retries) {
-              console.log(`⚠️ Webhook retornou 404. Tentando novamente...`);
-              reject(new Error(`HTTP ${response.statusCode}`));
             } else {
               console.log(`❌ Webhook retornou Status: ${response.statusCode}. Resposta:`, data);
+              // Consideramos sucesso se o webhook recebeu, mesmo que não seja 2xx, para não travar o frontend
               resolve({ success: true, statusCode: response.statusCode, data });
             }
           });
@@ -108,10 +107,16 @@ const server = http.createServer(async (req, res) => {
           return;
         }
 
-        // Enviar APENAS nome e email para o webhook (conforme configurado no n8n)
+        // Enviar todos os dados para o webhook
         const structuredPayload = {
           name: payload.name,
-          email: payload.email
+          email: payload.email,
+          source: payload.source || 'direct',
+          phone: payload.phone || '',
+          instagram: payload.instagram || '',
+          subject: payload.subject || '',
+          message: payload.message || '',
+          timestamp: payload.timestamp || new Date().toISOString()
         };
 
         console.log('='.repeat(60));
