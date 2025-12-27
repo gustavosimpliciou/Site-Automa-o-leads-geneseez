@@ -163,13 +163,14 @@ const Origem: React.FC = () => {
                 src={carouselImages[currentImageIndex].src} 
                 alt="Carousel Image" 
                 className={`w-full h-full object-contain transition-all duration-700 ease-out relative z-10 select-none ${
-                  imageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'
+                  imageLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'
                 } ${swipeDirection === 'left' ? 'animate-slide-left' : swipeDirection === 'right' ? 'animate-slide-right' : ''}`}
                 style={{
                   filter: 'none',
                   boxShadow: 'none',
                   border: 'none',
-                  outline: 'none'
+                  outline: 'none',
+                  transform: carouselImages[currentImageIndex].artist === 'denys' ? 'scale(0.75)' : 'scale(1)'
                 }}
                 loading="lazy"
                 onLoad={() => setImageLoaded(true)}
