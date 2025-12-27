@@ -7,6 +7,9 @@ const Origem: React.FC = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [discoLoaded, setDiscoLoaded] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartXRef = useRef<number>(0);
+  const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
 
   const carouselImages = [
     { src: '/diivinu1.png', artist: 'diivinu', instagram: 'https://www.instagram.com/diivinu/' },
@@ -27,6 +30,49 @@ const Origem: React.FC = () => {
   useEffect(() => {
     setImageLoaded(false);
   }, [currentImageIndex]);
+
+  const handleMouseEnter = () => {
+    hoverTimerRef.current = setTimeout(() => {
+      nextImage();
+    }, 1000);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    setSwipeDirection(null);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartXRef.current - touchEndX;
+    const minSwipeDistance = 30;
+
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0) {
+        setSwipeDirection('left');
+        nextImage();
+      } else {
+        setSwipeDirection('right');
+        prevImage();
+      }
+      setTimeout(() => setSwipeDirection(null), 300);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimerRef.current) {
+        clearTimeout(hoverTimerRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -77,26 +123,35 @@ const Origem: React.FC = () => {
       >
         <div className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto flex items-center justify-center relative">
           <div className="relative w-full">
-            <img 
-              key={currentImageIndex}
-              src={carouselImages[currentImageIndex].src} 
-              alt="Carousel Image" 
-              className={`w-full h-auto max-h-[50vh] sm:max-h-[55vh] md:max-h-[60vh] lg:max-h-[65vh] object-contain transition-all duration-700 ease-out relative z-10 ${
-                imageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'
-              }`}
-              style={{
-                filter: 'none',
-                boxShadow: 'none',
-                border: 'none',
-                outline: 'none'
-              }}
-              loading="lazy"
-              onLoad={() => setImageLoaded(true)}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-              }}
-            />
+            <div
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              className="cursor-grab active:cursor-grabbing"
+            >
+              <img 
+                key={currentImageIndex}
+                src={carouselImages[currentImageIndex].src} 
+                alt="Carousel Image" 
+                className={`w-full h-auto max-h-[50vh] sm:max-h-[55vh] md:max-h-[60vh] lg:max-h-[65vh] object-contain transition-all duration-700 ease-out relative z-10 select-none ${
+                  imageLoaded ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-8'
+                } ${swipeDirection === 'left' ? 'animate-slide-left' : swipeDirection === 'right' ? 'animate-slide-right' : ''}`}
+                style={{
+                  filter: 'none',
+                  boxShadow: 'none',
+                  border: 'none',
+                  outline: 'none'
+                }}
+                loading="lazy"
+                onLoad={() => setImageLoaded(true)}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                }}
+                draggable={false}
+              />
+            </div>
             
             {/* Left Arrow */}
             <button
@@ -213,6 +268,32 @@ const Origem: React.FC = () => {
         }
         .animate-spin-slow {
           animation: spin-slow 8s linear infinite;
+        }
+        @keyframes slide-left {
+          0% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+          100% {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+        }
+        @keyframes slide-right {
+          0% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+          100% {
+            opacity: 0;
+            transform: translateX(30px);
+          }
+        }
+        .animate-slide-left {
+          animation: slide-left 0.3s ease-out forwards;
+        }
+        .animate-slide-right {
+          animation: slide-right 0.3s ease-out forwards;
         }
       `}</style>
     </section>
