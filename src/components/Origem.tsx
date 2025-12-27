@@ -37,7 +37,7 @@ const Origem: React.FC = () => {
   const handleMouseEnter = () => {
     hoverTimerRef.current = setTimeout(() => {
       nextImage();
-    }, 1000);
+    }, 500);
   };
 
   const handleMouseLeave = () => {
@@ -59,7 +59,7 @@ const Origem: React.FC = () => {
   const handleLeftArrowHover = () => {
     hoverTimerRef.current = setTimeout(() => {
       prevImage();
-    }, 1000);
+    }, 500);
     resetAutoPlay();
   };
 
@@ -275,7 +275,7 @@ const Origem: React.FC = () => {
       <button
         onMouseEnter={handleLeftArrowHover}
         onMouseLeave={handleMouseLeave}
-        className="fixed left-4 sm:left-8 top-1/2 -translate-y-1/2 z-50 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer pointer-events-auto"
+        className="fixed left-16 sm:left-24 top-1/2 -translate-y-1/2 z-50 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer pointer-events-auto"
         aria-label="Previous image"
       >
         <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600 group-hover:text-gray-900 transition-colors" />
@@ -285,7 +285,7 @@ const Origem: React.FC = () => {
       <button
         onMouseEnter={handleRightArrowHover}
         onMouseLeave={handleMouseLeave}
-        className="fixed right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer pointer-events-auto"
+        className="fixed right-16 sm:right-24 top-1/2 -translate-y-1/2 z-50 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer pointer-events-auto"
         aria-label="Next image"
       >
         <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600 group-hover:text-gray-900 transition-colors" />
