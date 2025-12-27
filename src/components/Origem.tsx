@@ -135,15 +135,38 @@ const Origem: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-8 mt-6">
-          <a 
-            href={carouselImages[currentImageIndex].instagram} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
-          >
-            <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            <span className="text-sm font-medium uppercase">{carouselImages[currentImageIndex].artist}</span>
-          </a>
+          {carouselImages[currentImageIndex].artist === 'denys' ? (
+            <a 
+              href={carouselImages[currentImageIndex].instagram} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
+            >
+              <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              <span className="text-sm font-medium uppercase">{carouselImages[currentImageIndex].artist}</span>
+            </a>
+          ) : (
+            <>
+              <a 
+                href="https://www.instagram.com/diivinu/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
+              >
+                <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <span className="text-sm font-medium">DIIVINU</span>
+              </a>
+              <a 
+                href="https://instagram.com/lopz.of" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
+              >
+                <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <span className="text-sm font-medium">LOPZ</span>
+              </a>
+            </>
+          )}
         </div>
       </div>
 
