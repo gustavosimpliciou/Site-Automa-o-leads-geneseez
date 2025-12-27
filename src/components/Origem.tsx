@@ -15,8 +15,8 @@ const Origem: React.FC = () => {
   const [isPreSaveOpen, setIsPreSaveOpen] = useState(false);
 
   const carouselImages = [
-    { src: '/diivinu1.png', artist: 'diivinu', instagram: 'https://www.instagram.com/diivinu/' },
     { src: '/lopz1.png', artist: 'lopz', instagram: 'https://instagram.com/lopz.of' },
+    { src: '/diivinu1.png', artist: 'diivinu', instagram: 'https://www.instagram.com/diivinu/' },
     { src: '/tv1.png', artist: 'tv1', instagram: 'https://instagram.com/lopz.of' },
     { src: '/denys.png', artist: 'denys', instagram: 'https://instagram.com/denys' },
     { src: '/dicipulos.png', artist: 'dicipulos', instagram: 'https://instagram.com/lopz.of' }
@@ -126,7 +126,7 @@ const Origem: React.FC = () => {
   return (
     <section 
       id="origem" 
-      className="relative h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden"
+      className="relative h-screen flex items-center justify-center pt-24 pb-16"
     >
       <div className="absolute inset-0 bg-white overflow-hidden">
         <div className="absolute inset-0 opacity-5">
@@ -184,26 +184,6 @@ const Origem: React.FC = () => {
                 draggable={false}
               />
             </div>
-            
-            {/* Left Arrow */}
-            <button
-              onMouseEnter={handleLeftArrowHover}
-              onMouseLeave={handleMouseLeave}
-              className="fixed left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer"
-              aria-label="Previous image"
-            >
-              <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600 group-hover:text-gray-900 transition-colors" />
-            </button>
-            
-            {/* Right Arrow */}
-            <button
-              onMouseEnter={handleRightArrowHover}
-              onMouseLeave={handleMouseLeave}
-              className="fixed right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer"
-              aria-label="Next image"
-            >
-              <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600 group-hover:text-gray-900 transition-colors" />
-            </button>
             
             {/* Dots Indicator */}
             <div className="flex justify-center gap-2 mt-4">
@@ -289,6 +269,26 @@ const Origem: React.FC = () => {
           <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
         </svg>
         <span className="text-sm font-medium tracking-wide">Spotify</span>
+      </button>
+
+      {/* Left Arrow - Fixed Position */}
+      <button
+        onMouseEnter={handleLeftArrowHover}
+        onMouseLeave={handleMouseLeave}
+        className="fixed left-4 sm:left-8 top-1/2 -translate-y-1/2 z-50 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer pointer-events-auto"
+        aria-label="Previous image"
+      >
+        <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600 group-hover:text-gray-900 transition-colors" />
+      </button>
+      
+      {/* Right Arrow - Fixed Position */}
+      <button
+        onMouseEnter={handleRightArrowHover}
+        onMouseLeave={handleMouseLeave}
+        className="fixed right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 p-2 rounded-full hover:bg-white/10 transition-colors duration-300 group cursor-pointer pointer-events-auto"
+        aria-label="Next image"
+      >
+        <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600 group-hover:text-gray-900 transition-colors" />
       </button>
 
       <PreSavePopup 
