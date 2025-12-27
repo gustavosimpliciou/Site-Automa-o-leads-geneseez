@@ -40,12 +40,16 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
     setSubmitStatus('submitting');
     
     try {
-      const response = await fetch('/api/leads', {
+      const webhookUrl = 'https://discord.com/api/webhooks/1321453258529341511/kX87p0S3I8t9-G0X3S3X3X3X3X3X3X3X';
+      
+      const response = await fetch(webhookUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          content: `📩 **Nova Mensagem de Contato!**\n**Nome:** ${formData.name}\n**Email:** ${formData.email}\n**Telefone:** ${formData.phone}\n**Instagram:** ${formData.instagram || 'N/A'}\n**Assunto:** ${formData.subject}\n**Mensagem:** ${formData.message}`
+        })
       });
 
       if (response.ok) {

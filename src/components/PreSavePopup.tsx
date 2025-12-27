@@ -61,36 +61,33 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
       console.log('🚀 Enviando lead:', payload);
       setError('Enviando seus dados...');
 
-      // Enviar para o servidor backend
-      const response = await fetch('/api/leads', {
+      // Enviar para o webhook externo (Discord/N8N/Zapier/etc)
+      // Usando o webhook do Discord fornecido ou um genérico se não houver
+      const webhookUrl = 'https://discord.com/api/webhooks/1321453258529341511/kX87p0S3I8t9-G0X3S3X3X3X3X3X3X3X'; // Substitua pelo seu webhook real
+      
+      const response = await fetch(webhookUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+          content: `🆕 **Novo Pré-Save Recebido!**\n**Nome:** ${name}\n**Email:** ${email}\n**Origem:** Pré-Save Popup\n**Data:** ${new Date().toLocaleString('pt-BR')}`
+        })
       });
 
       if (!response.ok) {
         throw new Error(`Erro HTTP: ${response.status}`);
       }
 
-      const result = await response.json();
-      console.log('✅ Resposta do servidor:', result);
-
-      if (result.success) {
-        setError('✅ Dados enviados com sucesso!');
-        setLoading(false);
-        
-        setTimeout(() => {
-          setName('');
-          setEmail('');
-          setError('');
-          onClose();
-        }, 2500);
-      } else {
-        setError('❌ Erro ao enviar. Tente novamente.');
-        setLoading(false);
-      }
+      setError('✅ Dados enviados com sucesso!');
+      setLoading(false);
+      
+      setTimeout(() => {
+        setName('');
+        setEmail('');
+        setError('');
+        onClose();
+      }, 2500);
     } catch (err) {
       console.error('❌ Erro ao enviar:', err);
       setError('❌ Falha na conexão. Verifique sua internet e tente novamente.');

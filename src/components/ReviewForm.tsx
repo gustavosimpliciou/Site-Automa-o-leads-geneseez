@@ -16,23 +16,38 @@ const ReviewForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
     
-    setTimeout(() => {
-      console.log('Review submitted:', formData);
+    try {
+      const webhookUrl = 'https://discord.com/api/webhooks/1321453258529341511/kX87p0S3I8t9-G0X3S3X3X3X3X3X3X3X';
       
-      setFormData({
-        name: '',
-        email: ''
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          content: `⭐ **Nova Avaliação Recebida!**\n**Nome:** ${formData.name}\n**Email:** ${formData.email}\n**Data:** ${new Date().toLocaleString('pt-BR')}`
+        })
       });
-      setFormStatus('success');
-      
-      setTimeout(() => {
-        setFormStatus('idle');
-      }, 3000);
-    }, 1000);
+
+      if (response.ok) {
+        console.log('Review submitted:', formData);
+        setFormData({
+          name: '',
+          email: ''
+        });
+        setFormStatus('success');
+        setTimeout(() => setFormStatus('idle'), 3000);
+      } else {
+        setFormStatus('error');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar avaliação:', error);
+      setFormStatus('error');
+    }
   };
 
   useEffect(() => {
