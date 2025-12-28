@@ -130,7 +130,7 @@ const PreSavePopup: React.FC<PreSavePopupProps> = ({ isOpen, onClose }) => {
 
           {/* Header */}
           <div className="px-6 pt-8 pb-6 text-center">
-            <h2 className="text-white text-3xl font-bold mb-2">ALBUM ÊXTASE999</h2>
+            <h2 className="text-white text-3xl font-bold mb-2">ALBUM ÊXTASE⁹⁹⁹</h2>
             <p className="text-gray-300 text-sm mb-4">
               Você está a um passo de ouvir o que ainda não foi lançado.
             </p>
