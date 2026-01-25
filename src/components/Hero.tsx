@@ -114,15 +114,18 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
           ref={countdownRef}
           className="transition-all duration-1000 delay-500 opacity-0 translate-y-10 flex justify-center gap-8 mt-12"
         >
+          <div className="group relative flex flex-col items-center">
+            <div className="text-gray-400 hover:text-[#1DB954] transition-all duration-300 transform hover:scale-110 cursor-help" aria-label="Spotify">
+              <Music size={48} />
+            </div>
+            <span className="absolute -bottom-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[#1DB954] text-xs font-bold tracking-widest animate-pulse whitespace-nowrap uppercase">
+              Em Breve
+            </span>
+          </div>
           <a 
-            href="#spotify" 
-            className="text-gray-400 hover:text-[#1DB954] transition-all duration-300 transform hover:scale-110"
-            aria-label="Spotify"
-          >
-            <Music size={48} />
-          </a>
-          <a 
-            href="#youtube" 
+            href="https://www.youtube.com/@geneseez" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-400 hover:text-[#FF0000] transition-all duration-300 transform hover:scale-110"
             aria-label="YouTube"
           >
