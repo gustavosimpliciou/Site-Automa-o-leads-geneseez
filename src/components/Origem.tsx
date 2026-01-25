@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Instagram, ChevronLeft, ChevronRight, Menu } from 'lucide-react';
+import { Instagram, ChevronLeft, ChevronRight, Menu, Youtube } from 'lucide-react';
 import ParticleAnimation from './ParticleAnimation';
 
 const Origem: React.FC = () => {
