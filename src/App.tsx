@@ -4,8 +4,6 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
-import Countdown from './components/Countdown';
-import PreSavePopup from './components/PreSavePopup';
 
 const Origem = lazy(() => import('./components/Origem'));
 
@@ -14,19 +12,9 @@ type ViewType = 'home' | 'about' | 'projects' | 'origem';
 function App() {
   const [currentView, setCurrentView] = useState<ViewType>('home');
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isPreSavePopupOpen, setIsPreSavePopupOpen] = useState(false);
 
   useEffect(() => {
     document.title = 'Geneseez - Onde Tudo Comeca';
-    
-    // Mostrar popup de pré-save ao carregar a página
-    const timer = setTimeout(() => {
-      setIsPreSavePopupOpen(true);
-    }, 1500);
-    
-    return () => {
-      clearTimeout(timer);
-    };
   }, []);
 
   const handleViewChange = (view: ViewType) => {
@@ -103,18 +91,12 @@ function App() {
 
   return (
     <div className="min-h-screen">
-      {currentView !== 'home' && <Countdown isHome={false} />}
       <Header 
         onViewChange={handleViewChange}
         currentView={currentView}
       />
       
       {renderCurrentView()}
-      
-      <PreSavePopup 
-        isOpen={isPreSavePopupOpen}
-        onClose={() => setIsPreSavePopupOpen(false)}
-      />
     </div>
   );
 }

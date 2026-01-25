@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Countdown from './Countdown';
+import { Music, Youtube } from 'lucide-react';
 import ParticleAnimation from './ParticleAnimation';
 
 interface HeroProps {
@@ -112,9 +112,22 @@ const Hero: React.FC<HeroProps> = ({ onProjectsClick }) => {
         </div>
         <div 
           ref={countdownRef}
-          className="transition-all duration-1000 delay-500 opacity-0 translate-y-10"
+          className="transition-all duration-1000 delay-500 opacity-0 translate-y-10 flex justify-center gap-8 mt-12"
         >
-          <Countdown isHome={true} />
+          <a 
+            href="#spotify" 
+            className="text-gray-400 hover:text-[#1DB954] transition-all duration-300 transform hover:scale-110"
+            aria-label="Spotify"
+          >
+            <Music size={48} />
+          </a>
+          <a 
+            href="#youtube" 
+            className="text-gray-400 hover:text-[#FF0000] transition-all duration-300 transform hover:scale-110"
+            aria-label="YouTube"
+          >
+            <Youtube size={48} />
+          </a>
         </div>
       </div>
     </section>

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Play, Pause, Heart, MoreHorizontal, Clock, Music2 } from 'lucide-react';
 import AlbumPopup from './AlbumPopup';
-import PreSavePopup from './PreSavePopup';
 import GlobeMap from './GlobeMap';
 
 interface Track {
@@ -23,20 +22,15 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
   const [liked, setLiked] = useState(false);
   const [titleVisible, setTitleVisible] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [showPreSavePopup, setShowPreSavePopup] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
   const tracks: Track[] = [
-    { id: 1, title: 'DESACREDITOU', duration: '3:12', artist: 'LOPZ, DIIVINU' },
-    { id: 2, title: 'VIDA', duration: '3:11', artist: 'DIIVINU' },
-    { id: 3, title: 'PREFÁCIL', duration: '3:50', artist: 'LOPZ' },
-    { id: 4, title: 'BAILA', duration: '2:17', artist: 'LOPZ' },
-    { id: 5, title: 'FICA+', duration: '3:00', artist: 'LOPZ' },
-    { id: 6, title: 'GENESEEZ', duration: '2:00', artist: 'DIIVINU' },
-    { id: 7, title: 'SINTONIA', duration: '3:04', artist: 'DIIVINU' },
-    { id: 8, title: '1996', duration: '3:00', artist: 'LOPZ, DENYS, DIIVINU' },
-    { id: 9, title: '999!', duration: '4:26', artist: 'DIIVINU, LOPZ' },
+    { id: 1, title: 'VIDA', duration: '3:11', artist: 'DIIVINU' },
+    { id: 2, title: 'FORÇA', duration: '3:20', artist: 'DIIVINU' },
+    { id: 3, title: 'SINTONIA', duration: '3:04', artist: 'DIIVINU' },
+    { id: 4, title: 'ENIGMA', duration: '3:15', artist: 'DIIVINU' },
+    { id: 5, title: 'GENESEEZ', duration: '2:00', artist: 'DIIVINU' },
   ];
 
   useEffect(() => {
@@ -90,18 +84,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
   const handleTrackClick = (trackId: number) => {
     setCurrentTrack(trackId);
     setIsPlaying(true);
-    setShowPreSavePopup(true);
-  };
-
-  const scrollToListenButton = () => {
-    const listenButton = document.getElementById('listen-album-btn');
-    if (listenButton) {
-      listenButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      listenButton.classList.add('ring-4', 'ring-green-300', 'ring-opacity-50');
-      setTimeout(() => {
-        listenButton.classList.remove('ring-4', 'ring-green-300', 'ring-opacity-50');
-      }, 2000);
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -155,18 +138,16 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
               <h3 className="text-white text-4xl md:text-5xl font-bold mb-3 uppercase">ÊXTASE 999</h3>
               <div className="flex items-center justify-center md:justify-start gap-2 text-sm text-gray-300 flex-wrap">
                 <span className="font-semibold text-white">DIIVINU</span>
-                <span className="text-gray-500">X</span>
-                <span className="font-semibold text-white">LOPZ</span>
                 <span className="text-gray-500 mx-2">|</span>
                 <span>2026</span>
                 <span className="text-gray-500 mx-2">|</span>
-                <span>9 FAIXAS</span>
+                <span>5 FAIXAS</span>
               </div>
               <p className="text-gray-400 text-sm mt-4 max-w-md">
-               Esse Album tem como intuito explorar a musicalidade e talento dos artistas 
-               DIIVINU e LOPZ através de composições autorais, o objetivo desse 
+               Esse Album tem como intuito explorar a musicalidade e talento do artista 
+               DIIVINU através de composições autorais, o objetivo desse 
                projeto é obter resultados inovadores com todo o esforço e conhecimento 
-               desenvolvido por ambos durante o processo de criação. Esperamos que nossas 
+               desenvolvido por ele durante o processo de criação. Esperamos que nossas 
                canções te alcancem onde quer que você as escute.
               </p>
             </div>
@@ -174,7 +155,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
 
           <div className="px-6 md:px-8 pb-4 flex items-center gap-4">
             <button 
-              onClick={() => setShowPreSavePopup(true)}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center hover:scale-105 transition-transform hover:bg-green-400"
             >
               {isPlaying ? <Pause className="w-6 h-6 text-black" /> : <Play className="w-6 h-6 text-black ml-1" />}
@@ -233,7 +214,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
           <div className="px-6 md:px-8 pb-8">
             <button 
               id="listen-album-btn"
-              onClick={() => setShowPreSavePopup(true)}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="block w-full bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-8 rounded-full text-center uppercase tracking-wider transition-all duration-300 hover:scale-[1.02]"
             >
               OUVIR ALBUM
@@ -242,7 +223,6 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
         </div>
 
         <AlbumPopup isOpen={showPopup} onClose={() => setShowPopup(false)} onListenClick={onHomeClick} />
-        <PreSavePopup isOpen={showPreSavePopup} onClose={() => setShowPreSavePopup(false)} />
 
         {showCristo && (
           <div className="max-w-4xl mx-auto mt-12 flex justify-center">

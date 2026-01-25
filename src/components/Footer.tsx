@@ -50,7 +50,10 @@ const Footer: React.FC<FooterProps> = ({ onViewChange }) => {
               <a href="https://www.youtube.com/@geneseez" className="text-gray-400 hover:text-white transition-colors" aria-label="YouTube">
                 <Youtube size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Spotify">
+              <a href="#youtube" className="text-gray-400 hover:text-[#FF0000] transition-colors" aria-label="YouTube Music">
+                <Youtube size={20} />
+              </a>
+              <a href="#spotify" className="text-gray-400 hover:text-[#1DB954] transition-colors" aria-label="Spotify">
                 <Music size={20} />
               </a>
             </div>

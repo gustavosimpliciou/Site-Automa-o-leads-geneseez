@@ -51,7 +51,7 @@ const HeaderComponent: React.FC<HeaderProps> = ({ onViewChange, currentView }) =
     <header 
       className={`fixed left-0 w-full z-50 transition-all duration-300 ${
         isScrolled || isSpecialView ? 'bg-white shadow-md py-3' : 'bg-transparent py-6'
-      } ${isSpecialView ? 'top-10' : 'top-0'}`}
+      }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">

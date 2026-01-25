@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Instagram, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Instagram, ChevronLeft, ChevronRight, Menu } from 'lucide-react';
 import ParticleAnimation from './ParticleAnimation';
-import PreSavePopup from './PreSavePopup';
 
 const Origem: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -18,7 +17,6 @@ const Origem: React.FC = () => {
     { src: '/lopz1.png', artist: 'lopz', instagram: 'https://instagram.com/lopz.of' },
     { src: '/diivinu1.png', artist: 'diivinu', instagram: 'https://www.instagram.com/diivinu/' },
     { src: '/tv1.png', artist: 'tv1', instagram: 'https://instagram.com/lopz.of' },
-    { src: '/denys.png', artist: 'denys', instagram: 'https://instagram.com/denys' },
     { src: '/dicipulos.png', artist: 'dicipulos', instagram: 'https://instagram.com/lopz.of' }
   ];
 
@@ -170,7 +168,7 @@ const Origem: React.FC = () => {
                   boxShadow: 'none',
                   border: 'none',
                   outline: 'none',
-                  transform: carouselImages[currentImageIndex].artist === 'denys' ? 'scale(0.75)' : 'scale(1)'
+                  transform: 'scale(1)'
                 }}
                 loading="lazy"
                 onLoad={() => setImageLoaded(true)}
@@ -201,38 +199,24 @@ const Origem: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-8 mt-4">
-          {carouselImages[currentImageIndex].artist === 'denys' ? (
-            <a 
-              href={carouselImages[currentImageIndex].instagram} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
-            >
-              <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span className="text-sm font-medium uppercase">{carouselImages[currentImageIndex].artist}</span>
-            </a>
-          ) : (
-            <>
-              <a 
-                href="https://www.instagram.com/diivinu/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
-              >
-                <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span className="text-sm font-medium">DIIVINU</span>
-              </a>
-              <a 
-                href="https://instagram.com/lopz.of" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
-              >
-                <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span className="text-sm font-medium">LOPZ</span>
-              </a>
-            </>
-          )}
+          <a 
+            href="https://www.instagram.com/diivinu/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
+          >
+            <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            <span className="text-sm font-medium">DIIVINU</span>
+          </a>
+          <a 
+            href="https://instagram.com/lopz.of" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-gray-400 hover:text-pink-500 transition-all duration-300 group"
+          >
+            <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            <span className="text-sm font-medium">LOPZ</span>
+          </a>
         </div>
       </div>
 
@@ -255,7 +239,7 @@ const Origem: React.FC = () => {
       </div>
 
       <button 
-        onClick={() => setIsPreSaveOpen(true)}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         className="absolute bottom-8 left-8 z-20 flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 text-gray-400 transition-all duration-300 hover:border-[#1DB954] hover:text-[#1DB954] hover:bg-[#1DB954]/10 group"
       >
         <svg 
@@ -289,11 +273,6 @@ const Origem: React.FC = () => {
       >
         <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 text-gray-600 group-hover:text-gray-900 transition-colors" />
       </button>
-
-      <PreSavePopup 
-        isOpen={isPreSaveOpen}
-        onClose={() => setIsPreSaveOpen(false)}
-      />
 
       <style>{`
         @keyframes spin-slow {
