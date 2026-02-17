@@ -84,7 +84,7 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
   const handleTrackClick = (trackId: number) => {
     setCurrentTrack(trackId);
     setIsPlaying(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.open('https://open.spotify.com/intl-pt/album/1zRGtFpKEysDys3vuGSeyG?si=LGmsFw-3S3ClpzGVUEtS7w', '_blank');
   };
 
   return (
@@ -212,13 +212,15 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
           </div>
 
           <div className="px-6 md:px-8 pb-8">
-            <button 
+            <a 
               id="listen-album-btn"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              href="https://open.spotify.com/intl-pt/album/1zRGtFpKEysDys3vuGSeyG?si=LGmsFw-3S3ClpzGVUEtS7w"
+              target="_blank"
+              rel="noopener noreferrer"
               className="block w-full bg-green-500 hover:bg-green-400 text-black font-bold py-4 px-8 rounded-full text-center uppercase tracking-wider transition-all duration-300 hover:scale-[1.02]"
             >
               OUVIR ALBUM
-            </button>
+            </a>
           </div>
         </div>
 
