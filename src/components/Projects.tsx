@@ -81,10 +81,12 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
     };
   }, []);
 
+  const spotifyLink = "https://open.spotify.com/intl-pt/album/1zRGtFpKEysDys3vuGSeyG?si=LGmsFw-3S3ClpzGVUEtS7w";
+
   const handleTrackClick = (trackId: number) => {
     setCurrentTrack(trackId);
     setIsPlaying(true);
-    window.open('https://open.spotify.com/intl-pt/album/1zRGtFpKEysDys3vuGSeyG?si=LGmsFw-3S3ClpzGVUEtS7w', '_blank');
+    window.open(spotifyLink, '_blank');
   };
 
   return (
@@ -124,12 +126,14 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
                 onLoad={(e) => e.currentTarget.classList.replace('opacity-0', 'opacity-100')}
               />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <button 
-                  onClick={() => setShowPreSavePopup(true)}
+                <a 
+                  href={spotifyLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-xl hover:scale-105 transition-transform"
                 >
-                  {isPlaying ? <Pause className="w-7 h-7 text-black" /> : <Play className="w-7 h-7 text-black ml-1" />}
-                </button>
+                  <Play className="w-7 h-7 text-black ml-1" />
+                </a>
               </div>
             </div>
 
@@ -154,12 +158,14 @@ const Projects: React.FC<ProjectsProps> = ({ onHomeClick, showCristo = false }) 
           </div>
 
           <div className="px-6 md:px-8 pb-4 flex items-center gap-4">
-            <button 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            <a 
+              href={spotifyLink}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center hover:scale-105 transition-transform hover:bg-green-400"
             >
-              {isPlaying ? <Pause className="w-6 h-6 text-black" /> : <Play className="w-6 h-6 text-black ml-1" />}
-            </button>
+              <Play className="w-6 h-6 text-black ml-1" />
+            </a>
             <button 
               onClick={() => setLiked(!liked)}
               className={`p-2 transition-colors ${liked ? 'text-green-500' : 'text-gray-400 hover:text-white'}`}
